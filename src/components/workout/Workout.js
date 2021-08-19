@@ -9,9 +9,10 @@ const Workout = (props) => {
   const dispatch = useDispatch();
 
   const cooldown = useSelector((state) => state.settings.cooldown);
+
   const [rest, setRest] = useState(false);
-  const [timer, setTimer] = useState(30);
-  //TODO for later - generate as many "places" as the highest set exercise
+  const [timer, setTimer] = useState(cooldown);
+  //TODO for later - generate as many "places" as the highest set exercise - maybe max 5 ?
   // but make those other extra exercises disabled and unintarractible
 
   const disableRest = () => {

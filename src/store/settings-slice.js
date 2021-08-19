@@ -4,7 +4,7 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState: {
     theme: "light",
-    cooldown: 30,
+    cooldown: 50,
   },
   reducers: {
     changeCooldown(state, action) {
