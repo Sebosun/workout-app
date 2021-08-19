@@ -48,7 +48,10 @@ const Workout = (props) => {
       setsArr.push(
         <button
           key={i}
-          onClick={() => setsHandler(i)}
+          onClick={() => {
+            setsHandler(i);
+            props.startRest();
+          }}
           className={`${classes.rep} ${
             currentWorkout.activated[i] ? null : classes.disabled
           }`}
