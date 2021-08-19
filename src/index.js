@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase/app";
+import { Provider } from "react-redux";
+import store from "./store/index";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAug3P0fmT9ur-V04RtrssjGc2xXQwLk_4",
@@ -18,7 +20,10 @@ const app = firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
+    ,
   </React.StrictMode>,
   document.getElementById("root")
 );

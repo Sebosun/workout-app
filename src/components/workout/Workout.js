@@ -3,8 +3,12 @@ import Card from "../ui/Card";
 import Excercise from "./Excercise";
 import RestTimer from "./RestTimer";
 import classes from "./Workout.module.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const Workout = (props) => {
+  const dispatch = useDispatch();
+
+  const cooldown = useSelector((state) => state.settings.cooldown);
   const [rest, setRest] = useState(false);
   const [timer, setTimer] = useState(30);
   //TODO for later - generate as many "places" as the highest set exercise
@@ -16,7 +20,7 @@ const Workout = (props) => {
 
   const startRest = () => {
     setRest(true);
-    setTimer(30);
+    setTimer(cooldown);
   };
 
   const timerHandler = () => {
