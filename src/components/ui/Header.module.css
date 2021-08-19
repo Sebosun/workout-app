@@ -1,0 +1,17 @@
+.header {
+  margin: 0;
+  padding: 0;
+  border-bottom: solid var(--text-color) 1px;
+  opacity: 0.9;
+}
+.list {
+  padding: 20px;
+  margin: 0;
+  display: flex;
+  flex: row;
+  gap: 2em;
+}
+
+.list > li {
+  list-style-type: none;
+}

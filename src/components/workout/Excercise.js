@@ -9,6 +9,7 @@ import classes from "./Excercise.module.css";
 const Workout = (props) => {
   const [currentWorkout, setCurrentWorkout] = useState(() => {
     let workObj = { reps: [], activated: [] };
+
     for (let i = 0; i < props.sets; i++) {
       workObj.reps.push(parseInt(props.reps));
       workObj.activated.push(false);
@@ -60,11 +61,7 @@ const Workout = (props) => {
   };
   const sets = setsRender(props.sets);
 
-  return (
-    <div>
-      <div className={classes.sets}>{sets}</div>
-    </div>
-  );
+  return <div className={classes.sets}>{sets}</div>;
 };
 
 export default Workout;

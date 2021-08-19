@@ -1,10 +1,11 @@
 import "./App.css";
-import Excercise from "./components/workout/Excercise";
+import Header from "./components/ui/Header";
 import Workout from "./components/workout/Workout";
 
 function App() {
   return (
     <div className="main">
+      <Header />
       <section className="wrapper">
         <Workout />
       </section>
