@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Button from "../ui/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { settingsActions } from "../../store/settings-slice";
 
 const CooldownForm = (props) => {
-  const [cooldown, setCooldown] = useState();
+  const rdxCd = useSelector((state) => state.settings.cooldown);
+  const [cooldown, setCooldown] = useState(rdxCd);
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
