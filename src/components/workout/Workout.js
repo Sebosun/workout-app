@@ -49,24 +49,6 @@ const Workout = (props) => {
         />
       )}
       {exercisesMapped}
-      {/* <Card className={classes.exercise}> */}
-      {/*   <div>Squat</div> */}
-      {/*   <Excercise */}
-      {/*     disableRest={disableRest} */}
-      {/*     startRest={startRest} */}
-      {/*     sets={10} */}
-      {/*     reps={5} */}
-      {/*   /> */}
-      {/* </Card> */}
-      {/* <Card className={classes.exercise}> */}
-      {/*   <div>Bench</div> */}
-      {/*   <Excercise */}
-      {/*     startRest={startRest} */}
-      {/*     disableRest={disableRest} */}
-      {/*     sets={2} */}
-      {/*     reps={5} */}
-      {/*   /> */}
-      {/* </Card> */}
     </>
   );
 };
