@@ -1,13 +1,14 @@
-.exercise {
+.exerciseWrapper {
   padding: 20px;
   margin: 2em;
   display: flex;
   gap: 10px;
   flex-direction: column;
   align-items: center;
+  box-shadow: 3px 6px 8px 3px rgba(0, 0, 0, 0.66);
 }
 
-.exercise > div {
+.exerciseWrapper > div {
   color: var(--text-color);
   /* margin-left: 2em; */
 }
@@ -22,4 +23,10 @@
 
   color: var(--text-color);
   background-color: var(--tetriary-color);
+}
+
+@media (max-width: 600px) {
+  .exerciseWrapper {
+    flex-direction: column-reverse;
+  }
 }

@@ -32,7 +32,7 @@ const Workout = (props) => {
 
   const exercisesMapped = props.data.map((item, index) => {
     return (
-      <Card className={classes.exercise}>
+      <Card className={classes.exerciseWrapper}>
         <div>{item.name}</div>
         <Excercise
           disableRest={disableRest}

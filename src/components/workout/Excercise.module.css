@@ -2,11 +2,13 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 10px;
 }
 .rep {
-  width: calc(3.5em + 2vh);
-  height: calc(3.5em + 2vh);
+  width: calc(1.5em + 2vh);
+  height: calc(1.5em + 2vh);
   background-color: var(--primary-color);
+  font-size: 2em;
   color: var(--text-color);
   border-radius: 100%;
   border: 2px solid var(--text-color);
@@ -17,6 +19,6 @@
 }
 
 .disabled {
-  background-color: grey;
+  background-color: var(--tetriary-color);
   color: grey;
 }
