@@ -16,7 +16,7 @@ const Workout = (props) => {
 
   const startRest = () => {
     setRest(true);
-    setTimer(100);
+    setTimer(30);
   };
 
   const timerHandler = () => {
@@ -35,15 +35,30 @@ const Workout = (props) => {
       )}
       <Card className={classes.exercise}>
         <div>Squat</div>
-        <Excercise startRest={startRest} sets={5} reps={5} />
+        <Excercise
+          disableRest={disableRest}
+          startRest={startRest}
+          sets={5}
+          reps={5}
+        />
       </Card>
       <Card className={classes.exercise}>
         <div>Bench</div>
-        <Excercise startRest={startRest} sets={2} reps={5} />
+        <Excercise
+          startRest={startRest}
+          disableRest={disableRest}
+          sets={2}
+          reps={5}
+        />
       </Card>
       <Card className={classes.exercise}>
         <div>OHP</div>
-        <Excercise startRest={startRest} sets={3} reps={5} />
+        <Excercise
+          disableRest={disableRest}
+          startRest={startRest}
+          sets={3}
+          reps={5}
+        />
       </Card>
     </>
   );
