@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-const RestTimer = ({ timer, timerHandler, disableRest }) => {
+const RestTimer = ({ timer, timerHandler, disableRest, className }) => {
   if (timer === 0) {
     disableRest();
   }
@@ -13,7 +13,11 @@ const RestTimer = ({ timer, timerHandler, disableRest }) => {
     return () => clearTimeout(timer);
   }, [timer, timerHandler]);
 
-  return <p>{timer}</p>;
+  return (
+    <div className={className}>
+      <p>{timer}</p>
+    </div>
+  );
 };
 
 export default RestTimer;

@@ -6,7 +6,7 @@ import classes from "./Excercise.module.css";
 //   reps - how many repetitions of loops are there
 //   ex: 3 sets 8 reps => 3 * 8 => 3 times lift heavy thing 8 times in a row
 
-const Workout = (props) => {
+const Exercise = (props) => {
   const [currentWorkout, setCurrentWorkout] = useState(() => {
     let workObj = { reps: [], activated: [] };
 
@@ -73,4 +73,4 @@ const Workout = (props) => {
   return <div className={classes.sets}>{sets}</div>;
 };
 
-export default Workout;
+export default Exercise;

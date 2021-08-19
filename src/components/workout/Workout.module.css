@@ -11,3 +11,15 @@
   color: var(--text-color);
   /* margin-left: 2em; */
 }
+
+.timer {
+  margin: 0 5em;
+
+  font-size: 2em;
+  text-align: center;
+
+  border-radius: 8px;
+
+  color: var(--text-color);
+  background-color: var(--tetriary-color);
+}

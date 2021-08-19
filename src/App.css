@@ -12,11 +12,12 @@
     --text-color: #111;
     --primary-color: cornflowerblue;
     --secondary-color: #e8e4c9;
+    --tetriary-color: #c9cde8;
     --hover: rgb(100, 129, 237);
   }
 }
 
-.main {
+.app {
   padding: 0;
   margin: 0;
   background-color: var(--background-color);
@@ -26,5 +27,5 @@
 }
 
 .wrapper {
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
