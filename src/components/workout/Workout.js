@@ -4,6 +4,7 @@ import Excercise from "./Excercise";
 import RestTimer from "./RestTimer";
 import classes from "./Workout.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "../ui/Button";
 
 const Workout = (props) => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const Workout = (props) => {
         />
       )}
       {exercisesMapped}
+      <Button>Finish Exercise</Button>
     </>
   );
 };

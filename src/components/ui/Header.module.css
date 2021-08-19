@@ -1,7 +1,6 @@
 .header {
   margin: 0;
   padding: 0;
-
   opacity: 0.9;
 
   border-bottom: solid var(--text-color) 1px;
@@ -12,9 +11,7 @@
   padding: 0;
 
   display: flex;
-  flex: row;
-
-  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .list > li {
@@ -25,12 +22,13 @@
 }
 
 .list > li > a {
-  padding: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 
+  font-size: calc(10px + 5vw);
   display: flex;
   justify-content: center;
 
-  font-size: 2em;
   text-decoration: none;
 }
 

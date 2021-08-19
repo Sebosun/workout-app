@@ -1,16 +1,14 @@
 .sets {
   display: flex;
-  margin: 0 20px 20px 20px;
   justify-content: center;
-  gap: 5px;
   flex-wrap: wrap;
 }
 .rep {
-  width: 3.5em;
-  height: 3.5em;
+  width: calc(3.5em + 2vh);
+  height: calc(3.5em + 2vh);
   background-color: var(--primary-color);
   color: var(--text-color);
-  border-radius: 45%;
+  border-radius: 100%;
   border: 2px solid var(--text-color);
 }
 
