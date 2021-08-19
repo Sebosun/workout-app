@@ -16,3 +16,8 @@
 .rep:hover {
   background-color: var(--hover);
 }
+
+.disabled {
+  background-color: grey;
+  color: grey;
+}

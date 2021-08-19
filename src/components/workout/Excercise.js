@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./Workout.module.css";
+import classes from "./Excercise.module.css";
 
 // for clarity
 //   sets - how many series (loops) are there
@@ -19,16 +19,25 @@ const Workout = (props) => {
 
   const setsHandler = (position) => {
     setCurrentWorkout((prev) => {
-      let newArr = [...prev.reps];
+      let newReps = [...prev.reps];
+      let newActi = [...prev.activated];
       //if gets to 0 reset back to 18
       // TODO: make it go to 0 and change display to an "error" -> if clicked again back to 18
-      if (prev.reps[position] === 0) {
-        newArr[position] = props.reps;
-        return { ...prev, reps: newArr };
+      if (
+        prev.reps[position] === props.reps &&
+        prev.activated[position] === false
+      ) {
+        newActi[position] = true;
+      } else if (prev.reps[position] === 0) {
+        newReps[position] = props.reps;
+        newActi[position] = true;
+      } else if (prev.reps[position] === 1) {
+        newReps[position] = newReps[position] - 1;
+        newActi[position] = false;
       } else {
-        newArr[position] = newArr[position] - 1;
-        return { ...prev, reps: newArr };
+        newReps[position] = newReps[position] - 1;
       }
+      return { activated: newActi, reps: newReps };
     });
   };
 
@@ -36,7 +45,13 @@ const Workout = (props) => {
     let setsArr = [];
     for (let i = 0; i < amount; i++) {
       setsArr.push(
-        <button key={i} onClick={() => setsHandler(i)} className={classes.rep}>
+        <button
+          key={i}
+          onClick={() => setsHandler(i)}
+          className={`${classes.rep} ${
+            currentWorkout.activated[i] ? null : classes.disabled
+          }`}
+        >
           {currentWorkout.reps[i]}
         </button>
       );
