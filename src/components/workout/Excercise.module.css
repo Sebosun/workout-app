@@ -1,0 +1,18 @@
+.sets {
+  display: flex;
+  margin: 0 20px 20px 20px;
+  justify-content: center;
+  gap: 5px;
+}
+.rep {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 45%;
+  border: 2px solid var(--text-color);
+}
+
+.rep:hover {
+  background-color: var(--hover);
+}
