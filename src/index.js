@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase/app";
 import { Provider } from "react-redux";
 import store from "./store/index";
+import { BrowserRouter } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAug3P0fmT9ur-V04RtrssjGc2xXQwLk_4",
@@ -20,9 +21,11 @@ const app = firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
     ,
   </React.StrictMode>,
   document.getElementById("root")
