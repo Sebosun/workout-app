@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Button from "../ui/Button";
+import { useDispatch, useSelector } from "react-redux";
+import useReset from "../../hooks/useReset";
+import { timerActions } from "../../store/timer-slice";
 import classes from "./Excercise.module.css";
 
 // for clarity
@@ -8,6 +10,8 @@ import classes from "./Excercise.module.css";
 //   ex: 3 sets 8 reps => 3 * 8 => 3 times lift heavy thing 8 times in a row
 
 const Exercise = (props) => {
+  const cooldown = useSelector((state) => state.settings.cooldown);
+  const dispatch = useDispatch();
   const [currentWorkout, setCurrentWorkout] = useState(() => {
     let workObj = { reps: [], activated: [] };
 
@@ -18,6 +22,11 @@ const Exercise = (props) => {
 
     return workObj;
   });
+
+  const handleReset = () => {
+    dispatch(timerActions.setTimer(cooldown));
+    dispatch(timerActions.handleAction(true));
+  };
 
   const setsHandler = (position) => {
     setCurrentWorkout((prev) => {
@@ -32,17 +41,17 @@ const Exercise = (props) => {
         prev.activated[position] === false
       ) {
         newActi[position] = true;
-        props.startRest();
+        handleReset();
         // start rest again if we 'complete'  the exercise agasin
       } else if (prev.reps[position] === 0) {
         newReps[position] = props.reps;
         newActi[position] = true;
-        props.startRest();
+        handleReset();
         //disable rest if we're disabling the exercise (for example user misclicked)
       } else if (prev.reps[position] === 1) {
         newReps[position] = newReps[position] - 1;
         newActi[position] = false;
-        props.disableRest();
+        dispatch(timerActions.handleAction(false));
       } else {
         newReps[position] = newReps[position] - 1;
       }
@@ -69,6 +78,7 @@ const Exercise = (props) => {
     }
     return setsArr;
   };
+
   const sets = setsRender(props.sets);
 
   return <div className={classes.sets}>{sets}</div>;

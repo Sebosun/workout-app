@@ -1,21 +1,17 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { timerActions } from "../../store/timer-slice";
 
-const RestTimer = ({ timer, timerHandler, disableRest, className }) => {
-  if (timer === 0) {
-    disableRest();
-  }
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      timerHandler();
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [timer, timerHandler]);
+const RestTimer = ({ disableRest, className }) => {
+  const dispatch = useDispatch();
+  const timerRdx = useSelector((state) => state.timer.timer);
 
   return (
     <div className={className}>
-      <p>{timer}</p>
+      <p>{timerRdx}</p>
+      <button onClick={() => dispatch(timerActions.handleAction(false))}>
+        Disable
+      </button>
     </div>
   );
 };

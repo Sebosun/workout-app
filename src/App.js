@@ -5,8 +5,25 @@ import NotFound from "./components/pages/NotFound";
 import FrontPage from "./components/pages/FrontPage";
 import Header from "./components/ui/Header";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useEffect } from "react";
+import { timerActions } from "./store/timer-slice";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const timerRdx = useSelector((state) => state.timer.timer);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(timerActions.tickTimer());
+    }, 1000);
+
+    if (timerRdx === 0) {
+      dispatch(timerActions.handleAction);
+    }
+    return () => clearTimeout(timer);
+  }, [dispatch, timerRdx]);
+
   return (
     <div className="app">
       <Header />
