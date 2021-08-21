@@ -12,10 +12,11 @@
 
   color: var(--text-color);
   background-color: var(--primary-color);
-  cursor: pointer;
 
   border-radius: 100%;
   border: 2px solid var(--text-color);
+
+  cursor: pointer;
 }
 
 .rep:hover {
