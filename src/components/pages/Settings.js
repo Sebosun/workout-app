@@ -1,10 +1,11 @@
 import React from "react";
-import CooldownForm from "../forms/CooldownForm";
 import { useState } from "react";
-import Button from "../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { settingsActions } from "../../store/settings-slice";
-import { timerActions } from "../../store/timer-slice";
+
+import Flex from "../ui/Flex";
+import CooldownForm from "../forms/CooldownForm";
+import Button from "../ui/Button";
 
 const Settings = () => {
   const cooldownRedux = useSelector((state) => state.settings.cooldown);
@@ -21,10 +22,12 @@ const Settings = () => {
   const cooldownHandler = (e) => setCooldown(e.target.value);
 
   return (
-    <form onSubmit={submitHandler}>
-      <CooldownForm value={cooldown} cooldownHandler={cooldownHandler} />
-      <Button> Submit</Button>
-    </form>
+    <Flex>
+      <form onSubmit={submitHandler}>
+        <CooldownForm value={cooldown} cooldownHandler={cooldownHandler} />
+        <Button> Submit</Button>
+      </form>
+    </Flex>
   );
 };
 

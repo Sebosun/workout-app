@@ -1,0 +1,15 @@
+.flexWrap {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.column {
+  flex-direction: column;
+}

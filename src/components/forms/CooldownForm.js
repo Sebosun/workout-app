@@ -7,6 +7,7 @@ const CooldownForm = (props) => {
       <input
         value={props.cooldown}
         onChange={props.cooldownHandler}
+        id="cooldown"
         type="number"
         name="cooldown"
       />
