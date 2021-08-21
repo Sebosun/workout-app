@@ -12,17 +12,20 @@ import { useDispatch, useSelector } from "react-redux";
 function App() {
   const dispatch = useDispatch();
   const timerRdx = useSelector((state) => state.timer.timer);
+  const timerActive = useSelector((state) => state.timer.active);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(timerActions.tickTimer());
-    }, 1000);
+    if (timerActive) {
+      const timer = setTimeout(() => {
+        dispatch(timerActions.tickTimer());
+      }, 1000);
 
-    if (timerRdx === 0) {
-      dispatch(timerActions.handleAction);
+      if (timerRdx <= 0) {
+        dispatch(timerActions.handleAction());
+      }
+      return () => clearTimeout(timer);
     }
-    return () => clearTimeout(timer);
-  }, [dispatch, timerRdx]);
+  }, [dispatch, timerRdx, timerActive]);
 
   return (
     <div className="app">
@@ -43,6 +46,9 @@ function App() {
 
         <Route exact path="/settings">
           <Settings />
+        </Route>
+        <Route path="/*">
+          <NotFound />
         </Route>
       </Switch>
     </div>
