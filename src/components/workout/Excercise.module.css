@@ -7,9 +7,13 @@
 .rep {
   width: calc(1.5em + 2vh);
   height: calc(1.5em + 2vh);
-  background-color: var(--primary-color);
+
   font-size: 2em;
+
   color: var(--text-color);
+  background-color: var(--primary-color);
+  cursor: pointer;
+
   border-radius: 100%;
   border: 2px solid var(--text-color);
 }
@@ -21,4 +25,10 @@
 .disabled {
   background-color: var(--tetriary-color);
   color: grey;
+}
+
+@media (max-width: 600px) {
+  .exerciseWrapper {
+    flex-direction: column-reverse;
+  }
 }

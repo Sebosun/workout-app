@@ -9,9 +9,6 @@ const RestTimer = ({ disableRest, className }) => {
   return (
     <div className={className}>
       <p>{timerRdx}</p>
-      <button onClick={() => dispatch(timerActions.handleAction(false))}>
-        Disable
-      </button>
     </div>
   );
 };

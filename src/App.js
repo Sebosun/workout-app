@@ -8,11 +8,25 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { timerActions } from "./store/timer-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { settingsActions } from "./store/settings-slice";
 
 function App() {
   const dispatch = useDispatch();
   const timerRdx = useSelector((state) => state.timer.timer);
   const timerActive = useSelector((state) => state.timer.active);
+  const timerCooldown = useSelector((state) => state.settings.cooldown);
+
+  const readLocalStorage = () => {
+    const cooldown = localStorage.getItem("cooldown");
+    return { cooldown: cooldown };
+  };
+
+  // runs only once when the app is loaded
+  useEffect(() => {
+    const localStorage = readLocalStorage();
+
+    dispatch(settingsActions.changeCooldown(localStorage.cooldown));
+  }, []);
 
   useEffect(() => {
     if (timerActive) {

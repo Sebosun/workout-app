@@ -8,11 +8,7 @@ const DUMMY_DATA = [
 ];
 
 const WorkoutPage = (props) => {
-  return (
-    <main className="wrapper">
-      <Workout data={DUMMY_DATA} />
-    </main>
-  );
+  return <Workout data={DUMMY_DATA} />;
 };
 
 export default WorkoutPage;

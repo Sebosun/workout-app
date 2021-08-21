@@ -1,3 +1,8 @@
+.wrapper {
+  text-align: center;
+  margin: 0 auto;
+}
+
 .exerciseWrapper {
   padding: 20px;
   margin: 2em;
@@ -10,7 +15,6 @@
 
 .exerciseWrapper > div {
   color: var(--text-color);
-  /* margin-left: 2em; */
 }
 
 .timer {

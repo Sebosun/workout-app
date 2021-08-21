@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useReset from "../../hooks/useReset";
 import { timerActions } from "../../store/timer-slice";
 import classes from "./Excercise.module.css";
 

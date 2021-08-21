@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 const timerSlice = createSlice({
   name: "timer",
   initialState: {
-    active: true,
-    timer: 2,
+    active: false,
+    timer: 5,
   },
   reducers: {
     tickTimer(state) {
