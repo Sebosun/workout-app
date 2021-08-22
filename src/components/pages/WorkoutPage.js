@@ -5,6 +5,8 @@ const DUMMY_DATA = [
   { name: "bench", sets: 5, reps: 5 },
   { name: "squat", sets: 5, reps: 5 },
   { name: "deadlift", sets: 1, reps: 5 },
+  { name: "deadlift", sets: 1, reps: 5 },
+  { name: "deadlift", sets: 1, reps: 5 },
 ];
 
 const WorkoutPage = (props) => {

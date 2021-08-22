@@ -1,3 +1,4 @@
+import { current } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { timerActions } from "../../store/timer-slice";
@@ -8,18 +9,24 @@ import classes from "./Excercise.module.css";
 //   reps - how many repetitions of loops are there
 //   ex: 3 sets 8 reps => 3 * 8 => 3 times lift heavy thing 8 times in a row
 
+// TODO: rewrite this wiht settings-slice in redux.
+// I'm thinking take out this, map it in the level higher
+
+const state = (sets, reps) => {
+  let workObj = { reps: [], activated: [] };
+  for (let i = 0; i < sets; i++) {
+    workObj.reps.push(parseInt(reps));
+    workObj.activated.push(false);
+  }
+  return workObj;
+};
+
 const Exercise = (props) => {
   const cooldown = useSelector((state) => state.settings.cooldown);
   const dispatch = useDispatch();
-  const [currentWorkout, setCurrentWorkout] = useState(() => {
-    let workObj = { reps: [], activated: [] };
-
-    for (let i = 0; i < props.sets; i++) {
-      workObj.reps.push(parseInt(props.reps));
-      workObj.activated.push(false);
-    }
-
-    return workObj;
+  const [currentWorkout, setCurrentWorkout] = useState({
+    sets: props.sets,
+    completed: props.completed,
   });
 
   const handleReset = () => {
@@ -30,14 +37,14 @@ const Exercise = (props) => {
   const setsHandler = (position) => {
     setCurrentWorkout((prev) => {
       let newReps = [...prev.reps];
-      let newActi = [...prev.activated];
+      let newActi = [...prev.completed];
       //if gets to 0 reset back to 18
       // TODO: make it go to 0 and change display to an "error" -> if clicked again back to 18
 
       // start rest if we're activating the button for the first time
       if (
         prev.reps[position] === props.reps &&
-        prev.activated[position] === false
+        prev.completed[position] === false
       ) {
         newActi[position] = true;
         handleReset();
@@ -54,7 +61,7 @@ const Exercise = (props) => {
       } else {
         newReps[position] = newReps[position] - 1;
       }
-      return { activated: newActi, reps: newReps };
+      return { completed: newActi, reps: newReps };
     });
   };
 
@@ -64,22 +71,20 @@ const Exercise = (props) => {
       setsArr.push(
         <button
           key={i}
-          onClick={() => {
-            setsHandler(i);
-          }}
+          onClick={() => {}}
           className={`${classes.rep} ${
-            currentWorkout.activated[i] ? null : classes.disabled
+            currentWorkout.completed[i] ? null : classes.disabled
           }`}
         >
-          {currentWorkout.reps[i]}
+          {currentWorkout.sets[i]}
         </button>
       );
     }
     return setsArr;
   };
+  const sets = setsRender(props.sets.length);
 
-  const sets = setsRender(props.sets);
-
+  console.log(currentWorkout, sets);
   return <div className={classes.sets}>{sets}</div>;
 };
 

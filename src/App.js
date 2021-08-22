@@ -22,13 +22,12 @@ function App() {
   };
 
   // runs localstorage on app load, saves data in the settings
-  //
   useEffect(() => {
     const localStorage = readLocalStorage();
     if (localStorage.cooldown) {
       dispatch(settingsActions.changeCooldown(localStorage.cooldown));
     }
-  }, []);
+  }, [timerCooldown, dispatch]);
 
   useEffect(() => {
     if (timerActive) {

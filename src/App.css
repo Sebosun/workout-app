@@ -4,6 +4,8 @@
   /* --primary-color: purple; */
   --primary-color: hsl(38, 79%, 36%);
   --hover: hsl(40, 84%, 41%);
+
+  --ultramarine: rgb(64, 0, 255);
 }
 
 @media (prefers-color-scheme: light) {
@@ -14,6 +16,7 @@
     --secondary-color: #e8e4c9;
     --tetriary-color: #c9cde8;
     --hover: rgb(100, 129, 237);
+    --disabled: #201d1d;
   }
 }
 
