@@ -21,11 +21,13 @@ function App() {
     return { cooldown: cooldown };
   };
 
-  // runs only once when the app is loaded
+  // runs localstorage on app load, saves data in the settings
+  //
   useEffect(() => {
     const localStorage = readLocalStorage();
-
-    dispatch(settingsActions.changeCooldown(localStorage.cooldown));
+    if (localStorage.cooldown) {
+      dispatch(settingsActions.changeCooldown(localStorage.cooldown));
+    }
   }, []);
 
   useEffect(() => {
