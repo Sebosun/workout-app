@@ -9,33 +9,56 @@ import { timerActions } from "../../store/timer-slice";
 import { settingsActions } from "../../store/settings-slice";
 import { workoutActions } from "../../store/workout-slice";
 
+function initWorkout(data) {
+  const workoutData = data.map((item) => {
+    let workObj = { reps: [], completed: [] };
+    for (let i = 0; i < item.sets; i++) {
+      workObj.reps.push(parseInt(item.reps));
+      workObj.completed.push(false);
+    }
+
+    return {
+      name: item.name,
+      sets: [...workObj.reps],
+      completed: [...workObj.completed],
+      reps: item.reps,
+      weight: item.weight,
+    };
+  });
+  console.log(workoutData);
+  return workoutData;
+}
+
 const InitialState = () => {
   const dispatch = useDispatch();
-  // const timer = useSelector((state) => state.timer.timer);
-  // const active = useSelector((state) => state.timer.active);
   const { active, timer } = useSelector((state) => state.timer);
   const cooldown = useSelector((state) => state.settings.cooldown);
-  const { workout } = useSelector((state) => state.workout);
 
   useEffect(() => {
     const getData = async () => {
       const db = firebase.firestore();
       const docRef = db.collection("workouts");
+      // const docRef = db.collection("workout");
       const getDocRef = await docRef.get();
-      console.log(getDocRef);
-      // TODO error handling
-      let workoutArr = [];
-      getDocRef.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        workoutArr.push(doc.data());
-      });
+      if (getDocRef.docs.length > 0) {
+        console.log(getDocRef);
+        // TODO error handling
+        let workoutData = [];
+        getDocRef.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+          workoutData.push(doc.data());
+        });
 
-      dispatch(workoutActions.addWorkout(workoutArr));
+        const transformWorkout = initWorkout(workoutData);
+        dispatch(workoutActions.addWorkout(transformWorkout));
+      } else {
+        console.error("Whoops!");
+      }
     };
-
     getData();
   }, []);
 
+  //doing it in a separate function because settings for sure will expand in the future
   const readLocalStorage = () => {
     const cooldown = localStorage.getItem("cooldown");
     return { cooldown: cooldown };
@@ -49,6 +72,7 @@ const InitialState = () => {
     }
   }, [cooldown, dispatch]);
 
+  //timeouts for timer
   useEffect(() => {
     if (active) {
       const timer = setTimeout(() => {
