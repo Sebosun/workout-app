@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Card from "../ui/Card";
 
@@ -8,38 +8,31 @@ import RestTimer from "./RestTimer";
 
 import classes from "./Workout.module.css";
 import SubmitWorkout from "./SubmitWorkout";
+import { workoutActions } from "../../store/workout-slice";
 
 const Workout = (props) => {
+  const dispatch = useDispatch();
   const active = useSelector((state) => state.timer.active);
-  const [workout, setWorkout] = useState([]);
+  const workout = useSelector((state) => state.workout.workout);
 
   //TODO for later - generate as many "places" as the highest set exercise - maybe max 5 ?
   // but make those other extra exercises disabled and unintarractible
 
-  useEffect(() => {
-    function initWorkout() {
-      const dupas = props.data.map((item) => {
-        let workObj = { reps: [], activated: [] };
-        for (let i = 0; i < item.sets; i++) {
-          workObj.reps.push(parseInt(item.reps));
-          workObj.activated.push(false);
-        }
+  const setsHandler = (index, position) => {
+    const currentSets = workout[index].sets[position];
+    const currentCompleted = workout[index].completed[position];
+    const currentReps = workout[index].reps;
 
-        return {
-          name: item.name,
-          sets: [...workObj.reps],
-          setsCompleted: [...workObj.activated],
-          reps: item.reps,
-          weight: 0,
-        };
-      });
-      return dupas;
+    if (currentSets === currentReps && currentCompleted === false) {
+      dispatch(workoutActions.handleComplete({ index, position }));
+    } else if (currentSets === 0) {
+      dispatch(
+        workoutActions.handleSets({ index, position, number: currentReps })
+      );
+    } else {
+      dispatch(workoutActions.handleSets({ index, position }));
     }
-
-    setWorkout(initWorkout());
-  }, []);
-
-  console.log(workout);
+  };
 
   const exercisesMapped = workout.map((item, index) => {
     return (
@@ -48,13 +41,15 @@ const Workout = (props) => {
         <Excercise
           index={index}
           sets={item.sets}
-          completed={item.setsCompleted}
+          completed={item.completed}
           reps={item.reps}
+          setsHandler={setsHandler}
         />
       </Card>
     );
   });
 
+  console.log(workout);
   return (
     <main className={classes.wrapper}>
       {active && <RestTimer />}
