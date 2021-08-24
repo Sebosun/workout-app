@@ -7,7 +7,7 @@ const workoutSlice = createSlice({
   },
   reducers: {
     addWorkout(state, action) {
-      state.workout.push(action.payload);
+      state.workout = action.payload;
     },
   },
 });

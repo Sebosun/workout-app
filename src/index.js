@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import firebase from "firebase/app";
-import { Provider } from "react-redux";
+
 import store from "./store/index";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+
+import firebase from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAug3P0fmT9ur-V04RtrssjGc2xXQwLk_4",
@@ -17,7 +19,7 @@ const firebaseConfig = {
   appId: "1:448772049896:web:b8332f490c26822c8af25d",
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
