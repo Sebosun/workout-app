@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 import Workout from "../workout/Workout";
 
 const WorkoutPage = (props) => {
-  const [workoutStarted, setWorkoutStarted] = useState(false);
+  const [workoutStarted, setWorkoutStarted] = useState(true);
   const workoutRdx = useSelector((state) => state.workout.workout);
 
   const handleStart = () => {

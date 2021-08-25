@@ -7,7 +7,7 @@ import FrontPage from "./FrontPage";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
-const Routing = (props) => {
+const Routing = () => {
   return (
     <>
       <Switch>

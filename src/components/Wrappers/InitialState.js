@@ -82,6 +82,7 @@ const InitialState = () => {
       if (timer <= 0) {
         dispatch(timerActions.handleAction());
       }
+
       return () => clearTimeout(timer);
     }
   }, [dispatch, timer, active]);

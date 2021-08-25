@@ -5,7 +5,6 @@ import { timerActions } from "../../store/timer-slice";
 import classes from "./RestTimer.module.css";
 
 const RestTimer = ({ disableRest, className }) => {
-  const dispatch = useDispatch();
   const timerRdx = useSelector((state) => state.timer.timer);
 
   return (

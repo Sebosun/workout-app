@@ -9,14 +9,18 @@ import RestTimer from "./RestTimer";
 import classes from "./Workout.module.css";
 import SubmitWorkout from "./SubmitWorkout";
 import { workoutActions } from "../../store/workout-slice";
+import { timerActions } from "../../store/timer-slice";
 
 const Workout = (props) => {
   const dispatch = useDispatch();
   const active = useSelector((state) => state.timer.active);
   const workout = useSelector((state) => state.workout.workout);
+  const cooldown = useSelector((state) => state.settings.cooldown);
 
-  //TODO for later - generate as many "places" as the highest set exercise - maybe max 5 ?
-  // but make those other extra exercises disabled and unintarractible
+  const handleTimer = () => {
+    dispatch(timerActions.setTimer(cooldown));
+    dispatch(timerActions.handleAction(true));
+  };
 
   const setsHandler = (index, position) => {
     const currentSets = workout[index].sets[position];
@@ -25,9 +29,13 @@ const Workout = (props) => {
 
     if (currentSets === currentReps && currentCompleted === false) {
       dispatch(workoutActions.handleComplete({ index, position }));
+      handleTimer();
     } else if (currentSets === 0) {
       dispatch(
         workoutActions.handleSets({ index, position, number: currentReps })
+      );
+      dispatch(
+        workoutActions.handleComplete({ index, position, number: currentReps })
       );
     } else {
       dispatch(workoutActions.handleSets({ index, position }));
