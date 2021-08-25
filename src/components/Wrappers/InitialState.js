@@ -75,17 +75,18 @@ const InitialState = () => {
   //timeouts for timer
   useEffect(() => {
     if (active) {
-      const timer = setTimeout(() => {
+      const timerTimeout = setTimeout(() => {
         dispatch(timerActions.tickTimer());
       }, 1000);
 
-      if (timer <= 0) {
-        dispatch(timerActions.handleAction());
+      if (timer === 0) {
+        dispatch(timerActions.handleAction(false));
       }
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timerTimeout);
     }
   }, [dispatch, timer, active]);
+
   return null;
 };
 
