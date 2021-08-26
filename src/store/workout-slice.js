@@ -12,12 +12,13 @@ const workoutSlice = createSlice({
         weight: 20,
       },
     ],
+    completed: false,
   },
   reducers: {
     addWorkout(state, action) {
       state.workout = action.payload;
     },
-    handleComplete(state, action) {
+    handleSetComplete(state, action) {
       const { workout } = state;
       const { index, position } = action.payload;
       workout[index].completed[position] = !workout[index].completed[position];
@@ -32,6 +33,9 @@ const workoutSlice = createSlice({
       } else {
         --workout[index].sets[position];
       }
+    },
+    completeWorkout(state) {
+      state.completed = true;
     },
   },
 });

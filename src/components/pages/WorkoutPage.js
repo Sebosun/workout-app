@@ -5,22 +5,28 @@ import Workout from "../workout/Workout";
 
 const WorkoutPage = (props) => {
   const [workoutStarted, setWorkoutStarted] = useState(true);
-  const workoutRdx = useSelector((state) => state.workout.workout);
+  const { workout, completed } = useSelector((state) => state.workout);
 
   const handleStart = () => {
     setWorkoutStarted((prev) => !prev);
   };
 
-  return (
-    <>
-      {workoutStarted && <Workout data={workoutRdx} />}
-      {!workoutStarted && (
-        <Button style={{ margin: "100px auto" }} onClick={handleStart}>
-          <h1> Start workout</h1>
-        </Button>
-      )}
-    </>
-  );
+  console.log(completed);
+
+  if (completed) {
+    return <h1>Completed</h1>;
+  } else {
+    return (
+      <>
+        {workoutStarted && <Workout data={workout} />}
+        {!workoutStarted && (
+          <Button style={{ margin: "100px auto" }} onClick={handleStart}>
+            <h1> Start workout</h1>
+          </Button>
+        )}
+      </>
+    );
+  }
 };
 
 export default WorkoutPage;
