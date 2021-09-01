@@ -25,7 +25,6 @@ function initWorkout(data) {
       weight: item.weight,
     };
   });
-  console.log(workoutData);
   return workoutData;
 }
 
@@ -41,11 +40,9 @@ const InitialState = () => {
       // const docRef = db.collection("workout");
       const getDocRef = await docRef.get();
       if (getDocRef.docs.length > 0) {
-        console.log(getDocRef);
         // TODO error handling
         let workoutData = [];
         getDocRef.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
           workoutData.push(doc.data());
         });
 

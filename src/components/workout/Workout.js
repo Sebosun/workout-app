@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Card from "../ui/Card";
@@ -7,7 +7,6 @@ import Excercise from "./Excercise";
 import RestTimer from "./RestTimer";
 
 import classes from "./Workout.module.css";
-import SubmitWorkout from "./SubmitWorkout";
 import { workoutActions } from "../../store/workout-slice";
 import { timerActions } from "../../store/timer-slice";
 
@@ -64,8 +63,6 @@ const Workout = () => {
           </Card>
         );
       })}
-
-      <SubmitWorkout />
     </main>
   );
 };
