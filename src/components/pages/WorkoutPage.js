@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 import Workout from "../workout/Workout";
 import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
 
-const WorkoutPage = (props) => {
+const WorkoutPage = () => {
   const [workoutStarted, setWorkoutStarted] = useState(true);
 
   const { workout, completed } = useSelector((state) => state.workout);
