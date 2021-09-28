@@ -8,7 +8,7 @@ import classes from "./Excercise.module.css";
 interface Props {
   index: number;
   sets: number[];
-  completed: number[];
+  completed: boolean[];
   reps: number;
   setsHandler: (index: number, position: number) => void;
 }
