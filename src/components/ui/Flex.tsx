@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Flex.module.css";
 
 interface Props {
-  column: boolean;
+  column?: boolean;
   children: React.ReactNode;
 }
 
