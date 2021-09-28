@@ -1,5 +1,3 @@
-import React from "react";
-
 const CooldownForm = (props) => {
   return (
     <label htmlFor="cooldown">

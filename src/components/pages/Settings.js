@@ -18,8 +18,8 @@ const Settings = () => {
     dispatch(settingsActions.changeCooldown(cooldown));
     localStorage.setItem("cooldown", cooldown);
   };
-
-  const cooldownHandler = (e) => setCooldown(e.target.value);
+  // React.ChangeEvent<HTMLInputElement>
+  const cooldownHandler = (event) => setCooldown(event.target.value);
 
   return (
     <Flex>
