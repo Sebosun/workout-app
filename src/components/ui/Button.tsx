@@ -1,11 +1,14 @@
 import React from "react";
 import classes from "./Button.module.css";
 
-const Button: React.FC<{
-  onClick: () => void;
-  style: object;
-  className: string;
-}> = (props): JSX.Element => {
+interface Props {
+  onClick?: () => void;
+  style?: object;
+  className?: string;
+  children: React.ReactNode;
+}
+
+const Button = (props: Props) => {
   return (
     <button
       onClick={props.onClick}
