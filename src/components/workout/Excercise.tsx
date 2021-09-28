@@ -5,9 +5,19 @@ import classes from "./Excercise.module.css";
 //   reps - how many repetitions of loops are there
 //   ex: 3 sets 8 reps => 3 * 8 => 3 times lift heavy thing 8 times in a row
 
-const Exercise = (props) => {
-  const setsRender = (amount) => {
-    let setsArr = [];
+interface Props {
+  index: number;
+  sets: number[];
+  completed: number[];
+  reps: number;
+  setsHandler: (index: number, position: number) => void;
+}
+
+const Exercise = (props: Props) => {
+  /** given the amount of sets, creates array of buttons with
+   * onClick property that handles set behaviour */
+  const setsRender = (amount: number): JSX.Element[] => {
+    let setsArr: JSX.Element[] = [];
     for (let i = 0; i < amount; i++) {
       setsArr.push(
         <button
