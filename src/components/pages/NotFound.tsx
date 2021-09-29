@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Flex from "../ui/Flex";
 
-const NotFound = (props) => {
-  const [redirect, setRedirect] = useState(null);
+const NotFound = () => {
+  const [redirect, setRedirect] = useState<React.ReactElement>();
 
   setTimeout(() => {
     setRedirect(<Redirect to="/main" />);
@@ -20,7 +20,7 @@ const NotFound = (props) => {
         consequuntur distinctio tempora sint.
       </p>
 
-      {/* {redirect} */}
+      {redirect}
     </Flex>
   );
 };

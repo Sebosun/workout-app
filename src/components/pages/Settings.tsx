@@ -8,23 +8,26 @@ import CooldownForm from "../forms/CooldownForm";
 import Button from "../ui/Button";
 
 const Settings = () => {
-  const cooldownRedux = useSelector((state) => state.settings.cooldown);
+  // TODO: Temporary solution for Redux -> will fix when I read more about Typescript with redux
+  //  https://stackoverflow.com/questions/60777859/ts2339-property-tsreducer-does-not-exist-on-type-defaultrootstate
+  const cooldownRedux = useSelector((state: any) => state.settings.cooldown);
   const dispatch = useDispatch();
 
   const [cooldown, setCooldown] = useState(cooldownRedux);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     dispatch(settingsActions.changeCooldown(cooldown));
     localStorage.setItem("cooldown", cooldown);
   };
 
-  const cooldownHandler = (e) => setCooldown(e.target.value);
+  const cooldownHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setCooldown(event.target.value);
 
   return (
     <Flex>
-      <form onSubmit={submitHandler}>
-        <CooldownForm value={cooldown} cooldownHandler={cooldownHandler} />
+      <form onSubmit={(e) => submitHandler}>
+        <CooldownForm cooldown={cooldown} cooldownHandler={cooldownHandler} />
         <Button> Submit</Button>
       </form>
     </Flex>

@@ -12,7 +12,9 @@ const SubmitWorkout = () => {
 
   const [confirmation, setConfirmation] = useState(false);
 
-  const workoutRdx = useSelector((state) => state.workout.workout);
+  // TODO: Temporary solution for Redux -> will fix when I read more about Typescript with redux
+  //  https://stackoverflow.com/questions/60777859/ts2339-property-tsreducer-does-not-exist-on-type-defaultrootstate
+  const workoutRdx = useSelector((state: any) => state.workout.workout);
 
   // TODO: get date from the user, save it on server  instead of firestore
   // if date is the same day, say dude u already done it
