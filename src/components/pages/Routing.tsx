@@ -1,5 +1,3 @@
-import React from "react";
-
 import WorkoutPage from "./WorkoutPage";
 import Settings from "./Settings";
 import NotFound from "./NotFound";

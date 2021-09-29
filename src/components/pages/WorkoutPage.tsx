@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+
 import Button from "../ui/Button";
 import Workout from "../workout/Workout";
 import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
 
-const WorkoutPage = (props) => {
+const WorkoutPage = () => {
   const [workoutStarted, setWorkoutStarted] = useState(true);
 
-  const { workout, completed } = useSelector((state) => state.workout);
+  const { completed } = useSelector((state: any) => state.workout);
 
   const handleStart = () => {
     setWorkoutStarted((prev) => !prev);
@@ -20,7 +21,7 @@ const WorkoutPage = (props) => {
       <>
         {workoutStarted && (
           <>
-            <Workout data={workout} />
+            <Workout />
             <SubmitWorkout />
           </>
         )}
