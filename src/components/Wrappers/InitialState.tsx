@@ -8,10 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { timerActions } from "../../store/timer-slice";
 import { settingsActions } from "../../store/settings-slice";
 import { workoutActions } from "../../store/workout-slice";
+import { WorkoutType } from "../../helpers/types/workout";
 
-function initWorkout(data) {
-  const workoutData = data.map((item) => {
-    let workObj = { reps: [], completed: [] };
+interface WorkObj {
+  reps: number[];
+  completed: boolean[];
+}
+
+function initWorkout(data: firebase.firestore.DocumentData): WorkoutType {
+  const workoutData = data.map((item: firebase.firestore.DocumentData) => {
+    let workObj: WorkObj = { reps: [], completed: [] };
     for (let i = 0; i < item.sets; i++) {
       workObj.reps.push(parseInt(item.reps));
       workObj.completed.push(false);
@@ -30,8 +36,9 @@ function initWorkout(data) {
 
 const InitialState = () => {
   const dispatch = useDispatch();
-  const { active, timer } = useSelector((state) => state.timer);
-  const cooldown = useSelector((state) => state.settings.cooldown);
+  // TODO: Fix when you get around redux
+  const { active, timer } = useSelector((state: any) => state.timer);
+  const cooldown = useSelector((state: any) => state.settings.cooldown);
 
   useEffect(() => {
     const getData = async () => {
@@ -41,7 +48,8 @@ const InitialState = () => {
       const getDocRef = await docRef.get();
       if (getDocRef.docs.length > 0) {
         // TODO error handling
-        let workoutData = [];
+        let workoutData: firebase.firestore.DocumentData[] = [];
+
         getDocRef.forEach((doc) => {
           workoutData.push(doc.data());
         });
