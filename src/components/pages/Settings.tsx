@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { settingsActions } from "../../store/settings-slice";
+
+import { changeCooldown } from "../../store/settings-slice";
 
 import Flex from "../ui/Flex";
 import CooldownForm from "../forms/CooldownForm";
@@ -17,7 +18,7 @@ const Settings = () => {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(settingsActions.changeCooldown(cooldown));
+    dispatch(changeCooldown(cooldown));
     localStorage.setItem("cooldown", cooldown);
   };
 
