@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SettingsState {
   cooldown: number;
@@ -14,7 +14,7 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    changeCooldown(state, action) {
+    changeCooldown(state, action: PayloadAction<number>) {
       state.cooldown = action.payload;
     },
   },

@@ -5,7 +5,7 @@ import "firebase/firestore";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { timerActions } from "../../store/timer-slice";
+import { tickTimer, handleAction } from "../../store/timer-slice";
 import { changeCooldown } from "../../store/settings-slice";
 import { workoutActions } from "../../store/workout-slice";
 import { WorkoutType } from "../../helpers/types/workout";
@@ -73,7 +73,7 @@ const InitialState = () => {
   useEffect(() => {
     const localStorage = readLocalStorage();
     if (localStorage.cooldown) {
-      dispatch(changeCooldown(localStorage.cooldown));
+      dispatch(changeCooldown(parseInt(localStorage.cooldown)));
     }
   }, [cooldown, dispatch]);
 
@@ -81,11 +81,11 @@ const InitialState = () => {
   useEffect(() => {
     if (active) {
       const timerTimeout = setTimeout(() => {
-        dispatch(timerActions.tickTimer());
+        dispatch(tickTimer());
       }, 1000);
 
       if (timer === 0) {
-        dispatch(timerActions.handleAction(false));
+        dispatch(handleAction(false));
       }
 
       return () => clearTimeout(timerTimeout);

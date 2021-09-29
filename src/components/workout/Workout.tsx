@@ -9,7 +9,7 @@ import { WorkoutType } from "../../helpers/types/workout";
 
 import classes from "./Workout.module.css";
 import { workoutActions } from "../../store/workout-slice";
-import { timerActions } from "../../store/timer-slice";
+import { setTimer, handleAction } from "../../store/timer-slice";
 
 const Workout = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ const Workout = () => {
   const cooldown = useSelector((state: any) => state.settings.cooldown);
 
   const handleTimer = () => {
-    dispatch(timerActions.setTimer(cooldown));
-    dispatch(timerActions.handleAction(true));
+    dispatch(setTimer(cooldown));
+    dispatch(handleAction(true));
   };
 
   const setsHandler = (index: number, position: number) => {
