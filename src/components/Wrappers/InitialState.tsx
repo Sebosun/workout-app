@@ -5,9 +5,9 @@ import "firebase/firestore";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { tickTimer, handleAction } from "../../store/timer-slice";
-import { changeCooldown } from "../../store/settings-slice";
-import { workoutActions } from "../../store/workout-slice";
+import { tickTimer, handleAction } from "../../store/slices/timer-slice";
+import { changeCooldown } from "../../store/slices/settings-slice";
+import { workoutActions } from "../../store/slices/workout-slice";
 import { WorkoutType } from "../../helpers/types/workout";
 
 interface WorkObj {

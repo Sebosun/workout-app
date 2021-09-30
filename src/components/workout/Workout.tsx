@@ -8,8 +8,8 @@ import RestTimer from "./RestTimer";
 import { WorkoutType } from "../../helpers/types/workout";
 
 import classes from "./Workout.module.css";
-import { workoutActions } from "../../store/workout-slice";
-import { setTimer, handleAction } from "../../store/timer-slice";
+import { workoutActions } from "../../store/slices/workout-slice";
+import { setTimer, handleAction } from "../../store/slices/timer-slice";
 
 const Workout = () => {
   const dispatch = useDispatch();

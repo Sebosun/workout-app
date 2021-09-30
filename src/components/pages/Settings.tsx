@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { changeCooldown } from "../../store/settings-slice";
+import { changeCooldown } from "../../store/slices/settings-slice";
 
 import Flex from "../ui/Flex";
 import CooldownForm from "../forms/CooldownForm";

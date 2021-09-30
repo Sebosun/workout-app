@@ -4,7 +4,7 @@ import Button from "../../ui/Button";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { workoutActions } from "../../../store/workout-slice";
+import { workoutActions } from "../../../store/slices/workout-slice";
 import SubmitPortalWrapper from "./SubmitPortalWrapper";
 
 const SubmitWorkout = () => {
