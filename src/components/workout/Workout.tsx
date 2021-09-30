@@ -1,5 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import Card from "../ui/Card";
 
@@ -12,12 +13,11 @@ import { workoutActions } from "../../store/slices/workout-slice";
 import { setTimer, handleAction } from "../../store/slices/timer-slice";
 
 const Workout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // TODO: do after redux
-  const active = useSelector((state: any) => state.timer.active);
-  const workout = useSelector((state: any) => state.workout.workout);
-  const cooldown = useSelector((state: any) => state.settings.cooldown);
+  const active = useAppSelector((state) => state.timer.active);
+  const workout = useAppSelector((state) => state.workout.workout);
+  const cooldown = useAppSelector((state) => state.settings.cooldown);
 
   const handleTimer = () => {
     dispatch(setTimer(cooldown));

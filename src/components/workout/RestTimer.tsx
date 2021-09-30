@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/app/hooks";
 
 import classes from "./RestTimer.module.css";
 
 const RestTimer = () => {
-  // TODO fix this at some point
-  const timerRdx = useSelector((state: any) => state.timer.timer);
+  const timerRdx = useAppSelector((state) => state.timer.timer);
 
   return (
     <div className={classes.timer}>

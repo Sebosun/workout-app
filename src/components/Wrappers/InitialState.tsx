@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import { tickTimer, handleAction } from "../../store/slices/timer-slice";
 import { changeCooldown } from "../../store/slices/settings-slice";
@@ -35,17 +35,17 @@ function initWorkout(data: firebase.firestore.DocumentData): WorkoutType {
 }
 
 const InitialState = () => {
-  const dispatch = useDispatch();
-  // TODO: Fix when you get around redux
-  const { active, timer } = useSelector((state: any) => state.timer);
-  const cooldown = useSelector((state: any) => state.settings.cooldown);
+  const dispatch = useAppDispatch();
+
+  const { active, timer } = useAppSelector((state) => state.timer);
+  const cooldown = useAppSelector((state) => state.settings.cooldown);
 
   useEffect(() => {
     const getData = async () => {
       const db = firebase.firestore();
       const docRef = db.collection("workouts");
-      // const docRef = db.collection("workout");
       const getDocRef = await docRef.get();
+
       if (getDocRef.docs.length > 0) {
         // TODO error handling
         let workoutData: firebase.firestore.DocumentData[] = [];

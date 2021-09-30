@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import { changeCooldown } from "../../store/slices/settings-slice";
 
@@ -9,21 +10,21 @@ import CooldownForm from "../forms/CooldownForm";
 import Button from "../ui/Button";
 
 const Settings = () => {
-  // TODO: Temporary solution for Redux -> will fix when I read more about Typescript with redux
-  //  https://stackoverflow.com/questions/60777859/ts2339-property-tsreducer-does-not-exist-on-type-defaultrootstate
-  const cooldownRedux = useSelector((state: any) => state.settings.cooldown);
-  const dispatch = useDispatch();
+  const cooldownRedux = useAppSelector((state) => state.settings.cooldown);
+  const dispatch = useAppDispatch();
 
   const [cooldown, setCooldown] = useState(cooldownRedux);
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(changeCooldown(cooldown));
-    localStorage.setItem("cooldown", cooldown);
+    // typescript was mad about this so im dirty 'converting' cooldown to string
+    localStorage.setItem("cooldown", `${cooldown}`);
   };
 
   const cooldownHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setCooldown(event.target.value);
+    // parsing it as an int
+    setCooldown(+event.target.value);
 
   return (
     <Flex>

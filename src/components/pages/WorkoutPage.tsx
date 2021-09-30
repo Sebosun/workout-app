@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/app/hooks";
 
 import Button from "../ui/Button";
 import Workout from "../workout/Workout";
@@ -8,7 +8,7 @@ import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
 const WorkoutPage = () => {
   const [workoutStarted, setWorkoutStarted] = useState(true);
 
-  const { completed } = useSelector((state: any) => state.workout);
+  const { completed } = useAppSelector((state) => state.workout);
 
   const handleStart = () => {
     setWorkoutStarted((prev) => !prev);
