@@ -28,7 +28,7 @@ const Settings = () => {
 
   return (
     <Flex>
-      <form onSubmit={(e) => submitHandler}>
+      <form onSubmit={submitHandler}>
         <CooldownForm cooldown={cooldown} cooldownHandler={cooldownHandler} />
         <Button>Submit</Button>
       </form>

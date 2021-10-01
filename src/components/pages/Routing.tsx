@@ -4,6 +4,7 @@ import NotFound from "./NotFound";
 import FrontPage from "./FrontPage";
 
 import { Redirect, Route, Switch } from "react-router-dom";
+import Login from "../login/Login";
 
 const Routing = () => {
   return (
@@ -11,6 +12,10 @@ const Routing = () => {
       <Switch>
         <Route exact path="/">
           <Redirect to="/main" />
+        </Route>
+
+        <Route exact path="/login">
+          <Login />
         </Route>
 
         <Route path="/main">
@@ -24,6 +29,7 @@ const Routing = () => {
         <Route exact path="/settings">
           <Settings />
         </Route>
+
         <Route path="/*">
           <NotFound />
         </Route>
