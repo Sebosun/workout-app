@@ -1,11 +1,13 @@
 :root {
-  --background-color: #333;
-  --text-color: #fff;
-  /* --primary-color: purple; */
-  --primary-color: hsl(38, 79%, 36%);
-  --hover: hsl(40, 84%, 41%);
-
   --ultramarine: rgb(64, 0, 255);
+  --background-color: #231e29;
+  --text-color: #fff;
+  --primary-color: #7431ca;
+
+  --secondary-color: #322936;
+  --tetriary-color: #0c001c;
+  --disabled: #201d1d;
+  --hover: #7000ff;
 }
 
 @media (prefers-color-scheme: light) {
