@@ -31,10 +31,21 @@ const RegistrationForm = () => {
   };
 
   return (
-    <PortalWrapper>
+    <PortalWrapper location="main">
       <form onSubmit={submitHandler}>
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
         <label htmlFor="username">
-          Username:
+          Username
           <input
             type="text"
             name="username"
@@ -45,7 +56,7 @@ const RegistrationForm = () => {
         </label>
         <br />
         <label htmlFor="password">
-          Password:
+          Password
           <input
             type="password"
             name="password"
@@ -55,16 +66,7 @@ const RegistrationForm = () => {
           />
         </label>
         <br />
-        <label htmlFor="email">
-          Email:
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
+        <br />
         <Button> Submit </Button>
       </form>
     </PortalWrapper>
