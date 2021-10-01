@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { workoutActions } from "../../../store/slices/workout-slice";
+import { useLocation } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 
 import "firebase/firestore";
 import firebase from "firebase/app";
 
-import PortalWrapper from "../../ui/PortalWrapper";
 import Button from "../../ui/Button";
+import PortalWrapper from "../../ui/PortalWrapper";
+import classes from "./SubmitWorkout.module.css";
 
 const SubmitWorkout = () => {
   const dispatch = useAppDispatch();
-
   const [confirmation, setConfirmation] = useState(false);
+
+  const location = useLocation();
 
   const workoutRdx = useAppSelector((state) => state.workout.workout);
 
@@ -22,9 +25,11 @@ const SubmitWorkout = () => {
     setConfirmation((prev) => !prev);
   };
 
+  // uploads the workout from redux to firestore
   const handleSubmitWorkout = async () => {
     const db = firebase.firestore();
     const docRef = db.collection("completedWorkouts");
+
     docRef.add({
       workout: [...workoutRdx],
       date: firebase.firestore.FieldValue.serverTimestamp(),
@@ -33,14 +38,15 @@ const SubmitWorkout = () => {
     handleConfirmation();
     dispatch(workoutActions.completeWorkout());
   };
-
+  console.log(location);
+  // TODO: there's a bug here that requires you to double click button after workout has been cancelled
   return (
     <>
-      {!confirmation && (
-        <Button onClick={handleConfirmation}>Finish Workout</Button>
-      )}
+      <Button className={classes.button} onClick={handleConfirmation}>
+        Finish Workout
+      </Button>
       {confirmation && (
-        <PortalWrapper>
+        <PortalWrapper location={`${location.pathname}`}>
           <p> Are you sure you want to end the workout </p>
           <Button onClick={handleSubmitWorkout}>Yes</Button>
           <Button onClick={handleConfirmation}>No</Button>

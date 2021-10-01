@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAppSelector } from "../../store/app/hooks";
+import classes from "./WorkoutPage.module.css";
 
 import Button from "../ui/Button";
 import Workout from "../workout/Workout";
@@ -20,10 +21,10 @@ const WorkoutPage = () => {
     return (
       <>
         {workoutStarted && (
-          <>
+          <main className={classes.wrapper}>
             <Workout />
             <SubmitWorkout />
-          </>
+          </main>
         )}
         {!workoutStarted && (
           <Button style={{ margin: "100px auto" }} onClick={handleStart}>

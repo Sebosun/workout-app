@@ -49,7 +49,7 @@ const Workout = () => {
   };
 
   return (
-    <main className={classes.wrapper}>
+    <>
       {active && <RestTimer />}
 
       {workout.map((item: WorkoutType, index: number) => {
@@ -66,7 +66,7 @@ const Workout = () => {
           </Card>
         );
       })}
-    </main>
+    </>
   );
 };
 
