@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 import "firebase/firestore";
 import firebase from "firebase/app";
 
-import SubmitPortalWrapper from "./SubmitPortalWrapper";
+import PortalWrapper from "../../ui/PortalWrapper";
 import Button from "../../ui/Button";
 
 const SubmitWorkout = () => {
@@ -40,11 +40,11 @@ const SubmitWorkout = () => {
         <Button onClick={handleConfirmation}>Finish Workout</Button>
       )}
       {confirmation && (
-        <SubmitPortalWrapper>
+        <PortalWrapper>
           <p> Are you sure you want to end the workout </p>
           <Button onClick={handleSubmitWorkout}>Yes</Button>
           <Button onClick={handleConfirmation}>No</Button>
-        </SubmitPortalWrapper>
+        </PortalWrapper>
       )}
     </>
   );
