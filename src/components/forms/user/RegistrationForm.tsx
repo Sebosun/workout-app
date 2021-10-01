@@ -27,7 +27,24 @@ const RegistrationForm = () => {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(username, password, email);
+    fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+      } else {
+        res.json().then((data) => {
+          console.log(data);
+        });
+      }
+    });
   };
 
   return (
@@ -40,17 +57,6 @@ const RegistrationForm = () => {
             name="email"
             id="email"
             value={email}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label htmlFor="username">
-          Username
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value={username}
             onChange={handleChange}
           />
         </label>

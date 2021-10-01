@@ -23,9 +23,9 @@ const LoginForm = () => {
     }));
   };
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    console.log(username, password);
+  const submitHandler = (): void => {
+    // validation later
+    console.log(password);
   };
 
   return (
