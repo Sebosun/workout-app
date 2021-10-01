@@ -15,7 +15,11 @@ const initialState: RegistrationData = {
   email: "",
 };
 
-const RegistrationForm = () => {
+interface RegistrationFormState {
+  handleErrorMessage: (message: string) => void;
+}
+
+const RegistrationForm = ({ handleErrorMessage }: RegistrationFormState) => {
   const [loginData, setLoginData] = useState(initialState);
   const { password, email } = loginData;
   const { apiKey } = firebaseConfig;
@@ -46,7 +50,7 @@ const RegistrationForm = () => {
       if (res.ok) {
       } else {
         res.json().then((data) => {
-          console.log(data);
+          handleErrorMessage(data.message);
         });
       }
     });

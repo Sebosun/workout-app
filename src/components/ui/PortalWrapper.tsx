@@ -5,7 +5,7 @@ import Card from "./Card";
 import classes from "./PortalWrapper.module.css";
 
 interface PortalWrapperProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   location?: string;
 }
 

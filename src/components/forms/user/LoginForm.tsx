@@ -14,7 +14,11 @@ const initialState: LoginData = {
   password: "",
 };
 
-const LoginForm = () => {
+interface LoginFormState {
+  handleErrorMessage: (message: string) => void;
+}
+
+const LoginForm = ({ handleErrorMessage }: LoginFormState) => {
   const [loginData, setLoginData] = useState(initialState);
   const { email, password } = loginData;
 
@@ -45,44 +49,43 @@ const LoginForm = () => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          console.log(data);
+          //TODO: this part lol
         });
       } else {
         res.json().then((data) => {
           console.log(data);
+          handleErrorMessage(data.error.message);
         });
       }
     });
   };
 
   return (
-    <PortalWrapper>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <Button> Submit </Button>
-      </form>
-    </PortalWrapper>
+    <form onSubmit={submitHandler}>
+      <label htmlFor="email">
+        Email:
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value={email}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label htmlFor="password">
+        Password:
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={password}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <Button> Submit </Button>
+    </form>
   );
 };
 
