@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
 import PortalWrapper from "../../ui/PortalWrapper";
+import { firebaseConfig } from "../../../index";
 
 interface RegistrationData {
   username: string;
@@ -16,7 +17,8 @@ const initialState: RegistrationData = {
 
 const RegistrationForm = () => {
   const [loginData, setLoginData] = useState(initialState);
-  const { username, password, email } = loginData;
+  const { password, email } = loginData;
+  const { apiKey } = firebaseConfig;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setLoginData((prevState) => ({
@@ -27,7 +29,10 @@ const RegistrationForm = () => {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=", {
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
+
+    fetch(url, {
       method: "POST",
       body: JSON.stringify({
         email: email,

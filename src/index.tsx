@@ -10,7 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import firebase from "firebase/app";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyAug3P0fmT9ur-V04RtrssjGc2xXQwLk_4",
   authDomain: "workout-b9940.firebaseapp.com",
   projectId: "workout-b9940",

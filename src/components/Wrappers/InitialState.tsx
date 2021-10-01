@@ -15,7 +15,7 @@ interface WorkObj {
   completed: boolean[];
 }
 
-function initWorkout(data: firebase.firestore.DocumentData): WorkoutType {
+function initWorkout(data: firebase.firestore.DocumentData) {
   const workoutData = data.map((item: firebase.firestore.DocumentData) => {
     let workObj: WorkObj = { reps: [], completed: [] };
     for (let i = 0; i < item.sets; i++) {

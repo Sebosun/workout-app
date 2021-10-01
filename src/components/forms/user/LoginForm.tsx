@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import Button from "../../ui/Button";
 import PortalWrapper from "../../ui/PortalWrapper";
 
+import { firebaseConfig } from "../../../index";
+
 interface LoginData {
-  username: string;
+  email: string;
   password: string;
 }
 
 const initialState: LoginData = {
-  username: "",
+  email: "",
   password: "",
 };
 
 const LoginForm = () => {
   const [loginData, setLoginData] = useState(initialState);
-  const { username, password } = loginData;
+  const { email, password } = loginData;
+
+  const { apiKey } = firebaseConfig;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setLoginData((prevState) => ({
@@ -23,21 +27,44 @@ const LoginForm = () => {
     }));
   };
 
-  const submitHandler = (): void => {
-    // validation later
-    console.log(password);
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          console.log(data);
+        });
+      } else {
+        res.json().then((data) => {
+          console.log(data);
+        });
+      }
+    });
   };
 
   return (
     <PortalWrapper>
       <form onSubmit={submitHandler}>
-        <label htmlFor="username">
-          Username:
+        <label htmlFor="email">
+          Email:
           <input
-            type="text"
-            name="username"
-            id="username"
-            value={username}
+            type="email"
+            name="email"
+            id="email"
+            value={email}
             onChange={handleChange}
           />
         </label>
