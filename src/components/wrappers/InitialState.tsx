@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { tickTimer, handleAction } from "../../store/slices/timer-slice";
 import { changeCooldown } from "../../store/slices/settings-slice";
 import { workoutActions } from "../../store/slices/workout-slice";
-import { WorkoutType } from "../../helpers/types/workout";
 
 interface WorkObj {
   reps: number[];

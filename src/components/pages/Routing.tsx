@@ -15,7 +15,11 @@ const Routing = () => {
         </Route>
 
         <Route exact path="/login">
-          <Login />
+          <Login mode="login" />
+        </Route>
+
+        <Route exact path="/registration">
+          <Login mode="registration" />
         </Route>
 
         <Route path="/main">

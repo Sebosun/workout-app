@@ -6,7 +6,7 @@ const Header = () => {
     <header className={classes.header}>
       <ul className={classes.list}>
         <li>
-          <Link to="/Login">Login</Link>
+          <Link to="/login">Login</Link>
         </li>
         <li>
           <Link to="/">Main</Link>

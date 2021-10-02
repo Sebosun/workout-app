@@ -4,13 +4,11 @@ import PortalWrapper from "../../ui/PortalWrapper";
 import { firebaseConfig } from "../../../index";
 
 interface RegistrationData {
-  username: string;
   password: string;
   email: string;
 }
 
 const initialState: RegistrationData = {
-  username: "",
   password: "",
   email: "",
 };
@@ -57,34 +55,32 @@ const RegistrationForm = ({ handleErrorMessage }: RegistrationFormState) => {
   };
 
   return (
-    <PortalWrapper location="main">
-      <form onSubmit={submitHandler}>
-        <label htmlFor="email">
-          Email
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <br />
-        <Button> Submit </Button>
-      </form>
-    </PortalWrapper>
+    <form onSubmit={submitHandler}>
+      <label htmlFor="email">
+        Email
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value={email}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label htmlFor="password">
+        Password
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={password}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <br />
+      <Button> Submit </Button>
+    </form>
   );
 };
 
