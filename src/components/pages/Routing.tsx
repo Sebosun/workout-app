@@ -4,7 +4,7 @@ import NotFound from "./NotFound";
 import FrontPage from "./FrontPage";
 
 import { Redirect, Route, Switch } from "react-router-dom";
-import Login from "../login/Login";
+import Login from "./Login";
 
 const Routing = () => {
   return (

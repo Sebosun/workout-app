@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
 
-import { firebaseConfig } from "../../../index";
-import { useAppDispatch } from "../../../store/app/hooks";
 import { loginUser } from "../../../store/slices/user-slice";
+import { useAppDispatch } from "../../../store/app/hooks";
 
 interface LoginData {
   email: string;
@@ -24,8 +23,6 @@ const LoginForm = ({ handleErrorMessage }: LoginFormState) => {
   const { email, password } = loginData;
   const dispatch = useAppDispatch();
 
-  const { apiKey } = firebaseConfig;
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setLoginData((prevState) => ({
       ...prevState,
@@ -36,39 +33,7 @@ const LoginForm = ({ handleErrorMessage }: LoginFormState) => {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
-
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((data) => {
-          console.log(data);
-          dispatch(
-            loginUser({
-              idToken: data.idToken,
-              email: data.email,
-              refreshToken: data.refreshToken,
-              expiresIn: data.expiresIn,
-              localId: data.localId,
-            })
-          );
-        });
-      } else {
-        res.json().then((data) => {
-          console.log(data);
-          handleErrorMessage(data.error.message);
-        });
-      }
-    });
+    dispatch(loginUser(email, password));
   };
 
   return (
