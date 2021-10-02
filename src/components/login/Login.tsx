@@ -15,7 +15,7 @@ interface LoginState {
 }
 
 const initialErrorState: ErrorState = {
-  isActive: true,
+  isActive: false,
   errorMessage: "INVALID_PASSWORD",
 };
 
@@ -30,7 +30,7 @@ const Login = ({ mode }: LoginState) => {
   if (mode === "login") {
     return (
       <PortalWrapper>
-        <p> Login </p>
+        <h1>Login</h1>
         <LoginForm handleErrorMessage={handleErrorMessage} />
         {isActive && <Error message={errorMessage} />}
         <Link to="./registration">Don't have an account? Create one here.</Link>
@@ -39,7 +39,7 @@ const Login = ({ mode }: LoginState) => {
   } else if (mode === "registration") {
     return (
       <PortalWrapper>
-        <p> Registration </p>
+        <h1>Registration</h1>
         <RegistrationForm handleErrorMessage={handleErrorMessage} />
         {isActive && <Error message={errorMessage} />}
         <Link to="./login">Have an account? Log in here.</Link>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
-import PortalWrapper from "../../ui/PortalWrapper";
 
 import { firebaseConfig } from "../../../index";
+import { useAppDispatch } from "../../../store/app/hooks";
+import { loginUser } from "../../../store/slices/user-slice";
 
 interface LoginData {
   email: string;
@@ -21,6 +22,7 @@ interface LoginFormState {
 const LoginForm = ({ handleErrorMessage }: LoginFormState) => {
   const [loginData, setLoginData] = useState(initialState);
   const { email, password } = loginData;
+  const dispatch = useAppDispatch();
 
   const { apiKey } = firebaseConfig;
 
@@ -49,7 +51,16 @@ const LoginForm = ({ handleErrorMessage }: LoginFormState) => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          //TODO: this part lol
+          console.log(data);
+          dispatch(
+            loginUser({
+              idToken: data.idToken,
+              email: data.email,
+              refreshToken: data.refreshToken,
+              expiresIn: data.expiresIn,
+              localId: data.localId,
+            })
+          );
         });
       } else {
         res.json().then((data) => {
