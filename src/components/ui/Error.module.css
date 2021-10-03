@@ -1,13 +1,21 @@
 .error {
+  position: absolute;
+  z-index: 1;
   padding: 0 10px;
-  margin-top: 20px;
 
   font-size: 1.2em;
+
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%);
+
   border: 3px solid crimson;
+  background-color: var(--tetriary-color);
   border-radius: 8px;
 }
 
 .error > p {
   color: crimson;
   text-transform: capitalize;
+  pointer-events: none;
 }
