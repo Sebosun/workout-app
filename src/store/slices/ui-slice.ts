@@ -11,7 +11,7 @@ interface ErrorState {
 const initialState: { error: ErrorState } = {
   error: {
     message: "Something went wrong. Try again.",
-    status: true,
+    status: false,
   },
 };
 

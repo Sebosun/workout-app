@@ -18,15 +18,17 @@ interface UserState {
   localId: string;
 }
 
-const initialState: { userLoginInformation: UserState } = {
-  userLoginInformation: {
-    idToken: "",
-    email: "",
-    refreshToken: "",
-    expiresIn: "",
-    localId: "",
-  },
-};
+const initialState: { userLoginInformation: UserState; loginStatus: boolean } =
+  {
+    userLoginInformation: {
+      idToken: "",
+      email: "",
+      refreshToken: "",
+      expiresIn: "",
+      localId: "",
+    },
+    loginStatus: false,
+  };
 
 const userSlice = createSlice({
   name: "user-slice",
@@ -40,6 +42,7 @@ const userSlice = createSlice({
         expiresIn: action.payload.expiresIn,
         localId: action.payload.localId,
       };
+      state.loginStatus = true;
     },
   },
 });
