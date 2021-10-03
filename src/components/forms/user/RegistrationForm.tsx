@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
 import { firebaseConfig } from "../../../index";
+import { registerUser } from "../../../store/actions/register-user";
+import { useAppDispatch } from "../../../store/app/hooks";
 
 interface RegistrationData {
   password: string;
@@ -15,7 +17,7 @@ const initialState: RegistrationData = {
 const RegistrationForm = () => {
   const [loginData, setLoginData] = useState(initialState);
   const { password, email } = loginData;
-  const { apiKey } = firebaseConfig;
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setLoginData((prevState) => ({
@@ -26,25 +28,7 @@ const RegistrationForm = () => {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
-
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-      } else {
-        res.json().then((data) => {});
-      }
-    });
+    dispatch(registerUser(email, password));
   };
 
   return (
