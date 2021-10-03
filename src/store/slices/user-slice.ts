@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../app";
 import { createSlice } from "@reduxjs/toolkit";
+import { displayError } from "./ui-slice";
 
 // idToken 	string 	A Firebase Auth ID token for the newly created user.
 // email 	string 	The email for the newly created user.
@@ -81,11 +82,12 @@ export const loginUser = (
           localId: data.localId,
         })
       );
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      dispatch(displayError(error.message));
     }
   };
 };
 
 export const { saveUserLoginData } = userSlice.actions;
+
 export default userSlice.reducer;

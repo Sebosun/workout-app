@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
-import PortalWrapper from "../../ui/PortalWrapper";
 import { firebaseConfig } from "../../../index";
 
 interface RegistrationData {
@@ -13,11 +12,7 @@ const initialState: RegistrationData = {
   email: "",
 };
 
-interface RegistrationFormState {
-  handleErrorMessage: (message: string) => void;
-}
-
-const RegistrationForm = ({ handleErrorMessage }: RegistrationFormState) => {
+const RegistrationForm = () => {
   const [loginData, setLoginData] = useState(initialState);
   const { password, email } = loginData;
   const { apiKey } = firebaseConfig;
@@ -47,9 +42,7 @@ const RegistrationForm = ({ handleErrorMessage }: RegistrationFormState) => {
     }).then((res) => {
       if (res.ok) {
       } else {
-        res.json().then((data) => {
-          handleErrorMessage(data.message);
-        });
+        res.json().then((data) => {});
       }
     });
   };

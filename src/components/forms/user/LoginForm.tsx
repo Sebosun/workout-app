@@ -14,11 +14,7 @@ const initialState: LoginData = {
   password: "",
 };
 
-interface LoginFormState {
-  handleErrorMessage: (message: string) => void;
-}
-
-const LoginForm = ({ handleErrorMessage }: LoginFormState) => {
+const LoginForm = () => {
   const [loginData, setLoginData] = useState(initialState);
   const { email, password } = loginData;
   const dispatch = useAppDispatch();

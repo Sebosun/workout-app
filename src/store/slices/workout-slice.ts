@@ -63,4 +63,4 @@ const workoutSlice = createSlice({
 
 export const workoutActions = workoutSlice.actions;
 
-export default workoutSlice;
+export default workoutSlice.reducer;
