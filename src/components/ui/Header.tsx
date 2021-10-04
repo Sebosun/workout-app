@@ -8,11 +8,6 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <ul className={classes.list}>
-        {!loggedIn && (
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        )}
         <li>
           <Link to="/">Main</Link>
         </li>
@@ -25,6 +20,11 @@ const Header = () => {
               <Link to="/settings">Settings</Link>
             </li>
           </>
+        )}
+        {!loggedIn && (
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
         )}
       </ul>
     </header>

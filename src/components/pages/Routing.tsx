@@ -16,18 +16,6 @@ const Routing = () => {
         <Route exact path="/">
           <Redirect to="/main" />
         </Route>
-        {!loggedIn && (
-          <>
-            <Route exact path="/login">
-              <Login mode="login" />
-            </Route>
-
-            <Route exact path="/registration">
-              <Login mode="registration" />
-            </Route>
-          </>
-        )}
-
         <Route path="/main">
           <FrontPage />
         </Route>
@@ -39,6 +27,18 @@ const Routing = () => {
         <Route exact path="/settings">
           <Settings />
         </Route>
+
+        {!loggedIn && (
+          <>
+            <Route exact path="/login">
+              <Login mode="login" />
+            </Route>
+
+            <Route exact path="/registration">
+              <Login mode="registration" />
+            </Route>
+          </>
+        )}
 
         <Route path="/*">
           <NotFound />
