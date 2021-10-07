@@ -27,18 +27,13 @@ const Routing = () => {
         <Route exact path="/settings">
           <Settings />
         </Route>
+        <Route exact path="/login">
+          <Login mode="login" />
+        </Route>
 
-        {!loggedIn && (
-          <>
-            <Route exact path="/login">
-              <Login mode="login" />
-            </Route>
-
-            <Route exact path="/registration">
-              <Login mode="registration" />
-            </Route>
-          </>
-        )}
+        <Route exact path="/registration">
+          <Login mode="registration" />
+        </Route>
 
         <Route path="/*">
           <NotFound />

@@ -36,17 +36,8 @@ export const registerUser = (
     try {
       const response = await sendRequest();
       const data = await response.json();
-      dispatch(
-        saveUserLoginData({
-          idToken: data.idToken,
-          email: data.email,
-          refreshToken: data.refreshToken,
-          expiresIn: data.expiresIn,
-          localId: data.localId,
-        })
-      );
     } catch (error: any) {
-      dispatch(displayError(error.message));
+      console.log(error);
     }
   };
 };
