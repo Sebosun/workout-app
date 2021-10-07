@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
-import { firebaseConfig } from "../../../index";
 import { registerUser } from "../../../store/actions/register-user";
 import { useAppDispatch } from "../../../store/app/hooks";
 
