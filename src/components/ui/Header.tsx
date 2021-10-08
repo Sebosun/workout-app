@@ -1,9 +1,9 @@
 import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../store/app/hooks";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Header = () => {
-  const loggedIn = useAppSelector((state) => state.user.loginStatus);
+  const { currentUser: loggedIn }: any = useAuth();
 
   return (
     <header className={classes.header}>

@@ -1,59 +1,43 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useHistory } from "react-router";
+import { useAuth } from "../../../contexts/AuthContext";
+
 import Button from "../../ui/Button";
-// import { registerUser } from "../../../store/actions/register-user";
-import { useAppDispatch } from "../../../store/app/hooks";
-
-interface RegistrationData {
-  password: string;
-  email: string;
-}
-
-const initialState: RegistrationData = {
-  password: "",
-  email: "",
-};
 
 const RegistrationForm = () => {
-  const [loginData, setLoginData] = useState(initialState);
-  const { password, email } = loginData;
-  const dispatch = useAppDispatch();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setLoginData((prevState) => ({
-      ...prevState,
-      [event.target.id]: event.target.value,
-    }));
-  };
+  const { signup }: any = useAuth();
+  const history = useHistory();
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // dispatch(registerUser(email, password));
+    try {
+      await signup(emailRef.current?.value, passwordRef.current?.value);
+      history.push("/");
+    } catch {
+      throw new Error("cos sie zjebało");
+    }
   };
 
   return (
     <form onSubmit={submitHandler}>
       <label htmlFor="email">
-        Email
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={handleChange}
-        />
+        Email:
+        <input type="email" name="email" id="email" ref={emailRef} required />
       </label>
       <br />
       <label htmlFor="password">
-        Password
+        Password:
         <input
           type="password"
           name="password"
           id="password"
-          value={password}
-          onChange={handleChange}
+          ref={passwordRef}
+          required
         />
       </label>
-      <br />
       <br />
       <Button> Submit </Button>
     </form>

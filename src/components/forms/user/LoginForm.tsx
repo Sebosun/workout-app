@@ -3,16 +3,6 @@ import { useHistory } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 import Button from "../../ui/Button";
 
-interface LoginData {
-  email: string;
-  password: string;
-}
-
-const initialState: LoginData = {
-  email: "",
-  password: "",
-};
-
 const LoginForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
