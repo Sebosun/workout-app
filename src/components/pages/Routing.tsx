@@ -2,10 +2,10 @@ import WorkoutPage from "./WorkoutPage";
 import Settings from "./Settings";
 import NotFound from "./NotFound";
 import FrontPage from "./FrontPage";
-
 import { Redirect, Route, Switch } from "react-router-dom";
-import Login from "./Login";
 import { useAppSelector } from "../../store/app/hooks";
+import Login from "./Login";
+import PrivateRoute from "../wrappers/PrivateRoute";
 
 const Routing = () => {
   const loggedIn = useAppSelector((state) => state.user.loginStatus);
@@ -20,9 +20,9 @@ const Routing = () => {
           <FrontPage />
         </Route>
 
-        <Route exact path="/workout">
+        <PrivateRoute authenticationPath="/login" exact path="/workout">
           <WorkoutPage />
-        </Route>
+        </PrivateRoute>
 
         <Route exact path="/settings">
           <Settings />

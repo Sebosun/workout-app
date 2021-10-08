@@ -7,6 +7,7 @@ interface LoginState {
   mode: "login" | "registration";
 }
 
+// TODO this one will have to be reworked too, unnecessary
 const Login = ({ mode }: LoginState) => {
   if (mode === "login") {
     return (

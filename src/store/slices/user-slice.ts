@@ -5,6 +5,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { auth } from "../../index";
 import { User } from "@firebase/auth";
 
+//TODO DELETE this in its entirety
 // const initialState: { userLoginInformation: UserState; loginStatus: boolean } =
 //   {
 //     userLoginInformation: {
