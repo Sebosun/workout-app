@@ -1,6 +1,8 @@
 import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import HeaderLoggedIn from "./HeaderLoggedIn";
+import HeaderLoggedOff from "./HeaderLoggedOff";
 
 const Header = () => {
   const { currentUser: loggedIn }: any = useAuth();
@@ -11,21 +13,8 @@ const Header = () => {
         <li>
           <Link to="/">Main</Link>
         </li>
-        {loggedIn && (
-          <>
-            <li>
-              <Link to="/workout">Workout</Link>
-            </li>
-            <li>
-              <Link to="/settings">Settings</Link>
-            </li>
-          </>
-        )}
-        {!loggedIn && (
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        )}
+        {loggedIn && <HeaderLoggedIn />}
+        {!loggedIn && <HeaderLoggedOff />}
       </ul>
     </header>
   );

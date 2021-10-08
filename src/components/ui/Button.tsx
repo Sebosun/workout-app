@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Button.module.css";
 
 interface Props {
-  onClick?: () => void;
+  onClick?: (() => void) | (() => Promise<void>);
   style?: object;
   className?: string;
   children: React.ReactNode;
