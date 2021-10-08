@@ -9,10 +9,12 @@ import firebase from "firebase/app";
 import Button from "../../ui/Button";
 import PortalWrapper from "../../ui/PortalWrapper";
 import classes from "./SubmitWorkout.module.css";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const SubmitWorkout = () => {
   const dispatch = useAppDispatch();
   const [confirmation, setConfirmation] = useState(false);
+  const { currentUser }: any = useAuth();
 
   const location = useLocation();
 
@@ -28,7 +30,10 @@ const SubmitWorkout = () => {
   // uploads the workout from redux to firestore
   const handleSubmitWorkout = async () => {
     const db = firebase.firestore();
-    const docRef = db.collection("completedWorkouts");
+    const docRef = db
+      .collection("userData")
+      .doc(currentUser.uid)
+      .collection("completeWorkout");
 
     docRef.add({
       workout: [...workoutRdx],
@@ -46,7 +51,7 @@ const SubmitWorkout = () => {
       </Button>
       {confirmation && (
         <PortalWrapper location={`${location.pathname}`}>
-          <p> Are you sure you want to end the workout </p>
+          <p>Are you sure you want to end the workout</p>
           <Button onClick={handleSubmitWorkout}>Yes</Button>
           <Button onClick={handleConfirmation}>No</Button>
         </PortalWrapper>
