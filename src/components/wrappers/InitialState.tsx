@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { tickTimer, handleAction } from "../../store/slices/timer-slice";
 import { changeCooldown } from "../../store/slices/settings-slice";
 import { workoutActions } from "../../store/slices/workout-slice";
+import { displayError } from "../../store/slices/ui-slice";
 
 interface WorkObj {
   reps: number[];
@@ -35,32 +36,42 @@ function initWorkout(data: firebase.firestore.DocumentData) {
 
 const InitialState = () => {
   const dispatch = useAppDispatch();
+  const user = firebase.auth().currentUser;
 
   const { active, timer } = useAppSelector((state) => state.timer);
   const cooldown = useAppSelector((state) => state.settings.cooldown);
 
+  // get workout data from template workouts in user's folder
+  //
   useEffect(() => {
     const getData = async () => {
       const db = firebase.firestore();
-      const docRef = db.collection("workouts");
-      const getDocRef = await docRef.get();
+      const docRef = db
+        .collection("userData")
+        .doc(user?.uid)
+        .collection("workoutTemplates");
 
-      if (getDocRef.docs.length > 0) {
-        // TODO error handling
-        let workoutData: firebase.firestore.DocumentData[] = [];
+      try {
+        const getDocRef = await docRef.get();
+        if (getDocRef.docs.length > 0) {
+          let workoutData: firebase.firestore.DocumentData[] = [];
 
-        getDocRef.forEach((doc) => {
-          workoutData.push(doc.data());
-        });
+          getDocRef.forEach((doc) => {
+            workoutData.push(doc.data());
+          });
 
-        const transformWorkout = initWorkout(workoutData);
-        dispatch(workoutActions.addWorkout(transformWorkout));
-      } else {
-        console.error("Whoops!");
+          const transformWorkout = initWorkout(workoutData);
+          dispatch(workoutActions.addWorkout(transformWorkout));
+        }
+      } catch (err: any) {
+        dispatch(displayError(err.message));
+        console.error(err.message);
       }
     };
-    getData();
-  }, []);
+    if (user) {
+      getData();
+    }
+  }, [dispatch, user]);
 
   //doing it in a separate function because settings for sure will expand in the future
   const readLocalStorage = () => {

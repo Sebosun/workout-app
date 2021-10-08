@@ -46,7 +46,6 @@ export const loginUser = (
   return async (dispatch) => {
     try {
       const dupa = await auth.signInWithEmailAndPassword(email, password);
-      console.log(dupa);
     } catch (error) {
       console.log(error);
     }

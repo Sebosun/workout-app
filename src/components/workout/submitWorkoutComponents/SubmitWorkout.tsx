@@ -38,7 +38,6 @@ const SubmitWorkout = () => {
     handleConfirmation();
     dispatch(workoutActions.completeWorkout());
   };
-  console.log(location);
   // TODO: there's a bug here that requires you to double click button after workout has been cancelled
   return (
     <>

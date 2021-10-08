@@ -20,6 +20,7 @@ const uiSlice = createSlice({
   initialState,
   reducers: {
     //* replaces message state and flips the boolean value */
+    // use the displayError below instead of this to show an error message
     addErrorMessage(state, action: PayloadAction<string>) {
       state.error.message = action.payload;
       state.error.status = !state.error.status;
@@ -31,6 +32,7 @@ const uiSlice = createSlice({
 });
 
 //* dispatches an error message and then hides it after 5 seconds */
+
 export const displayError = (
   message: string
 ): ThunkAction<void, RootState, unknown, AnyAction> => {
