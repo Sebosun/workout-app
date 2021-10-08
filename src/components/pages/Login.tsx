@@ -10,20 +10,12 @@ interface LoginState {
 // TODO this one will have to be reworked too, unnecessary
 const Login = ({ mode }: LoginState) => {
   if (mode === "login") {
-    return (
-      <PortalWrapper>
-        <h1>Login</h1>
-        <LoginForm />
-        <Link to="./registration">Don't have an account? Create one here.</Link>
-      </PortalWrapper>
-    );
+    return <LoginForm />;
   } else if (mode === "registration") {
     return (
-      <PortalWrapper>
-        <h1>Registration</h1>
-        <RegistrationForm />
-        <Link to="./login">Have an account? Log in here.</Link>
-      </PortalWrapper>
+      // <PortalWrapper>
+      <RegistrationForm />
+      // </PortalWrapper>
     );
   } else {
     return null;

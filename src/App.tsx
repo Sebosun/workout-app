@@ -11,7 +11,7 @@ function App() {
   const { status } = useAppSelector((state) => state.ui.error);
 
   return (
-    <div className="app">
+    <div className="p-0 m-0 h-full">
       <AuthProvider>
         {status && <Error />}
         <Header />
