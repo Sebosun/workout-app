@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
-import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
@@ -59,7 +58,7 @@ const LoginForm = () => {
             id="password"
             className="rounded-md block bg-gray-900 text-white focus:border-gray-50 focus:ring-gray-50 border-2 solid border-purple-800 my-2"
             ref={passwordRef}
-            placeholder="*********************"
+            placeholder="***********"
             required
           />
           <button className="bg-gray-900 p-2 mt-2 w-full border-2 hover:border-indigo-700 hover:bg-blue-400 uppercase font-semibold tracking-tight border-solid border-purple-800 rounded-lg">
