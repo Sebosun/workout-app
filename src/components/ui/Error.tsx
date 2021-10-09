@@ -18,8 +18,13 @@ export default function Error(): ReactElement | null {
   };
 
   return (
-    <div onClick={hideErrorMessage} className={classes.error}>
-      <p>Error: {errorMessageTransformed}</p>
+    <div
+      onClick={hideErrorMessage}
+      className="border-2 p-4 rounded-xl border-crimson border-solid absolute z-50 bg-tetriary text-2xl left-1/2 transform -translate-x-2/4 top-8 text-center"
+    >
+      <p className="capitalize pointer-events-none text-crimson">
+        ERROR: {errorMessageTransformed}
+      </p>
     </div>
   );
 }

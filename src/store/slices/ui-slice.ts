@@ -11,7 +11,7 @@ interface ErrorState {
 const initialState: { error: ErrorState } = {
   error: {
     message: "Something went wrong. Try again.",
-    status: false,
+    status: true,
   },
 };
 
@@ -40,7 +40,7 @@ export const displayError = (
     dispatch(addErrorMessage(message));
     setTimeout(() => {
       dispatch(changeErrorStatus());
-    }, 5 * 1000);
+    }, 6 * 1000);
   };
 };
 

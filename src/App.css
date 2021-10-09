@@ -9,17 +9,17 @@
   --hover: #7000ff;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background-color: rgb(238, 238, 238);
-    --text-color: #111;
-    --primary-color: cornflowerblue;
-    --secondary-color: #e8e4c9;
-    --tetriary-color: #c9cde8;
-    --hover: rgb(100, 129, 237);
-    --disabled: #201d1d;
-  }
-}
+/* @media (prefers-color-scheme: light) { */
+/*   :root { */
+/*     --background-color: rgb(238, 238, 238); */
+/*     --text-color: #111; */
+/*     --primary-color: cornflowerblue; */
+/*     --secondary-color: #e8e4c9; */
+/*     --tetriary-color: #c9cde8; */
+/*     --hover: rgb(100, 129, 237); */
+/*     --disabled: #201d1d; */
+/*   } */
+/* } */
 
 .app {
   padding: 0;
