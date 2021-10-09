@@ -6,6 +6,7 @@ import HeaderLoggedOff from "./HeaderLoggedOff";
 
 const Header = () => {
   const { currentUser: loggedIn }: any = useAuth();
+  //TODO add underline to indicate which path is active at the moment
 
   return (
     <header className={classes.header}>

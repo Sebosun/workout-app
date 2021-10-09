@@ -11,7 +11,7 @@ interface ErrorState {
 const initialState: { error: ErrorState } = {
   error: {
     message: "Something went wrong. Try again.",
-    status: true,
+    status: false,
   },
 };
 
@@ -23,7 +23,7 @@ const uiSlice = createSlice({
     // use the displayError below instead of this to show an error message
     addErrorMessage(state, action: PayloadAction<string>) {
       state.error.message = action.payload;
-      state.error.status = !state.error.status;
+      state.error.status = true;
     },
     changeErrorStatus(state) {
       state.error.status = false;

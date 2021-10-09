@@ -4,10 +4,8 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import { changeCooldown } from "../../store/slices/settings-slice";
-
-import Flex from "../ui/Flex";
+import Input from "../forms/Input";
 import CooldownForm from "../forms/CooldownForm";
-import Button from "../ui/Button";
 
 const Settings = () => {
   const cooldownRedux = useAppSelector((state) => state.settings.cooldown);
@@ -27,12 +25,24 @@ const Settings = () => {
     setCooldown(+event.target.value);
 
   return (
-    <Flex>
-      <form onSubmit={submitHandler}>
-        <CooldownForm cooldown={cooldown} cooldownHandler={cooldownHandler} />
-        <Button>Submit</Button>
-      </form>
-    </Flex>
+    <div className=" p-4 mx-auto max-w-xl">
+      <h1 className="text-5xl text-center">Settings</h1>
+      <div className="max-w-sm mx-auto mt-8">
+        <form onSubmit={submitHandler}>
+          <Input
+            id="cooldown"
+            type="number"
+            name="cooldown"
+            label="Cooldown"
+            value={cooldown}
+            onValueChange={cooldownHandler}
+          />
+          <button className="p-2 my-4 rounded-xl border-2 w-full ">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

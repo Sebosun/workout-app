@@ -5,16 +5,19 @@ interface Props {
 
 const CooldownForm = ({ cooldown, cooldownHandler }: Props) => {
   return (
-    <label htmlFor="cooldown">
-      Cooldown:
+    <>
+      <label className="block" htmlFor="cooldown">
+        Cooldown:
+      </label>
       <input
         value={cooldown}
         onChange={cooldownHandler}
+        className="bg-gray-500"
         id="cooldown"
         type="number"
         name="cooldown"
       />
-    </label>
+    </>
   );
 };
 

@@ -39,6 +39,7 @@ const LoginForm = () => {
           </label>
           <input
             type="email"
+            defaultValue="test@github.log"
             name="email"
             className="rounded-md bg-gray-900 text-white focus:border-gray-50 focus:ring-gray-50  border-2 solid border-purple-800 my-2"
             id="email"
@@ -56,6 +57,7 @@ const LoginForm = () => {
             type="password"
             name="password"
             id="password"
+            defaultValue="1234567"
             className="rounded-md block bg-gray-900 text-white focus:border-gray-50 focus:ring-gray-50 border-2 solid border-purple-800 my-2"
             ref={passwordRef}
             placeholder="***********"
