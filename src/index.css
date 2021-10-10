@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply bg-gray-900 tracking-wide font-medium p-2 mt-2 w-full border-2 hover:border-indigo-700 hover:bg-blue-400 uppercase font-semibold tracking-tight border-solid border-purple-800 rounded-lg;
+  }
+}
