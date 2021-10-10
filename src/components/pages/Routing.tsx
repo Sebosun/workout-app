@@ -2,9 +2,11 @@ import WorkoutPage from "./WorkoutPage";
 import Settings from "./Settings";
 import NotFound from "./NotFound";
 import FrontPage from "./FrontPage";
+import AddWorkoutTemplate from './AddWorkoutTemplate'
 import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "./Login";
 import PrivateRoute from "../wrappers/PrivateRoute";
+import User from "./User";
 
 const Routing = () => {
   // may split this later into two components - logged in routes and 'normal routes'
@@ -33,6 +35,14 @@ const Routing = () => {
 
         <PrivateRoute authenticationPath="/login" exact path="/settings">
           <Settings />
+        </PrivateRoute>
+
+        <PrivateRoute authenticationPath="/login" exact path="/user">
+          <User />
+        </PrivateRoute>
+
+        <PrivateRoute authenticationPath="/login" exact path="/add-workout">
+          <AddWorkoutTemplate />
         </PrivateRoute>
 
         <Route path="/*">

@@ -2,9 +2,9 @@
   margin: 0;
   padding: 0;
   opacity: 0.9;
-
   border-bottom: solid var(--text-color) 1px;
   background-color: var(--tetriary-color);
+  /* overflow-x: scroll; */
 }
 
 .list {

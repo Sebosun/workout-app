@@ -14,24 +14,27 @@ export default function HeaderLoggedIn(): ReactElement | null {
       await logout();
       history.push("/");
     } catch {
-      throw new Error("cos sie zjebało");
+      throw new Error("An error has occurred");
     }
   };
 
   // that button will be stylized later after i get around implementing tailwind
   return (
     <>
-      <li className="text-xl self-center">
+      <li className="self-center text-xl">
         <Link to="/workout">Workout</Link>
       </li>
-      <li className="text-xl self-center">
+      <li className="self-center text-xl">
         <Link to="/settings">Settings</Link>
       </li>
-      <li className="solid self-center">
+      <li className="self-center text-xl">
+        <Link to="/user">User</Link>
+      </li>
+      <li className="self-center solid">
         <IoIosLogOut
           role="button"
           onClick={handleLogout}
-          className="cursor-pointer hover:text-purple-500 text-2xl"
+          className="text-2xl cursor-pointer hover:text-purple-500"
         />
       </li>
     </>
