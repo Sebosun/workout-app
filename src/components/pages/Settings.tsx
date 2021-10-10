@@ -37,7 +37,7 @@ const Settings = () => {
             value={cooldown}
             onValueChange={cooldownHandler}
           />
-          <button className="p-2 my-4 rounded-xl border-2 w-full ">
+          <button className="p-2 my-4 hover:bg-purple-900 hover:border-purple-900 uppercase rounded-xl border-2 w-full ">
             Submit
           </button>
         </form>
