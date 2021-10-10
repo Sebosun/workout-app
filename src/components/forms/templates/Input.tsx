@@ -5,7 +5,8 @@ interface InputProps {
   id: string;
   label: string;
   name: string;
-  value: number;
+  placeholder?: string;
+  value: number | string;
   onValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -14,7 +15,7 @@ export default function Input(props: InputProps): ReactElement | null {
     <>
       <label
         htmlFor={props.id}
-        className="block text-left text-white text-xl font-bold"
+        className="block text-xl font-bold text-left text-indigo-400 capitalize"
       >
         {props.label}
       </label>
@@ -24,7 +25,9 @@ export default function Input(props: InputProps): ReactElement | null {
         type={props.type}
         name={props.name}
         id={props.id}
-        className="rounded-md w-full  block bg-gray-900 text-white focus:border-gray-50 focus:ring-gray-50 border-2 solid border-purple-800 my-2"
+        placeholder={props.placeholder && `${props.placeholder}`}
+        className="block w-full p-2 my-6 text-white bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
+       required
       />
     </>
   );

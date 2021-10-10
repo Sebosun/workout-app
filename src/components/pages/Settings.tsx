@@ -15,7 +15,6 @@ const Settings = () => {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(changeCooldown(cooldown));
-    // typescript was mad about this so im dirty 'converting' cooldown to string
     localStorage.setItem("cooldown", `${cooldown}`);
   };
 

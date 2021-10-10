@@ -5,7 +5,6 @@ import classes from "./WorkoutPage.module.css";
 import Button from "../ui/Button";
 import Workout from "../workout/Workout";
 import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
-import AddWorkout from "../forms/workout/AddWorkout";
 
 const WorkoutPage = () => {
   const [workoutStarted, setWorkoutStarted] = useState(true);
@@ -25,7 +24,6 @@ const WorkoutPage = () => {
           <main className={classes.wrapper}>
             <Workout />
             <SubmitWorkout />
-            <AddWorkout />
           </main>
         )}
         {!workoutStarted && (
