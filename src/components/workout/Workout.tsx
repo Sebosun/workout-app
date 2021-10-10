@@ -54,7 +54,10 @@ const Workout = () => {
 
       {workout.map((item: WorkoutType, index: number) => {
         return (
-          <Card key={index + item.name} className={classes.exerciseWrapper}>
+          <Card
+            key={index + item.name}
+            className="max-w-md my-6 p-4 border-4 border-purple-700 mx-auto"
+          >
             <div>{item.name}</div>
             <Excercise
               index={index}
