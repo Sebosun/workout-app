@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import Card from "../ui/Card";
@@ -56,9 +54,11 @@ const Workout = () => {
         return (
           <Card
             key={index + item.name}
-            className="max-w-md my-6 p-4 border-4 border-purple-700 mx-auto"
+            className="max-w-md my-6 p-4 border-4 border-purple-800 mx-auto"
           >
-            <div>{item.name}</div>
+            <h1 className="text-xl capitalize font-semibold mb-4">
+              {item.name}
+            </h1>
             <Excercise
               index={index}
               sets={item.sets}

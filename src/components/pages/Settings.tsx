@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import { changeCooldown } from "../../store/slices/settings-slice";
-import Input from "../forms/Input";
-import CooldownForm from "../forms/CooldownForm";
+import InputLabel from "../forms/templates/Input";
 
 const Settings = () => {
   const cooldownRedux = useAppSelector((state) => state.settings.cooldown);
@@ -29,7 +28,7 @@ const Settings = () => {
       <h1 className="text-5xl text-center">Settings</h1>
       <div className="max-w-sm mx-auto mt-8">
         <form onSubmit={submitHandler}>
-          <Input
+          <InputLabel
             id="cooldown"
             type="number"
             name="cooldown"
