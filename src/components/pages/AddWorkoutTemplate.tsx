@@ -10,24 +10,6 @@ export default function AddWorkoutTemplate(): ReactElement | null {
       reps: 0,
       weight: 0,
     },
-    {
-      name: "Squat",
-      sets: 0,
-      reps: 0,
-      weight: 0,
-    },
-    {
-      name: "Squat",
-      sets: 0,
-      reps: 0,
-      weight: 0,
-    },
-    {
-      name: "Squat",
-      sets: 0,
-      reps: 0,
-      weight: 0,
-    },
   ]);
   const [visible, setVisible] = useState(true);
   const [preview, setPreview] = useState(true);
@@ -46,7 +28,7 @@ export default function AddWorkoutTemplate(): ReactElement | null {
   };
 
   return (
-    <div className="max-w-lg p-8 m-4 mx-auto">
+    <div className="max-w-full p-8 m-4 mx-auto lg:max-w-2xl">
       {preview && (
         <div className="">
           <DisplayWorkoutTemplatePreview workout={workout} />
@@ -65,15 +47,14 @@ export default function AddWorkoutTemplate(): ReactElement | null {
           )}
           {!visible && (
             <div className="">
-              <h1 className="text-center">Add another exercise?</h1>
               <button className="btn" onClick={handleVisibleClick}>
-                Yes
-              </button>
-              <button className="btn" onClick={() => {}}>
-                No
+                Add another exercise
               </button>
               <button className="btn" onClick={handlePreviewClick}>
                 Show preview
+              </button>
+              <button className="btn" onClick={() => {}}>
+                Submit workout
               </button>
             </div>
           )}

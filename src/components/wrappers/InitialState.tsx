@@ -42,7 +42,7 @@ const InitialState = () => {
   const cooldown = useAppSelector((state) => state.settings.cooldown);
 
   // get workout data from template workouts in user's folder
-  //
+  // TODO: move this logic to a component that loads the workout rather than running it at the very start.
   useEffect(() => {
     const getData = async () => {
       const db = firebase.firestore();
