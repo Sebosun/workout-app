@@ -1,5 +1,4 @@
-import classes from "./Header.module.css";
-import { Link } from "react-router-dom";
+import classes from "./Header.module.css"; import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import HeaderLoggedIn from "./HeaderLoggedIn";
 import HeaderLoggedOff from "./HeaderLoggedOff";
@@ -9,9 +8,9 @@ const Header = () => {
   //TODO add underline to indicate which path is active at the moment
 
   return (
-    <header className={classes.header}>
-      <ul className={classes.list}>
-        <li>
+    <header className="m-0 bg-purple-900 border-b-2 border-white ">
+      <ul className="flex justify-end p-4 mx-4 overflow-y-scrol gap-10">
+        <li className="text-xl border-b-2 border-transparent outline-none hover:border-white hover:border-current">
           <Link to="/">Main</Link>
         </li>
         {loggedIn && <HeaderLoggedIn />}

@@ -1,57 +1,5 @@
-.header {
-  margin: 0;
-  padding: 0;
-  opacity: 0.9;
-  border-bottom: solid var(--text-color) 1px;
-  background-color: var(--tetriary-color);
-  /* overflow-x: scroll; */
-}
-
-.list {
-  margin: 0;
-  padding: 0px;
-
-  display: flex;
-  justify-content: flex-end;
-}
-
-.list > li {
-  list-style-type: none;
-  padding: 15px;
-}
-
-.list > li > a {
-  margin-top: 10px;
-  padding: 5px 5px 5px 5px;
-  font-size: calc(10px + 1vw);
-  text-decoration: none;
-  color: var(--text-color);
-}
-
 @media (hover: hover) {
   .list > li > a:hover {
     border-bottom: 4px solid var(--primary-color); /* solves sticky problem */
-  }
-}
-
-@media (max-width: 900px) {
-  .list {
-    justify-content: space-evenly;
-    flex: 1;
-    gap: 0px;
-  }
-
-  .list > li {
-    padding: 0;
-    border-radius: 0;
-    background-color: inherit;
-  }
-  .list > li > a {
-    margin: 0;
-    padding: 15px;
-
-    font-size: calc(10px + 5vw);
-    display: flex;
-    justify-content: center;
   }
 }
