@@ -3,8 +3,6 @@ import { useHistory } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../store/app/hooks";
-
-import Button from "../../ui/Button";
 import { displayError } from "../../../store/slices/ui-slice";
 
 const RegistrationForm = () => {

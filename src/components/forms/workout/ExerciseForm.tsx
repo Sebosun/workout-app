@@ -1,6 +1,10 @@
 import { ReactElement, useState, useRef } from "react";
 import Input from "../templates/Input";
 
+interface ExerciseProps{
+  collector: (exercise: ExerciseTypes) => void;
+}
+
 export interface ExerciseTypes {
   name: string;
   reps: number;
@@ -15,7 +19,7 @@ const defaultExercise: ExerciseTypes = {
   weight: 0,
 };
 
-export default function ExerciseForm(): ReactElement | null {
+export default function ExerciseForm({collector}: ExerciseProps ): ReactElement | null {
   const [exercise, setExercise] = useState(defaultExercise);
   const { name, reps, sets, weight } = exercise;
 
@@ -25,11 +29,11 @@ export default function ExerciseForm(): ReactElement | null {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('dupa')
+    collector(exercise)
   }
 
   return (
-    <form className="max-w-lg p-4 mx-auto border-2 border-white border-blue-900 border-solid shadow-2xl rounded-xl" onSubmit={e => handleSubmit}>
+    <form className="max-w-lg p-4 mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl" onSubmit={handleSubmit}>
       <Input
         type="string"
         label="name"

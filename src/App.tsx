@@ -20,6 +20,4 @@ function App() {
       </AuthProvider>
     </div>
   );
-}
-
-export default App;
+} export default App;
