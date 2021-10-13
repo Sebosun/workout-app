@@ -33,7 +33,7 @@ export default function ExerciseForm({collector}: ExerciseProps ): ReactElement 
   }
 
   return (
-    <form className="max-w-lg p-4 mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl" onSubmit={handleSubmit}>
+    <form className="p-4 mx-auto border-2 border-blue-900 border-solid shadow-2xl  rounded-xl" onSubmit={handleSubmit}>
       <Input
         type="string"
         label="name"
