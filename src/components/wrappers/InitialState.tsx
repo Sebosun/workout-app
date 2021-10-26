@@ -15,6 +15,8 @@ interface WorkObj {
   completed: boolean[];
 }
 
+
+// accepts an array within an array with 4 properties: name reps sets weight.
 function initWorkout(data: firebase.firestore.DocumentData) {
   const workoutData = data.map((item: firebase.firestore.DocumentData) => {
     let workObj: WorkObj = { reps: [], completed: [] };
@@ -43,6 +45,7 @@ const InitialState = () => {
 
   // get workout data from template workouts in user's folder
   // TODO: move this logic to a component that loads the workout rather than running it at the very start.
+  // TODO: rethink this to reflect new structure
   useEffect(() => {
     const getData = async () => {
       const db = firebase.firestore();
@@ -60,7 +63,8 @@ const InitialState = () => {
             workoutData.push(doc.data());
           });
 
-          const transformWorkout = initWorkout(workoutData);
+          console.log(workoutData[0].workout)
+          const transformWorkout = initWorkout(workoutData[0].workout);
           dispatch(workoutActions.addWorkout(transformWorkout));
         }
       } catch (err: any) {

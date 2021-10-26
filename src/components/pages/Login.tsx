@@ -13,9 +13,9 @@ const Login = ({ mode }: LoginState) => {
     return <LoginForm />;
   } else if (mode === "registration") {
     return (
-      // <PortalWrapper>
+<PortalWrapper>
       <RegistrationForm />
-      // </PortalWrapper>
+      </PortalWrapper>
     );
   } else {
     return null;
