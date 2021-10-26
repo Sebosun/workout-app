@@ -6,14 +6,17 @@ import InitialState from "./components/wrappers/InitialState";
 import Error from "./components/ui/Error";
 import { useAppSelector } from "./store/app/hooks";
 import { AuthProvider } from "./contexts/AuthContext";
+import Success from "./components/ui/Success";
 
 function App() {
-  const { status } = useAppSelector((state) => state.ui.error);
+  const errorStatus= useAppSelector((state) => state.ui.error.status);
+  const successStatus= useAppSelector((state) => state.ui.success.status);
 
   return (
-    <div className="p-0 m-0 h-full">
+    <div className="h-full p-0 m-0">
       <AuthProvider>
-        {status && <Error />}
+        {errorStatus && <Error />}
+        {successStatus && <Success />}
         <Header />
         <Routing />
         <InitialState />
