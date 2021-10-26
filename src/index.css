@@ -4,6 +4,6 @@
 
 @layer components {
   .btn {
-    @apply bg-gray-900 tracking-wide font-medium p-2 mt-2 w-full border-2 hover:border-indigo-700 hover:bg-blue-800 uppercase font-semibold tracking-tight border-solid border-purple-800 rounded-lg;
+    @apply w-full p-2 mt-2 font-medium font-semibold tracking-tight tracking-wide uppercase bg-gray-900 border-2 border-purple-800 border-solid rounded-lg hover:border-purple-800 hover:bg-purple-800;
   }
 }
