@@ -47,7 +47,7 @@ export const loginUser = (
     try {
       const dupa = await auth.signInWithEmailAndPassword(email, password);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };

@@ -63,7 +63,6 @@ const InitialState = () => {
             workoutData.push(doc.data());
           });
 
-          console.log(workoutData[0].workout)
           const transformWorkout = initWorkout(workoutData[0].workout);
           dispatch(workoutActions.addWorkout(transformWorkout));
         }

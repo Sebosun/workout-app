@@ -12,7 +12,6 @@ const LoginForm = () => {
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(emailRef.current?.value, passwordRef.current?.value);
     try {
       await login(emailRef.current?.value, passwordRef.current?.value);
       history.push("/");
