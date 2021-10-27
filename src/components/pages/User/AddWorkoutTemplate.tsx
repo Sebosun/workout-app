@@ -57,6 +57,8 @@ export default function AddWorkoutTemplate(): ReactElement | null {
     setPreviewVisible(false);
   };
 
+  //submits the workout to firebase, then dispatches 'success' message and redirects to the main page
+  // if the name of the workout is the same, overwrites the previous entry
   const submitWorkout = async () => {
     const db = firebase.firestore();
     const docRef = db
@@ -75,7 +77,6 @@ export default function AddWorkoutTemplate(): ReactElement | null {
 
   };
 
-  console.log(workout.length != 0 )
   //this might need to be thrown into another component
   if (!started) {
     return (
@@ -119,7 +120,7 @@ export default function AddWorkoutTemplate(): ReactElement | null {
                 <h1 className="p-2 text-2xl text-center">Add an exercise</h1>
                 <ExerciseForm collector={handleExerciseSubmit} />
               </div>
-              {workout.length != 0 && (
+              {workout.length !== 0 && (
                 <button
                   onClick={handleShowMenuPage}
                   className="max-w-xs mx-auto btn"
