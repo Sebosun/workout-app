@@ -1,6 +1,5 @@
-import React, { ReactElement } from "react"
+import { ReactElement } from "react"
 import {Link} from "react-router-dom";
-import ExerciseForm from '../forms/workout/ExerciseForm'
 
 export default function User(): ReactElement | null {
   const linkClasses = "flex sm:flex-row items-center self-center justify-center h-48 text-4xl border-2 border-solid text-center max-w-sm lg:max-w-lg rounded-xl border-crimson"

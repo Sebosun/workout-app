@@ -1,14 +1,14 @@
 import React, { ReactElement, useState } from "react";
-import Input from "../forms/templates/Input";
-import ExerciseForm, { ExerciseTypes } from "../forms/workout/ExerciseForm";
-import DisplayWorkoutTemplatePreview from "../workout/workoutTemplates/DisplayWorkoutTemplatePreview";
-import { useAppDispatch } from "../../store/app/hooks";
-import { useAuth } from "../../contexts/AuthContext";
+import Input from "../../forms/templates/Input";
+import ExerciseForm, { ExerciseTypes } from "../../forms/workout/ExerciseForm";
+import DisplayWorkoutTemplatePreview from "../../workout/workoutTemplates/DisplayWorkoutTemplatePreview";
+import { useAppDispatch } from "../../../store/app/hooks";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useHistory } from "react-router";
 
 import "firebase/firestore";
 import firebase from "firebase/app";
-import {displaySuccess} from "../../store/slices/ui-slice";
+import {displaySuccess} from "../../../store/slices/ui-slice";
 
 export default function AddWorkoutTemplate(): ReactElement | null {
   const [workout, setWorkout] = useState<ExerciseTypes[]>([]);

@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from "react"
 
 import firebase from "firebase/app";
 import "firebase/firestore";
-import {useAppDispatch} from "../../store/app/hooks";
+import {useAppDispatch} from "../../../store/app/hooks";
 
 export default function CheckWorkoutTemplates(): ReactElement | null {
   const [templateData, setTemplateData] = useState<firebase.firestore.DocumentData[]|null>(null) 

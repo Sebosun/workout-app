@@ -2,12 +2,13 @@ import WorkoutPage from "./WorkoutPage";
 import Settings from "./Settings";
 import NotFound from "./NotFound";
 import FrontPage from "./FrontPage";
-import AddWorkoutTemplate from './AddWorkoutTemplate'
 import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "./Login";
 import PrivateRoute from "../wrappers/PrivateRoute";
-import User from "./User";
-import CheckWorkoutTemplates from "./CheckWorkoutTemplates";
+
+import User from "./User/User";
+import CheckWorkoutTemplates from "./User/CheckWorkoutTemplates";
+import AddWorkoutTemplate from './User/AddWorkoutTemplate'
 
 const Routing = () => {
   // may split this later into two components - logged in routes and 'normal routes'
