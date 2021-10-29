@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";

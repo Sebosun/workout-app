@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { useAppSelector } from "../../store/app/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
+import {startWorkout} from "../../store/slices/workout-slice"
 import classes from "./WorkoutPage.module.css";
 
 import Workout from "../workout/Workout";
 import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
 
 const WorkoutPage = () => {
-  const [workoutStarted, setWorkoutStarted] = useState(false);
-
-  const { completed } = useAppSelector((state) => state.workout);
+  const dispatch = useAppDispatch()
+  const { started, completed } = useAppSelector((state) => state.workout);
 
   const handleStart = () => {
-    setWorkoutStarted((prev) => !prev);
+    dispatch(startWorkout());
   };
 
   if (completed) {
@@ -19,13 +18,13 @@ const WorkoutPage = () => {
   } else {
     return (
       <>
-        {workoutStarted && (
+        {started && (
           <main className={classes.wrapper}>
             <Workout />
             <SubmitWorkout />
           </main>
         )}
-        {!workoutStarted && (
+        {!started && (
           <div className="max-w-xl mx-auto">
             <button className="p-8 my-4 my-32 text-4xl btn" onClick={handleStart}>
               Start Workout
