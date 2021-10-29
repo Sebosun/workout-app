@@ -6,6 +6,7 @@ import Excercise from "./Excercise";
 import RestTimer from "./RestTimer";
 import { WorkoutType } from "../../helpers/types/workout";
 
+import classes from "./Workout.module.css";
 import { handleSetComplete, handleSets } from "../../store/slices/workout-slice";
 import { setTimer, handleAction } from "../../store/slices/timer-slice";
 
@@ -30,7 +31,9 @@ const Workout = () => {
       dispatch(handleSetComplete({ index, position }));
       handleTimer();
     } else if (currentSets === 0) {
-      dispatch(handleSets({ index, position, number: currentReps }));
+      dispatch(
+        handleSets({ index, position, number: currentReps })
+      );
       dispatch(
         handleSetComplete({
           index,

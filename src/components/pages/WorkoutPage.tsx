@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import {startWorkout} from "../../store/slices/workout-slice"
-import classes from "./WorkoutPage.module.css";
 
 import Workout from "../workout/Workout";
 import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
+import {WorkoutWrapper} from "../workout/WorkoutWrapper";
 
 const WorkoutPage = () => {
   const dispatch = useAppDispatch()
@@ -19,10 +19,7 @@ const WorkoutPage = () => {
     return (
       <>
         {started && (
-          <main className={classes.wrapper}>
-            <Workout />
-            <SubmitWorkout />
-          </main>
+          <WorkoutWrapper />
         )}
         {!started && (
           <div className="max-w-xl mx-auto">
