@@ -10,7 +10,6 @@ interface InputProps {
   onValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-
 // a template input component, used within forms 
 export default function Input(props: InputProps): ReactElement | null {
   return (

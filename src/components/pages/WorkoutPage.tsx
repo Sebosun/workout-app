@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useAppSelector } from "../../store/app/hooks";
 import classes from "./WorkoutPage.module.css";
 
-import Button from "../ui/Button";
 import Workout from "../workout/Workout";
 import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
 
 const WorkoutPage = () => {
-  const [workoutStarted, setWorkoutStarted] = useState(true);
+  const [workoutStarted, setWorkoutStarted] = useState(false);
 
   const { completed } = useAppSelector((state) => state.workout);
 
@@ -27,9 +26,11 @@ const WorkoutPage = () => {
           </main>
         )}
         {!workoutStarted && (
-          <Button style={{ margin: "100px auto" }} onClick={handleStart}>
-            <h1> Start workout</h1>
-          </Button>
+          <div className="max-w-xl mx-auto">
+            <button className="p-8 my-4 my-32 text-4xl btn" onClick={handleStart}>
+              Start Workout
+            </button>
+          </div>
         )}
       </>
     );

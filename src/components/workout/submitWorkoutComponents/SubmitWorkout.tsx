@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 import "firebase/firestore";
 import firebase from "firebase/app";
 
-import Button from "../../ui/Button";
 import PortalWrapper from "../../ui/PortalWrapper";
 import classes from "./SubmitWorkout.module.css";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -45,18 +44,18 @@ const SubmitWorkout = () => {
   };
   // TODO: there's a bug here that requires you to double click button after workout has been cancelled
   return (
-    <>
-      <Button className={classes.button} onClick={handleConfirmation}>
+    <div className="max-w-md mx-auto">
+      <button className="btn" onClick={handleConfirmation}>
         Finish Workout
-      </Button>
+      </button>
       {confirmation && (
         <PortalWrapper location={`${location.pathname}`}>
           <p>Are you sure you want to end the workout</p>
-          <Button onClick={handleSubmitWorkout}>Yes</Button>
-          <Button onClick={handleConfirmation}>No</Button>
+          <button className="btn" onClick={handleSubmitWorkout}>Yes</button>
+          <button className="btn" onClick={handleConfirmation}>No</button>
         </PortalWrapper>
       )}
-    </>
+    </div>
   );
 };
 

@@ -81,7 +81,7 @@ export default function AddWorkoutTemplate(): ReactElement | null {
   if (!started) {
     return (
       <div className="max-w-md p-2 mx-auto lg:max-w-xl">
-        <h1 className="text-center">Enter workout name</h1>
+        <h1 className="text-center ">Enter workout name</h1>
         <form onSubmit={handleStart}>
           <Input
             type="string"
