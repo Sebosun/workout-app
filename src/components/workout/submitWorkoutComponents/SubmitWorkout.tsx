@@ -31,9 +31,9 @@ const SubmitWorkout = () => {
   const handleSubmitWorkout = async () => {
     const db = firebase.firestore();
     const docRef = db
-      .collection("userData")
+      .collection("user-data")
       .doc(currentUser.uid)
-      .collection("completeWorkout");
+      .collection("completed-workouts");
 
     docRef.add({
       workout: [...workoutRdx],

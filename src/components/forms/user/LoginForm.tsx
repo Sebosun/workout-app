@@ -28,14 +28,14 @@ const LoginForm = () => {
           onSubmit={submitHandler}
           className="p-6 pb-8 bg-gray-800 border-2 border-purple-500 border-solid rounded shadow-md rounded-2xl"
         >
-          <label htmlFor="email" className="block text-xl font-bold text-white">
+          <label htmlFor="email" className="block text-xl font-bold ">
             Email
           </label>
           <input
             type="email"
             defaultValue="test@github.log"
             name="email"
-            className="my-2 text-white bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
+            className="my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             id="email"
             ref={emailRef}
             placeholder="Email"
@@ -43,7 +43,7 @@ const LoginForm = () => {
           />
           <label
             htmlFor="password"
-            className="block text-xl font-bold text-white"
+            className="block text-xl font-bold "
           >
             Password
           </label>
@@ -52,7 +52,7 @@ const LoginForm = () => {
             name="password"
             id="password"
             defaultValue="1234567"
-            className="block my-2 text-white bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
+            className="block my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             ref={passwordRef}
             placeholder="***********"
             required

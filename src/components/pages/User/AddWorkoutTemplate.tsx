@@ -62,9 +62,9 @@ export default function AddWorkoutTemplate(): ReactElement | null {
   const submitWorkout = async () => {
     const db = firebase.firestore();
     const docRef = db
-      .collection("userData")
+      .collection("user-data")
       .doc(currentUser.uid)
-      .collection("workoutTemplates")
+      .collection("workout-templates")
       .doc(workoutName);
 
       await docRef.set({
@@ -117,7 +117,7 @@ export default function AddWorkoutTemplate(): ReactElement | null {
           <div>
             <div className="flex flex-col">
               <div>
-                <h1 className="p-2 text-2xl text-center">Add an exercise</h1>
+                <h1 className="p-2 text-2xl text-center text-gray-300">Add an exercise</h1>
                 <ExerciseForm collector={handleExerciseSubmit} />
               </div>
               {workout.length !== 0 && (

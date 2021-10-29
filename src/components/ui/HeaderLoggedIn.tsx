@@ -21,16 +21,16 @@ export default function HeaderLoggedIn(): ReactElement | null {
   // that button will be stylized later after i get around implementing tailwind
   return (
     <>
-      <li className="text-xl border-b-2 border-transparent outline-none  hover:border-white hover:border-current">
+      <li className="text-xl border-b-2 border-transparent outline-none hover:border-gray-400 hover:border-current">
         <Link to="/workout">Workout</Link>
       </li>
-      <li className="text-xl border-b-2 border-transparent outline-none  hover:border-white hover:border-current">
+      <li className="text-xl border-b-2 border-transparent outline-none hover:border-gray-400 hover:border-current">
         <Link to="/settings">Settings</Link>
       </li>
-      <li className="text-xl border-b-2 border-transparent outline-none  hover:border-white hover:border-current">
+      <li className="text-xl border-b-2 border-transparent outline-none hover:border-gray-400 hover:border-current">
         <Link to="/user">User</Link>
       </li>
-      <li className="text-xl border-b-2 border-transparent outline-none  hover:border-white hover:border-current">
+      <li className="text-xl border-b-2 border-transparent outline-none hover:border-gray-400 hover:border-current">
         <IoIosLogOut
           role="button"
           onClick={handleLogout}

@@ -36,13 +36,13 @@ const RegistrationForm = () => {
           onSubmit={submitHandler}
           className="p-6 pb-8 bg-gray-800 border-2 border-purple-500 border-solid rounded shadow-md rounded-2xl"
         >
-          <label htmlFor="email" className="block text-xl font-bold text-white">
+          <label htmlFor="email" className="block text-xl font-bold">
             Email
           </label>
           <input
             type="email"
             name="email"
-            className="my-2 text-white bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
+            className="my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             id="email"
             ref={emailRef}
             placeholder="Email"
@@ -50,7 +50,7 @@ const RegistrationForm = () => {
           />
           <label
             htmlFor="password"
-            className="block text-xl font-bold text-white"
+            className="block text-xl font-bold "
           >
             Password
           </label>
@@ -58,14 +58,14 @@ const RegistrationForm = () => {
             type="password"
             name="password"
             id="password"
-            className="block my-2 text-white bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
+            className="block my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             ref={passwordRef}
             placeholder="***********"
             required
           />
           <label
             htmlFor="password-confirmation"
-            className="block text-xl font-bold text-white"
+            className="block text-xl font-bold "
           >
             Password Confirmation
           </label>
@@ -73,7 +73,7 @@ const RegistrationForm = () => {
             type="password"
             name="password-confirmation"
             id="password-confirmation"
-            className="block my-2 text-white bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
+            className="block my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             ref={passwordConfirmationRef}
             placeholder="***********"
             required

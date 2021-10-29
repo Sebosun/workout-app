@@ -23,8 +23,8 @@ const Settings = () => {
     setCooldown(+event.target.value);
 
   return (
-    <div className=" p-4 mx-auto max-w-xl">
-      <h1 className="text-5xl text-center">Settings</h1>
+    <div className="max-w-xl p-4 mx-auto ">
+      <h1 className="text-5xl text-center text-gray-300">Settings</h1>
       <div className="max-w-sm mx-auto mt-8">
         <form onSubmit={submitHandler}>
           <InputLabel
@@ -35,9 +35,7 @@ const Settings = () => {
             value={cooldown}
             onValueChange={cooldownHandler}
           />
-          <button className="p-2 my-4 hover:bg-purple-900 hover:border-purple-900 uppercase rounded-xl border-2 w-full ">
-            Submit
-          </button>
+          <button className="btn">Submit</button>
         </form>
       </div>
     </div>

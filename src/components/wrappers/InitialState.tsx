@@ -50,9 +50,9 @@ const InitialState = () => {
     const getData = async () => {
       const db = firebase.firestore();
       const docRef = db
-        .collection("userData")
+        .collection("user-data")
         .doc(user?.uid)
-        .collection("workoutTemplates");
+        .collection("workout-templates");
 
       try {
         const getDocRef = await docRef.get();

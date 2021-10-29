@@ -32,13 +32,6 @@
   flex: 1;
 }
 
-p,
-h1,
-h2,
-h3,
-div {
-  color: var(--text-color);
-}
 
 @media (max-width: 600px) {
   .app {

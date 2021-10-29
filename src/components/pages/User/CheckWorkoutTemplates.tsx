@@ -5,7 +5,7 @@ import "firebase/firestore";
 import {useAppDispatch} from "../../../store/app/hooks";
 import DisplayWorkoutTemplatePreview from "../../workout/workoutTemplates/DisplayWorkoutTemplatePreview";
 
-interface previewItem{
+interface previewItem {
   name: string;
   date: Date,
   workout: [];
@@ -23,9 +23,9 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     const getData = async () => {
       const db = firebase.firestore();
       const docRef = db
-        .collection("userData")
+        .collection("user-data")
         .doc(user?.uid)
-        .collection("workoutTemplates");
+        .collection("workout-templates");
 
       try {
         const getDocRef = await docRef.get();
@@ -71,7 +71,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
           >
             Show preview
           </button>
-          <button className="btn">Set as current template</button>
+          <button className="btn" onClick={() => console.log('clicked')}>Set as current template</button>
         </div>
       </div>
     ));
