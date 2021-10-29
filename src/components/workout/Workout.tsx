@@ -7,7 +7,7 @@ import RestTimer from "./RestTimer";
 import { WorkoutType } from "../../helpers/types/workout";
 
 import classes from "./Workout.module.css";
-import { workoutActions } from "../../store/slices/workout-slice";
+import { handleSetComplete, handleSets } from "../../store/slices/workout-slice";
 import { setTimer, handleAction } from "../../store/slices/timer-slice";
 
 const Workout = () => {
@@ -28,21 +28,21 @@ const Workout = () => {
     const currentReps = workout[index].reps;
 
     if (currentSets === currentReps && currentCompleted === false) {
-      dispatch(workoutActions.handleSetComplete({ index, position }));
+      dispatch(handleSetComplete({ index, position }));
       handleTimer();
     } else if (currentSets === 0) {
       dispatch(
-        workoutActions.handleSets({ index, position, number: currentReps })
+        handleSets({ index, position, number: currentReps })
       );
       dispatch(
-        workoutActions.handleSetComplete({
+        handleSetComplete({
           index,
           position,
           number: currentReps,
         })
       );
     } else {
-      dispatch(workoutActions.handleSets({ index, position }));
+      dispatch(handleSets({ index, position }));
     }
   };
 
@@ -54,9 +54,9 @@ const Workout = () => {
         return (
           <Card
             key={index + item.name}
-            className="max-w-md my-6 p-4 border-4 border-purple-800 mx-auto"
+            className="max-w-md p-4 mx-auto my-6 border-4 border-purple-800"
           >
-            <h1 className="text-xl capitalize font-semibold mb-4">
+            <h1 className="mb-4 text-xl font-semibold capitalize">
               {item.name}
             </h1>
             <Excercise

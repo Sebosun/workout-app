@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { workoutActions } from "../../../store/slices/workout-slice";
+import { completeWorkout } from "../../../store/slices/workout-slice";
 import { useLocation } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 
@@ -7,7 +7,6 @@ import "firebase/firestore";
 import firebase from "firebase/app";
 
 import PortalWrapper from "../../ui/PortalWrapper";
-import classes from "./SubmitWorkout.module.css";
 import { useAuth } from "../../../contexts/AuthContext";
 
 const SubmitWorkout = () => {
@@ -40,7 +39,7 @@ const SubmitWorkout = () => {
     });
 
     handleConfirmation();
-    dispatch(workoutActions.completeWorkout());
+    dispatch(completeWorkout());
   };
   // TODO: there's a bug here that requires you to double click button after workout has been cancelled
   return (

@@ -11,6 +11,7 @@ interface workoutArray {
 interface WorkoutState {
   workout: workoutArray[];
   completed: boolean;
+  started: boolean;
 }
 
 interface SetComplete {
@@ -29,6 +30,7 @@ const initialState: WorkoutState = {
       weight: 20,
     },
   ],
+  started: false,
   completed: false,
 };
 
@@ -36,6 +38,9 @@ const workoutSlice = createSlice({
   name: "workout",
   initialState,
   reducers: {
+    startWorkout(state) {
+      state.started = true;
+    },
     addWorkout(state, action) {
       state.workout = action.payload;
     },
@@ -61,6 +66,6 @@ const workoutSlice = createSlice({
   },
 });
 
-export const workoutActions = workoutSlice.actions;
+export const {startWorkout, addWorkout, handleSetComplete, handleSets, completeWorkout} = workoutSlice.actions;
 
 export default workoutSlice.reducer;

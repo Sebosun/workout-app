@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import { tickTimer, handleAction } from "../../store/slices/timer-slice";
 import { changeCooldown } from "../../store/slices/settings-slice";
-import { workoutActions } from "../../store/slices/workout-slice";
+import { addWorkout } from "../../store/slices/workout-slice";
 import { displayError } from "../../store/slices/ui-slice";
 
 interface WorkObj {
@@ -64,7 +64,7 @@ const InitialState = () => {
           });
 
           const transformWorkout = initWorkout(workoutData[0].workout);
-          dispatch(workoutActions.addWorkout(transformWorkout));
+          dispatch(addWorkout(transformWorkout));
         }
       } catch (err: any) {
         dispatch(displayError(err.message));
