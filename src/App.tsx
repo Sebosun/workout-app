@@ -9,8 +9,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Success from "./components/ui/Success";
 
 function App() {
-  const errorStatus= useAppSelector((state) => state.ui.error.status);
-  const successStatus= useAppSelector((state) => state.ui.success.status);
+  const errorStatus = useAppSelector((state) => state.ui.error.status);
+  const successStatus = useAppSelector((state) => state.ui.success.status);
 
   return (
     <div className="h-full p-0 m-0">
@@ -23,4 +23,5 @@ function App() {
       </AuthProvider>
     </div>
   );
-} export default App;
+}
+export default App;

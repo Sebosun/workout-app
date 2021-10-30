@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
 import { changeCooldown } from "../../store/slices/settings-slice";
+import { displaySuccess } from "../../store/slices/ui-slice";
 import InputLabel from "../forms/templates/Input";
 
 const Settings = () => {
@@ -16,6 +17,7 @@ const Settings = () => {
     event.preventDefault();
     dispatch(changeCooldown(cooldown));
     localStorage.setItem("cooldown", `${cooldown}`);
+    dispatch(displaySuccess("Successfully submitted settings"));
   };
 
   const cooldownHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
