@@ -81,6 +81,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     </div>
   ));
 
+  // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
   if (!templateData) {
     return <p>Loading...</p>;
   } else if (preview) {
@@ -88,9 +89,14 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
       <div className="max-w-md p-2 mx-auto lg:max-w-xl">
         <h1 className="my-4 text-4xl text-center">{preview.name}</h1>
         <DisplayWorkoutTemplatePreview workout={preview.workout} />
+        <button
+          className="btn"
+          onClick={() => handleChangeTemplate(preview.name)}
+        >
+          Set as current template
+        </button>
         <button onClick={() => setPreview(null)} className="btn">
-          {" "}
-          Return{" "}
+          Return
         </button>
       </div>
     );
