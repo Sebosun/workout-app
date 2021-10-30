@@ -1,5 +1,0 @@
-@media (hover: hover) {
-  .list > li > a:hover {
-    border-bottom: 4px solid var(--primary-color); /* solves sticky problem */
-  }
-}
