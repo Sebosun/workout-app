@@ -1,4 +1,4 @@
-import { ReactElement, useState, useRef } from "react";
+import { ReactElement, useState} from "react";
 import Input from "../templates/Input";
 
 interface ExerciseProps{
@@ -33,7 +33,7 @@ export default function ExerciseForm({collector}: ExerciseProps ): ReactElement 
   }
 
   return (
-    <form className="p-4 mx-auto border-2 border-blue-900 border-solid shadow-2xl  rounded-xl" onSubmit={handleSubmit}>
+    <form className="p-4 mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl" onSubmit={handleSubmit}>
       <Input
         type="string"
         label="name"

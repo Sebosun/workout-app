@@ -1,4 +1,4 @@
-import classes from "./Header.module.css"; import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import HeaderLoggedIn from "./HeaderLoggedIn";
 import HeaderLoggedOff from "./HeaderLoggedOff";

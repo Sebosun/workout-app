@@ -1,4 +1,4 @@
-import { useEffect, ReactElement, useState } from "react"
+import { ReactElement } from "react";
 import Workout from "./Workout"
 import SubmitWorkout from "./submitWorkoutComponents/SubmitWorkout"
 

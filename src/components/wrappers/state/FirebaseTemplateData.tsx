@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import {useEffect } from "react"
 import "firebase/firestore";
 import firebase from "firebase/app";
 import {addWorkout} from "../../../store/slices/workout-slice";

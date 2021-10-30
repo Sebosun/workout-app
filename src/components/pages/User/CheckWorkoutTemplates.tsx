@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -13,7 +13,6 @@ interface previewItem {
 
 export default function CheckWorkoutTemplates(): ReactElement | null {
   const [templateData, setTemplateData] = useState<firebase.firestore.DocumentData[]|null>(null) 
-  const [displayData, setDisplayData] = useState<any>() 
   const [preview, setPreview] = useState<previewItem | null>()
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch() 

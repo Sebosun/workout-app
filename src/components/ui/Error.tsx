@@ -1,7 +1,6 @@
 import { ReactElement } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { changeErrorStatus } from "../../store/slices/ui-slice";
-import classes from "./Error.module.css";
 
 export interface ErrorProps {
   message: string;
@@ -20,7 +19,7 @@ export default function Error(): ReactElement | null {
   return (
     <div
       onClick={hideErrorMessage}
-      className="border-2 p-4 rounded-xl border-crimson border-solid absolute z-50 bg-tetriary text-2xl left-1/2 transform -translate-x-2/4 top-8 text-center"
+      className="absolute z-50 p-4 text-2xl text-center border-2 border-solid rounded-xl border-crimson bg-tetriary left-1/2 transform -translate-x-2/4 top-8"
     >
       <p className="capitalize pointer-events-none text-crimson">
         ERROR: {errorMessageTransformed}
