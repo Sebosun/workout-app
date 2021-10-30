@@ -11,6 +11,7 @@ export default function HeaderLoggedIn(): ReactElement | null {
   const handleLogout = async (): Promise<void> => {
     //TODO confirmation if you really want to logout
     try {
+      // TODO: clear workout data at logout maybe
       await logout();
       history.push("/");
     } catch {

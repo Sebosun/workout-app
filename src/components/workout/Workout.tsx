@@ -9,6 +9,7 @@ import { WorkoutType } from "../../helpers/types/workout";
 import { handleSetComplete, handleSets } from "../../store/slices/workout-slice";
 import { setTimer, handleAction } from "../../store/slices/timer-slice";
 
+// TODO: consider saving current workout to localStorage
 const Workout = () => {
   const dispatch = useAppDispatch();
 

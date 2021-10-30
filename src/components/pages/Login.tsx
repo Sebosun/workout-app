@@ -1,7 +1,6 @@
 import LoginForm from "../forms/user/LoginForm";
 import RegistrationForm from "../forms/user/RegistrationForm";
 import PortalWrapper from "../ui/PortalWrapper";
-import { Link } from "react-router-dom";
 
 interface LoginState {
   mode: "login" | "registration";
@@ -13,8 +12,8 @@ const Login = ({ mode }: LoginState) => {
     return <LoginForm />;
   } else if (mode === "registration") {
     return (
-<PortalWrapper>
-      <RegistrationForm />
+      <PortalWrapper>
+        <RegistrationForm />
       </PortalWrapper>
     );
   } else {

@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./components/ui/Header";
 
 import Routing from "./components/pages/Routing";
-import InitialState from "./components/wrappers/InitialState";
+import InitialState from "./components/wrappers/state/InitialState";
 import Error from "./components/ui/Error";
 import { useAppSelector } from "./store/app/hooks";
 import { AuthProvider } from "./contexts/AuthContext";

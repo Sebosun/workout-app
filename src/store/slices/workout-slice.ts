@@ -23,11 +23,11 @@ interface SetComplete {
 const initialState: WorkoutState = {
   workout: [
     {
-      name: "deadlift",
-      sets: [3, 3, 3],
-      completed: [false, false, false],
-      reps: 3,
-      weight: 20,
+      name: "",
+      sets: [],
+      completed: [],
+      reps: 0,
+      weight: 0,
     },
   ],
   started: false,

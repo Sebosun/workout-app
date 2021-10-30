@@ -1,8 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import {startWorkout} from "../../store/slices/workout-slice"
 
-import Workout from "../workout/Workout";
-import SubmitWorkout from "../workout/submitWorkoutComponents/SubmitWorkout";
 import {WorkoutWrapper} from "../workout/WorkoutWrapper";
 
 const WorkoutPage = () => {
