@@ -1,15 +1,17 @@
-import {useEffect } from "react"
+import { useEffect } from "react";
 import "firebase/firestore";
 import firebase from "firebase/app";
-import {addWorkout} from "../../../store/slices/workout-slice";
-import {displayError} from "../../../store/slices/ui-slice";
-import {useAppDispatch, useAppSelector} from "../../../store/app/hooks";
+import { addWorkout } from "../../../store/slices/workout-slice";
+import { displayError } from "../../../store/slices/ui-slice";
+import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
+import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
 
 interface WorkObj {
   reps: number[];
   completed: boolean[];
 }
 
+/** Transforms document integrer data into a 'workout' object */
 function initWorkout(data: firebase.firestore.DocumentData) {
   const workoutData = data.map((item: firebase.firestore.DocumentData) => {
     let workObj: WorkObj = { reps: [], completed: [] };
@@ -28,10 +30,37 @@ function initWorkout(data: firebase.firestore.DocumentData) {
   return workoutData;
 }
 
+/** Handles fetching template data from firestore and adding it to redux */
 const FirebaseTemplateData = () => {
   const dispatch = useAppDispatch();
   const user = firebase.auth().currentUser;
-  const { started } = useAppSelector(state => state.workout)
+
+  const { started } = useAppSelector((state) => state.workout);
+  const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
+
+  /** Gets realtime updates on user settings stored on firestore */
+  const getUserSettings = async () => {
+    const db = firebase.firestore();
+    const docRef = db
+      .collection("user-data")
+      .doc(user?.uid)
+      .collection("settings")
+      .doc("workout-settings");
+
+    docRef.onSnapshot((snapShot) => {
+      try {
+        const data = snapShot.data();
+        console.log(data);
+        dispatch(changeCurrentWorkoutTemplate(data!.currentWorkout));
+      } catch (err: any) {
+        console.error(err);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getUserSettings();
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -40,7 +69,7 @@ const FirebaseTemplateData = () => {
         .collection("user-data")
         .doc(user?.uid)
         .collection("workout-templates")
-        .doc("Template");
+        .doc(currentWorkoutTemplate);
 
       try {
         const getDocRef = await docRef.get();
@@ -55,12 +84,12 @@ const FirebaseTemplateData = () => {
         console.error(err.message);
       }
     };
-    if (user) {
-      getData()
+    if (user && currentWorkoutTemplate !== "") {
+      getData();
     }
-  }, [dispatch, user, started]);
+  }, [dispatch, user, started, currentWorkoutTemplate]);
 
-  return null
-}
+  return null;
+};
 
-export default FirebaseTemplateData
+export default FirebaseTemplateData;

@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface SettingsState {
   cooldown: number;
   theme: "light" | "dark";
+  currentWorkout: string;
 }
 
 const initialState = {
   theme: "light",
   cooldown: 30,
+  currentWorkoutTemplate: "",
 };
 
 const settingsSlice = createSlice({
@@ -17,10 +19,14 @@ const settingsSlice = createSlice({
     changeCooldown(state, action: PayloadAction<number>) {
       state.cooldown = action.payload;
     },
+    changeCurrentWorkoutTemplate(state, action: PayloadAction<string>) {
+      state.currentWorkoutTemplate = action.payload;
+    },
   },
 });
 
-export const { changeCooldown } = settingsSlice.actions;
+export const { changeCooldown, changeCurrentWorkoutTemplate } =
+  settingsSlice.actions;
 // export const settingsActions = settingsSlice.actions;
 
 export default settingsSlice.reducer;
