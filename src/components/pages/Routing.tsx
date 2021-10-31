@@ -8,7 +8,8 @@ import PrivateRoute from "../wrappers/PrivateRoute";
 
 import User from "./User/User";
 import CheckWorkoutTemplates from "./User/CheckWorkoutTemplates";
-import AddWorkoutTemplate from './User/AddWorkoutTemplate'
+import AddWorkoutTemplate from "./User/AddWorkoutTemplate";
+import Dashboard from "./Dashboard";
 
 const Routing = () => {
   // may split this later into two components - logged in routes and 'normal routes'
@@ -16,10 +17,6 @@ const Routing = () => {
     <>
       <Switch>
         <Route exact path="/">
-          <Redirect to="/main" />
-        </Route>
-
-        <Route path="/main">
           <FrontPage />
         </Route>
 
@@ -47,7 +44,15 @@ const Routing = () => {
           <AddWorkoutTemplate />
         </PrivateRoute>
 
-        <PrivateRoute authenticationPath="/login" exact path="/custom-templates">
+        <PrivateRoute authenticationPath="/login" exact path="/dashboard">
+          <Dashboard />
+        </PrivateRoute>
+
+        <PrivateRoute
+          authenticationPath="/login"
+          exact
+          path="/custom-templates"
+        >
           <CheckWorkoutTemplates />
         </PrivateRoute>
 
