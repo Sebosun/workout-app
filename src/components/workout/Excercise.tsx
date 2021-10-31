@@ -14,9 +14,9 @@ interface Props {
 }
 
 const btnActive =
-  "w-14 h-14 lg:w-20 lg:h-20 rounded-2xl text-2xl bg-purple-800 pointer";
+  "w-14 h-14 lg:w-20 lg:h-20 rounded-2xl text-2xl lg:text-4xl bg-purple-800 pointer";
 const btnDisabled =
-  "w-14 h-14 lg:w-20 lg:h-20 rounded-2xl text-2xl bg-gray-800 pointer";
+  "w-14 h-14 lg:w-20 lg:h-20 rounded-2xl text-2xl lg:text-4xl bg-gray-800 pointer";
 
 const Exercise = (props: Props) => {
   /** given the amount of sets, creates array of buttons with

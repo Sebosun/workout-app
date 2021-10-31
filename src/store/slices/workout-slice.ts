@@ -49,6 +49,14 @@ const workoutSlice = createSlice({
       const { index, position } = action.payload;
       workout[index].completed[position] = !workout[index].completed[position];
     },
+    increaseWeight(state, action: PayloadAction<number>) {
+      const index = action.payload;
+      state.workout[index].weight += 2.5;
+    },
+    decreaseWeight(state, action: PayloadAction<number>) {
+      const index = action.payload;
+      state.workout[index].weight -= 2.5;
+    },
     handleSets(state, action: PayloadAction<SetComplete>) {
       const { workout } = state;
       const { index, position } = action.payload;
@@ -66,6 +74,14 @@ const workoutSlice = createSlice({
   },
 });
 
-export const {startWorkout, addWorkout, handleSetComplete, handleSets, completeWorkout} = workoutSlice.actions;
+export const {
+  startWorkout,
+  addWorkout,
+  handleSetComplete,
+  handleSets,
+  increaseWeight,
+  decreaseWeight,
+  completeWorkout,
+} = workoutSlice.actions;
 
 export default workoutSlice.reducer;
