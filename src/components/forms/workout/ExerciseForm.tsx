@@ -1,7 +1,7 @@
-import { ReactElement, useState} from "react";
+import { ReactElement, useState } from "react";
 import Input from "../templates/Input";
 
-interface ExerciseProps{
+interface ExerciseProps {
   collector: (exercise: ExerciseTypes) => void;
 }
 
@@ -19,7 +19,9 @@ const defaultExercise: ExerciseTypes = {
   weight: 0,
 };
 
-export default function ExerciseForm({collector}: ExerciseProps ): ReactElement | null {
+export default function ExerciseForm({
+  collector,
+}: ExerciseProps): ReactElement | null {
   const [exercise, setExercise] = useState(defaultExercise);
   const { name, reps, sets, weight } = exercise;
 
@@ -28,12 +30,15 @@ export default function ExerciseForm({collector}: ExerciseProps ): ReactElement 
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    collector(exercise)
-  }
+    e.preventDefault();
+    collector(exercise);
+  };
 
   return (
-    <form className="p-4 mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl" onSubmit={handleSubmit}>
+    <form
+      className="p-4 mx-auto rounded-xl border-2 border-blue-900 border-solid shadow-2xl"
+      onSubmit={handleSubmit}
+    >
       <Input
         type="string"
         label="name"
