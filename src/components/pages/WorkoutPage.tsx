@@ -20,7 +20,7 @@ const WorkoutPage = () => {
           <WorkoutWrapper />
         )}
         {!started && (
-          <div className="max-w-xl mx-auto">
+          <div className="mx-auto max-w-xl">
             <button className="p-8 my-4 my-32 text-4xl btn" onClick={handleStart}>
               Start Workout
             </button>

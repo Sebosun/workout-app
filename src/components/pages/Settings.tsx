@@ -25,9 +25,9 @@ const Settings = () => {
     setCooldown(+event.target.value);
 
   return (
-    <div className="max-w-xl p-4 mx-auto ">
+    <div className="p-4 mx-auto max-w-xl">
       <h1 className="text-5xl text-center text-gray-300">Settings</h1>
-      <div className="max-w-sm mx-auto mt-8">
+      <div className="mx-auto mt-8 max-w-sm">
         <form onSubmit={submitHandler}>
           <InputLabel
             id="cooldown"

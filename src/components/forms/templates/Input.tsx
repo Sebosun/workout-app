@@ -27,7 +27,7 @@ export default function Input(props: InputProps): ReactElement | null {
         name={props.name}
         id={props.id}
         placeholder={props.placeholder && `${props.placeholder}`}
-        className="block w-full p-2 my-6 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
+        className="block p-2 my-6 w-full bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50 solid"
        required
       />
     </>

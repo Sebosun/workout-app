@@ -19,7 +19,7 @@ export default function Error(): ReactElement | null {
   return (
     <div
       onClick={hideErrorMessage}
-      className="absolute z-50 p-4 text-2xl text-center border-2 border-solid rounded-xl border-crimson bg-tetriary left-1/2 transform -translate-x-2/4 top-8"
+      className="absolute top-8 left-1/2 z-50 p-4 text-2xl text-center rounded-xl border-2 border-solid transform -translate-x-2/4 border-crimson bg-tetriary"
     >
       <p className="capitalize pointer-events-none text-crimson">
         ERROR: {errorMessageTransformed}

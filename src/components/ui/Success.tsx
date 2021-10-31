@@ -16,7 +16,7 @@ export default function Success(): ReactElement | null {
   return (
     <div
       onClick={hideSuccessMessage}
-      className="absolute z-50 p-4 text-2xl text-center bg-green-700 border-2 border-black text-gray-900 border-solid rounded-xl left-1/2 transform -translate-x-2/4 top-8"
+      className="absolute top-8 left-1/2 z-50 p-4 text-2xl text-center text-gray-900 bg-green-700 rounded-xl border-2 border-black border-solid transform -translate-x-2/4"
     >
       <p className="capitalize pointer-events-none">
         {successMessageTransformed}

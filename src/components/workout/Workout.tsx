@@ -1,12 +1,13 @@
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 
-import Card from "../ui/Card";
-
 import Excercise from "./Excercise";
 import RestTimer from "./RestTimer";
 import { WorkoutType } from "../../helpers/types/workout";
 
-import { handleSetComplete, handleSets } from "../../store/slices/workout-slice";
+import {
+  handleSetComplete,
+  handleSets,
+} from "../../store/slices/workout-slice";
 import { setTimer, handleAction } from "../../store/slices/timer-slice";
 
 // TODO: consider saving current workout to localStorage
@@ -50,9 +51,9 @@ const Workout = () => {
 
       {workout.map((item: WorkoutType, index: number) => {
         return (
-          <Card
+          <div
             key={index + item.name}
-            className="max-w-md p-4 mx-auto my-6 border-4 border-purple-800"
+            className="p-4 m-4 my-6 mx-auto max-w-sm border-4 border-purple-800 lg:max-w-md"
           >
             <h1 className="mb-4 text-xl font-semibold capitalize">
               {item.name}
@@ -64,7 +65,7 @@ const Workout = () => {
               reps={item.reps}
               setsHandler={setsHandler}
             />
-          </Card>
+          </div>
         );
       })}
     </>

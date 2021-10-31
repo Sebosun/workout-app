@@ -43,15 +43,19 @@ const SubmitWorkout = () => {
   };
   // TODO: there's a bug here that requires you to double click button after workout has been cancelled
   return (
-    <div className="max-w-md mx-auto">
+    <div className="mx-auto max-w-sm sm:max-w-md">
       <button className="btn" onClick={handleConfirmation}>
         Finish Workout
       </button>
       {confirmation && (
         <PortalWrapper location={`${location.pathname}`}>
           <p>Are you sure you want to end the workout</p>
-          <button className="btn" onClick={handleSubmitWorkout}>Yes</button>
-          <button className="btn" onClick={handleConfirmation}>No</button>
+          <button className="btn" onClick={handleSubmitWorkout}>
+            Yes
+          </button>
+          <button className="btn" onClick={handleConfirmation}>
+            No
+          </button>
         </PortalWrapper>
       )}
     </div>

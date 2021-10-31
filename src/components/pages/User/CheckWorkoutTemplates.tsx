@@ -62,7 +62,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
   };
 
   const templatesMapped: any = templateData?.map((item, index) => (
-    <div className="max-w-xl p-2 mx-auto my-4 lg:max-w-2xl">
+    <div className="p-2 my-4 mx-auto max-w-xl lg:max-w-2xl">
       <div key={`${item.name}${index}`}>
         <p>Name: {item.name}</p>
         <p>
@@ -86,7 +86,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     return <p>Loading...</p>;
   } else if (preview) {
     return (
-      <div className="max-w-md p-2 mx-auto lg:max-w-xl">
+      <div className="p-2 mx-auto max-w-md lg:max-w-xl">
         <h1 className="my-4 text-4xl text-center">{preview.name}</h1>
         <DisplayWorkoutTemplatePreview workout={preview.workout} />
         <button

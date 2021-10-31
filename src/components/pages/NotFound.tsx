@@ -6,11 +6,11 @@ const NotFound = () => {
   const [redirect, setRedirect] = useState<React.ReactElement>();
 
   setTimeout(() => {
-    setRedirect(<Redirect to="/main" />);
+    setRedirect(<Redirect to="/" />);
   }, 4000);
 
   return (
-    <Flex column={true}>
+    <div className="flex flex-col">
       <h1>Page not found</h1>
       <p> You will be redirected to the main page shortly</p>
       <p>
@@ -21,7 +21,7 @@ const NotFound = () => {
       </p>
 
       {redirect}
-    </Flex>
+    </div>
   );
 };
 

@@ -80,8 +80,8 @@ export default function AddWorkoutTemplate(): ReactElement | null {
   //this might need to be thrown into another component
   if (!started) {
     return (
-      <div className="max-w-md p-2 mx-auto lg:max-w-xl">
-        <h1 className="text-center ">Enter workout name</h1>
+      <div className="p-2 mx-auto max-w-md lg:max-w-xl">
+        <h1 className="text-center">Enter workout name</h1>
         <form onSubmit={handleStart}>
           <Input
             type="string"
@@ -98,7 +98,7 @@ export default function AddWorkoutTemplate(): ReactElement | null {
     );
   } else {
     return (
-      <div className="max-w-full p-2 mx-auto lg:max-w-2xl">
+      <div className="p-2 mx-auto max-w-full lg:max-w-2xl">
         {/*the added exercises preview*/}
         {previewVisible && (
           <>
@@ -123,7 +123,7 @@ export default function AddWorkoutTemplate(): ReactElement | null {
               {workout.length !== 0 && (
                 <button
                   onClick={handleShowMenuPage}
-                  className="max-w-xs mx-auto btn"
+                  className="mx-auto max-w-xs btn"
                 >
                   Show menu
                 </button>

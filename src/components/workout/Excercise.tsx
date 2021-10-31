@@ -13,6 +13,11 @@ interface Props {
   setsHandler: (index: number, position: number) => void;
 }
 
+const btnActive =
+  "w-14 h-14 lg:w-20 lg:h-20 rounded-2xl text-2xl bg-purple-800 pointer";
+const btnDisabled =
+  "w-14 h-14 lg:w-20 lg:h-20 rounded-2xl text-2xl bg-gray-800 pointer";
+
 const Exercise = (props: Props) => {
   /** given the amount of sets, creates array of buttons with
    * onClick property that handles set behaviour */
@@ -25,9 +30,7 @@ const Exercise = (props: Props) => {
           onClick={() => {
             props.setsHandler(props.index, i);
           }}
-          className={`${classes.rep} ${
-            props.completed[i] ? null : classes.disabled
-          }`}
+          className={`${props.completed[i] ? btnActive : btnDisabled}`}
         >
           {props.sets[i]}
         </button>
@@ -38,7 +41,7 @@ const Exercise = (props: Props) => {
 
   const sets = setsRender(props.sets.length);
 
-  return <div className={classes.sets}>{sets}</div>;
+  return <div className="flex gap-2 justify-center">{sets}</div>;
 };
 
 export default Exercise;
