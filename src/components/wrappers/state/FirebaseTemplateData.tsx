@@ -60,7 +60,7 @@ const FirebaseTemplateData = () => {
 
   useEffect(() => {
     getUserSettings();
-  }, []);
+  }, [started]);
 
   useEffect(() => {
     const getData = async () => {
