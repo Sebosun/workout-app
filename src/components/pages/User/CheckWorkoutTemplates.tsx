@@ -64,6 +64,17 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     dispatch(displaySuccess(`Workout template succesfully changed to ${name}`));
   };
 
+  const handleDeleteItem = (name: string) => {
+    const db = firebase.firestore();
+    const docRef = db
+      .collection("user-data")
+      .doc(user?.uid)
+      .collection("workout-templates")
+      .doc(name);
+
+    docRef.delete().then(() => console.log("deletion completed"));
+  };
+
   // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
   if (!templateData) {
     return <div>Loading...</div>;
@@ -92,6 +103,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
         templateData={templateData}
         onShowPreview={onShowPreview}
         handleChangeTemplate={handleChangeTemplate}
+        deleteItem={handleDeleteItem}
       />
     );
   }
