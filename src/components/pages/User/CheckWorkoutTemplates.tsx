@@ -33,20 +33,32 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
         .doc(user?.uid)
         .collection("workout-templates");
 
-      try {
-        const getDocRef = await docRef.get();
-        if (getDocRef.docs.length > 0) {
-          let workoutTemplates: firebase.firestore.DocumentData[] = [];
+      // try {
+      //   const getDocRef = await docRef.get();
 
-          getDocRef.forEach((doc) => {
+      //   if (getDocRef.docs.length > 0) {
+      //     let workoutTemplates: firebase.firestore.DocumentData[] = [];
+
+      //     getDocRef.forEach((doc) => {
+      //       workoutTemplates.push(doc.data());
+      //     });
+
+      //     setTemplateData([...workoutTemplates]);
+      //   }
+      // } catch (err: any) {
+      //   console.error(err.message);
+      // }
+      docRef.onSnapshot((querySnapshot) => {
+        try {
+          let workoutTemplates: firebase.firestore.DocumentData[] = [];
+          querySnapshot.forEach((doc) => {
             workoutTemplates.push(doc.data());
           });
-
           setTemplateData([...workoutTemplates]);
+        } catch (err: any) {
+          console.error(err.message);
         }
-      } catch (err: any) {
-        console.error(err.message);
-      }
+      });
     };
     if (user) {
       getData();
