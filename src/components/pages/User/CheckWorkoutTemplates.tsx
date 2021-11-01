@@ -3,9 +3,10 @@ import { ReactElement, useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { useAppDispatch } from "../../../store/app/hooks";
-import DisplayWorkoutTemplatePreview from "../../workout/workoutTemplates/DisplayWorkoutTemplatePreview";
+import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTemplatePreview";
 import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
 import { displaySuccess } from "../../../store/slices/ui-slice";
+import WorkoutTemplatesList from "../../workout/workoutTemplates/WorkoutTemplatesList";
 
 interface previewItem {
   name: string;
@@ -13,10 +14,12 @@ interface previewItem {
   workout: [];
 }
 
+/** fetches users workout templates from fireabse and displays them as a grid list */
 export default function CheckWorkoutTemplates(): ReactElement | null {
   const [templateData, setTemplateData] = useState<
     firebase.firestore.DocumentData[] | null
   >(null);
+
   const [preview, setPreview] = useState<previewItem | null>();
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch();
@@ -39,7 +42,6 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
             workoutTemplates.push(doc.data());
           });
 
-          console.log(workoutTemplates);
           setTemplateData([...workoutTemplates]);
         }
       } catch (err: any) {
@@ -62,29 +64,6 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     dispatch(displaySuccess(`Workout template succesfully changed to ${name}`));
   };
 
-  const templatesMapped: any = templateData?.map((item, index) => (
-    <div
-      key={`${item.name}${index}`}
-      className="p-2 my-4 mx-auto max-w-xl lg:max-w-2xl"
-    >
-      <div>
-        <p>Name: {item.name}</p>
-        <p>
-          Date added:{" "}
-          {item.date.toDate().toDateString() +
-            " " +
-            item.date.toDate().toLocaleTimeString()}
-        </p>
-        <button onClick={() => onShowPreview(item)} className="btn">
-          Show preview
-        </button>
-        <button className="btn" onClick={() => handleChangeTemplate(item.name)}>
-          Set as current template
-        </button>
-      </div>
-    </div>
-  ));
-
   // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
   if (!templateData) {
     return <div>Loading...</div>;
@@ -92,19 +71,28 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     return (
       <div className="p-2 mx-auto max-w-md lg:max-w-xl">
         <h1 className="my-4 text-4xl text-center">{preview.name}</h1>
-        <DisplayWorkoutTemplatePreview workout={preview.workout} />
-        <button
-          className="btn"
-          onClick={() => handleChangeTemplate(preview.name)}
-        >
-          Set as current template
-        </button>
+        <WorkoutTemplatePreview workout={preview.workout} />
+        <div className="flex gap-4">
+          <button
+            className="btn"
+            onClick={() => handleChangeTemplate(preview.name)}
+          >
+            Set as current template
+          </button>
+          <button className="btn"> Edit</button>
+        </div>
         <button onClick={() => setPreview(null)} className="btn">
           Return
         </button>
       </div>
     );
   } else {
-    return <div>{templatesMapped && templatesMapped}</div>;
+    return (
+      <WorkoutTemplatesList
+        templateData={templateData}
+        onShowPreview={onShowPreview}
+        handleChangeTemplate={handleChangeTemplate}
+      />
+    );
   }
 }

@@ -1,14 +1,14 @@
 import React, { ReactElement, useState } from "react";
 import Input from "../../forms/templates/Input";
 import ExerciseForm, { ExerciseTypes } from "../../forms/workout/ExerciseForm";
-import DisplayWorkoutTemplatePreview from "../../workout/workoutTemplates/DisplayWorkoutTemplatePreview";
+import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTemplatePreview";
 import { useAppDispatch } from "../../../store/app/hooks";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useHistory } from "react-router";
 
 import "firebase/firestore";
 import firebase from "firebase/app";
-import {displaySuccess} from "../../../store/slices/ui-slice";
+import { displaySuccess } from "../../../store/slices/ui-slice";
 
 export default function AddWorkoutTemplate(): ReactElement | null {
   const [workout, setWorkout] = useState<ExerciseTypes[]>([]);
@@ -18,11 +18,9 @@ export default function AddWorkoutTemplate(): ReactElement | null {
   const [previewVisible, setPreviewVisible] = useState(true);
   const [started, setStarted] = useState(false);
 
-
   const { currentUser }: any = useAuth();
   const dispatch = useAppDispatch();
   const history = useHistory();
-
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWorkoutName(e.target.value);
@@ -35,19 +33,19 @@ export default function AddWorkoutTemplate(): ReactElement | null {
   };
 
   const handleExerciseSubmit = (submittedWorkout: ExerciseTypes) => {
-    handleShowPreviewPage()
+    handleShowPreviewPage();
     setWorkout((prev) => [...prev, submittedWorkout]);
   };
 
   // shows the 'exercise' page
   const handleShowExercisePage = () => {
-    setPreviewVisible(false)
+    setPreviewVisible(false);
     setFormVisible(true);
   };
 
   // shows the 'preview' page
   const handleShowPreviewPage = () => {
-    setFormVisible(false)
+    setFormVisible(false);
     setPreviewVisible(true);
   };
 
@@ -67,14 +65,13 @@ export default function AddWorkoutTemplate(): ReactElement | null {
       .collection("workout-templates")
       .doc(workoutName);
 
-      await docRef.set({
-        name: workoutName,
-        date: firebase.firestore.FieldValue.serverTimestamp(),
-        workout,
-      });
-      dispatch(displaySuccess("Workout template added succesfully"));
-      history.push("/")
-
+    await docRef.set({
+      name: workoutName,
+      date: firebase.firestore.FieldValue.serverTimestamp(),
+      workout,
+    });
+    dispatch(displaySuccess("Workout template added succesfully"));
+    history.push("/");
   };
 
   //this might need to be thrown into another component
@@ -102,7 +99,7 @@ export default function AddWorkoutTemplate(): ReactElement | null {
         {/*the added exercises preview*/}
         {previewVisible && (
           <>
-            <DisplayWorkoutTemplatePreview workout={workout} />
+            <WorkoutTemplatePreview workout={workout} />
             <button onClick={handleShowExercisePage} className="btn">
               Add an exercise
             </button>
@@ -117,7 +114,9 @@ export default function AddWorkoutTemplate(): ReactElement | null {
           <div>
             <div className="flex flex-col">
               <div>
-                <h1 className="p-2 text-2xl text-center text-gray-300">Add an exercise</h1>
+                <h1 className="p-2 text-2xl text-center text-gray-300">
+                  Add an exercise
+                </h1>
                 <ExerciseForm collector={handleExerciseSubmit} />
               </div>
               {workout.length !== 0 && (
@@ -149,7 +148,4 @@ export default function AddWorkoutTemplate(): ReactElement | null {
       </div>
     );
   }
-     
-   
-  }
-
+}

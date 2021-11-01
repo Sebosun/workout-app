@@ -5,7 +5,7 @@ interface DisplayProps {
   workout: ExerciseTypes[];
 }
 
-export default function DisplayWorkoutTemplatePreview({
+export default function WorkoutTemplatePreview({
   workout,
 }: DisplayProps): ReactElement | null {
   return (
