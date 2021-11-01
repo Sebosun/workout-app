@@ -13,7 +13,7 @@ function App() {
   const successStatus = useAppSelector((state) => state.ui.success.status);
 
   return (
-    <div className="p-0 m-0 h-full">
+    <div className="">
       <AuthProvider>
         {errorStatus && <Error />}
         {successStatus && <Success />}
