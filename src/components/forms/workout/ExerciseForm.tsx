@@ -19,14 +19,28 @@ const defaultExercise: ExerciseTypes = {
   weight: 0,
 };
 
+/** handles exercise form for AddWorkoutTemplate component */
 export default function ExerciseForm({
   collector,
 }: ExerciseProps): ReactElement | null {
   const [exercise, setExercise] = useState(defaultExercise);
   const { name, reps, sets, weight } = exercise;
 
-  const onExerciseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setExercise((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  // this is likely why refs might be easier lol
+  /** getting a type from input to if number pase it as int later on */
+  const onExerciseChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: string
+  ) => {
+    console.log(type);
+    if (type === "number") {
+      setExercise((prev) => ({
+        ...prev,
+        [e.target.id]: parseInt(e.target.value),
+      }));
+    } else {
+      setExercise((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +50,7 @@ export default function ExerciseForm({
 
   return (
     <form
-      className="p-4 mx-auto rounded-xl border-2 border-blue-900 border-solid shadow-2xl"
+      className="p-4 mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl"
       onSubmit={handleSubmit}
     >
       <Input
@@ -50,7 +64,7 @@ export default function ExerciseForm({
       />
       <Input
         type="number"
-        label="Sets"
+        label="sets"
         name="sets"
         id="sets"
         value={sets}
