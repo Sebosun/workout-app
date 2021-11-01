@@ -56,14 +56,18 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     setPreview(item);
   };
 
+  //TODO confirmation if workout started
   const handleChangeTemplate = (name: string) => {
     dispatch(changeCurrentWorkoutTemplate(name));
     dispatch(displaySuccess(`Workout template succesfully changed to ${name}`));
   };
 
   const templatesMapped: any = templateData?.map((item, index) => (
-    <div className="p-2 my-4 mx-auto max-w-xl lg:max-w-2xl">
-      <div key={`${item.name}${index}`}>
+    <div
+      key={`${item.name}${index}`}
+      className="p-2 my-4 mx-auto max-w-xl lg:max-w-2xl"
+    >
+      <div>
         <p>Name: {item.name}</p>
         <p>
           Date added:{" "}
@@ -83,7 +87,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
 
   // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
   if (!templateData) {
-    return <p>Loading...</p>;
+    return <div>Loading...</div>;
   } else if (preview) {
     return (
       <div className="p-2 mx-auto max-w-md lg:max-w-xl">
@@ -101,6 +105,6 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
       </div>
     );
   } else {
-    return <p>{templatesMapped && templatesMapped}</p>;
+    return <div>{templatesMapped && templatesMapped}</div>;
   }
 }

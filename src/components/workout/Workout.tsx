@@ -66,32 +66,41 @@ const Workout = () => {
 
       {workout.map((item: WorkoutType, index: number) => {
         return (
-          <div
+          <section
             key={index + item.name}
             className="max-w-sm p-4 m-4 mx-auto my-6 border-4 border-purple-800 lg:max-w-md"
           >
-            <div className="grid grid-cols-2 justify-center align-center p-4">
-              <h1 className="self-center mb-4 text-xl font-semibold capitalize">
+            <div className="p-4 grid grid-cols-2">
+              <h1 className="self-center text-xl font-semibold capitalize">
                 {item.name}
               </h1>
-              <div className="text-xl gap-4 font-semibold grid justify-items-center align-items-center grid grid-cols-3">
+
+              <div className="text-xl font-semibold gap-4 grid justify-self-stretch align-items-center grid-cols-3">
                 <button
                   onClick={() => onWeightIncrease(index)}
-                  className=" min-w-full w-1/3 w-max btn"
+                  className="w-1/3 min-w-full bg-green-800 border-black self-center w-max btn"
                 >
                   +
                 </button>
+
                 <button
                   onClick={() => onWeightDecrease(index, item.weight)}
-                  className="min-w-full  w-1/3 btn"
+                  className={`${
+                    item.weight === 0
+                      ? "bg-gray-800 cursor-not-allowed "
+                      : "bg-red-800"
+                  } w-1/3 self-center border-black min-w-full btn 
+              `}
                 >
                   -
                 </button>
-                <p className="overflow-visible w-1/3 min-w-full self-center justify-center text-center ">
+
+                <p className="self-center  w-1/3 min-w-full overflow-visible text-center ">
                   {`${item.weight}kg`}
                 </p>
               </div>
             </div>
+
             <Excercise
               index={index}
               sets={item.sets}
@@ -99,7 +108,7 @@ const Workout = () => {
               reps={item.reps}
               setsHandler={setsHandler}
             />
-          </div>
+          </section>
         );
       })}
     </>
