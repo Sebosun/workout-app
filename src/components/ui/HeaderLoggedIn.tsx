@@ -7,6 +7,8 @@ import { IoIosLogOut } from "react-icons/io";
 export default function HeaderLoggedIn(): ReactElement | null {
   const { logout }: any = useAuth();
   const history = useHistory();
+  const headerItemClasses =
+    "text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400";
 
   const handleLogout = async (): Promise<void> => {
     //TODO confirmation if you really want to logout
@@ -22,23 +24,23 @@ export default function HeaderLoggedIn(): ReactElement | null {
   // that button will be stylized later after i get around implementing tailwind
   return (
     <>
-      <li className="text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400">
+      <li className={headerItemClasses}>
         <Link to="/dashboard">Dashboard</Link>
       </li>
-      <li className="text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400">
+      <li className={headerItemClasses}>
         <Link to="/workout">Workout</Link>
       </li>
-      <li className="text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400">
+      <li className={headerItemClasses}>
         <Link to="/settings">Settings</Link>
       </li>
-      <li className="text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400">
+      <li className={headerItemClasses}>
         <Link to="/user">User</Link>
       </li>
-      <li className="text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400">
+      <li className={headerItemClasses + "self-center"}>
         <IoIosLogOut
           role="button"
           onClick={handleLogout}
-          className="text-2xl cursor-pointer hover:text-purple-500 hover:border-current"
+          className="text-3xl cursor-pointer hover:text-purple-500 hover:border-current"
         />
       </li>
     </>
