@@ -34,21 +34,6 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
         .doc(user?.uid)
         .collection("workout-templates");
 
-      // try {
-      //   const getDocRef = await docRef.get();
-
-      //   if (getDocRef.docs.length > 0) {
-      //     let workoutTemplates: firebase.firestore.DocumentData[] = [];
-
-      //     getDocRef.forEach((doc) => {
-      //       workoutTemplates.push(doc.data());
-      //     });
-
-      //     setTemplateData([...workoutTemplates]);
-      //   }
-      // } catch (err: any) {
-      //   console.error(err.message);
-      // }
       docRef.onSnapshot((querySnapshot) => {
         try {
           let workoutTemplates: firebase.firestore.DocumentData[] = [];
@@ -73,14 +58,31 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
 
   //TODO confirmation if workout started
   const handleChangeTemplate = (name: string) => {
-    dispatch(changeCurrentWorkoutTemplate(name));
-    dispatch(displaySuccess(`Workout template succesfully changed to ${name}`));
+    const db = firebase.firestore();
+    const docRef = db
+      .collection("user-data")
+      .doc(user?.uid)
+      .collection("settings")
+      .doc("workout-settings");
+
+    try {
+      docRef.update({
+        currentWorkout: name,
+      });
+      dispatch(changeCurrentWorkoutTemplate(name));
+      dispatch(
+        displaySuccess(`Workout template succesfully changed to ${name}`)
+      );
+    } catch (err: any) {
+      console.error(err);
+      dispatch(displayError(err));
+    }
   };
 
   // TODO This will need additional verifications. Such as:
   // - prevent from deleting current template
   // - confirmation if you *really* want to do this
-  const deleteItem = (name: string) => {
+  const deleteItem = async (name: string) => {
     if (currentWorkoutTemplate === name) {
       dispatch(
         displayError(
@@ -95,7 +97,8 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
         .collection("workout-templates")
         .doc(name);
 
-      docRef.delete().then(() => console.log("deletion completed"));
+      await docRef.delete();
+      dispatch(displaySuccess("Template succesfully deleted."));
     }
   };
 
