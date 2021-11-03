@@ -68,7 +68,7 @@ const Workout = () => {
         return (
           <section
             key={index + item.name}
-            className="max-w-sm p-4 m-4 mx-auto my-6 border-4 border-purple-800 lg:max-w-md"
+            className="max-w-sm p-4 mx-auto my-6 border-4 border-purple-800 lg:max-w-md"
           >
             <div className="p-4 grid grid-cols-2">
               <h1 className="self-center text-xl font-semibold capitalize">
