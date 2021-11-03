@@ -2,10 +2,10 @@ import { ReactElement, useEffect, useState } from "react";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { useAppDispatch } from "../../../store/app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTemplatePreview";
 import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
-import { displaySuccess } from "../../../store/slices/ui-slice";
+import { displayError, displaySuccess } from "../../../store/slices/ui-slice";
 import WorkoutTemplatesList from "../../workout/workoutTemplates/WorkoutTemplatesList";
 
 interface previewItem {
@@ -23,6 +23,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
   const [preview, setPreview] = useState<previewItem | null>();
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch();
+  const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
 
   // TODO getitng unique id for array later
   useEffect(() => {
@@ -76,15 +77,26 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     dispatch(displaySuccess(`Workout template succesfully changed to ${name}`));
   };
 
-  const handleDeleteItem = (name: string) => {
-    const db = firebase.firestore();
-    const docRef = db
-      .collection("user-data")
-      .doc(user?.uid)
-      .collection("workout-templates")
-      .doc(name);
+  // TODO This will need additional verifications. Such as:
+  // - prevent from deleting current template
+  // - confirmation if you *really* want to do this
+  const deleteItem = (name: string) => {
+    if (currentWorkoutTemplate === name) {
+      dispatch(
+        displayError(
+          "Template already in use. Choose another template as default to delete this one."
+        )
+      );
+    } else {
+      const db = firebase.firestore();
+      const docRef = db
+        .collection("user-data")
+        .doc(user?.uid)
+        .collection("workout-templates")
+        .doc(name);
 
-    docRef.delete().then(() => console.log("deletion completed"));
+      docRef.delete().then(() => console.log("deletion completed"));
+    }
   };
 
   // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
@@ -115,7 +127,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
         templateData={templateData}
         onShowPreview={onShowPreview}
         handleChangeTemplate={handleChangeTemplate}
-        deleteItem={handleDeleteItem}
+        deleteItem={deleteItem}
       />
     );
   }
