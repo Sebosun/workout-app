@@ -19,40 +19,47 @@ const WorkoutTemplatesList = ({
   const templatesMapped: any = templateData?.map((item, index) => (
     <div
       key={`${item.name}${index}`}
-      className={`p-2 my-4 mx-auto max-w-xl lg:max-w-2xl ${
-        currentWorkoutTemplate === item.name &&
-        "border-2 border-green-600 rounded-xl"
-      }`}
+      className={`p-2 my-4 mx-auto max-w-xl lg:max-w-2xl`}
     >
-      {currentWorkoutTemplate === item.name && (
-        <p className="  text-green-500 ">Active</p>
-      )}
-      <div>
-        <div className="grid grid-cols-2  gap-4">
-          <p>Template name: {item.name}</p>
-          <div className="flex justify-between">
-            <p>Date added:</p>
-            <p className="text-red-400">
-              {item.date.toDate().toLocaleTimeString() +
-                " " +
-                item.date.toDate().toDateString()}
-            </p>
+      <div
+        className={`
+${
+  currentWorkoutTemplate === item.name &&
+  "border-2 border-green-400 rounded-lg p-2"
+}
+        `}
+      >
+        {currentWorkoutTemplate === item.name && (
+          <p className="  text-green-500 ">Active</p>
+        )}
+        <div>
+          <div className="lg:grid lg:grid-cols-2  gap-4">
+            <p>Template name: {item.name}</p>
+            <div className="flex justify-between">
+              <p>Date added:</p>
+              <div className="flex gap-2">
+                <p>{item.date.toDate().toLocaleTimeString()}</p>
+                <p className="text-blue-300">
+                  {item.date.toDate().toDateString()}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="flex gap-2">
-          <button
-            className="btn"
-            onClick={() => handleChangeTemplate(item.name)}
-          >
-            Set as current template
+          <div className="flex gap-2">
+            <button
+              className="btn"
+              onClick={() => handleChangeTemplate(item.name)}
+            >
+              Set as current template
+            </button>
+            <button onClick={() => onShowPreview(item)} className="btn">
+              Show preview
+            </button>
+          </div>
+          <button onClick={() => deleteItem(item.name)} className="btn">
+            Delete
           </button>
-          <button onClick={() => onShowPreview(item)} className="btn">
-            Show preview
-          </button>
         </div>
-        <button onClick={() => deleteItem(item.name)} className="btn">
-          Delete
-        </button>
       </div>
     </div>
   ));
