@@ -131,6 +131,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
         onShowPreview={onShowPreview}
         handleChangeTemplate={handleChangeTemplate}
         deleteItem={deleteItem}
+        currentWorkoutTemplate={currentWorkoutTemplate}
       />
     );
   }
