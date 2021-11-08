@@ -30,10 +30,10 @@ ${
         `}
       >
         {currentWorkoutTemplate === item.name && (
-          <p className="  text-green-500 ">Active</p>
+          <p className="text-green-500 ">Active</p>
         )}
         <div>
-          <div className="lg:grid lg:grid-cols-2  gap-4">
+          <div className="gap-4">
             <p>Template name: {item.name}</p>
             <div className="flex justify-between">
               <p>Date added:</p>
