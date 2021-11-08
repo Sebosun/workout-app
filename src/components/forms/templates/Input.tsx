@@ -23,16 +23,31 @@ export default function Input(props: InputProps): ReactElement | null {
       >
         {props.label}
       </label>
-      <input
-        value={props.value}
-        onChange={(e) => props.onValueChange(e, props.type)}
-        type={props.type}
-        name={props.name}
-        id={props.id}
-        placeholder={props.placeholder && `${props.placeholder}`}
-        className="block p-2 my-6 w-full bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50 solid"
-        required
-      />
+      {props.type === "number" ? (
+        <input
+          value={props.value}
+          onChange={(e) => props.onValueChange(e, props.type)}
+          type={props.type}
+          name={props.name}
+          id={props.id}
+          placeholder={props.placeholder && `${props.placeholder}`}
+          className="block p-2 my-6 w-full bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50 solid"
+          max={1000}
+          required
+        />
+      ) : (
+        <input
+          value={props.value}
+          onChange={(e) => props.onValueChange(e, props.type)}
+          type={props.type}
+          name={props.name}
+          id={props.id}
+          placeholder={props.placeholder && `${props.placeholder}`}
+          maxLength={40}
+          className="block p-2 my-6 w-full bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50 solid"
+          required
+        />
+      )}
     </>
   );
 }
