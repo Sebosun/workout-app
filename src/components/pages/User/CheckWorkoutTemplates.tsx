@@ -7,6 +7,7 @@ import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTempla
 import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
 import { displayError, displaySuccess } from "../../../store/slices/ui-slice";
 import WorkoutTemplatesList from "../../workout/workoutTemplates/WorkoutTemplatesList";
+import Edit from "../../forms/workout/Edit";
 
 interface previewItem {
   name: string;
@@ -21,6 +22,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
   >(null);
 
   const [preview, setPreview] = useState<previewItem | null>();
+  const [edit, setEdit] = useState<previewItem | null>();
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch();
   const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
@@ -102,10 +104,14 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     }
   };
 
+  const onEdit = () => {
+    setEdit(preview);
+  };
+
   // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
   if (!templateData) {
     return <div>Loading...</div>;
-  } else if (preview) {
+  } else if (preview && !edit) {
     return (
       <div className="p-2 mx-auto max-w-md lg:max-w-xl">
         <h1 className="my-4 text-4xl text-center">{preview.name}</h1>
@@ -117,12 +123,20 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
           >
             Set as current template
           </button>
-          <button className="btn"> Edit</button>
+          <button onClick={onEdit} className="btn">
+            Edit
+          </button>
         </div>
         <button onClick={() => setPreview(null)} className="btn">
           Return
         </button>
       </div>
+    );
+  } else if (preview && edit) {
+    return (
+      <h1>
+        <Edit name={edit.name} date={edit.date} workout={edit.workout} />
+      </h1>
     );
   } else {
     return (

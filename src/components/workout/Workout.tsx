@@ -60,6 +60,7 @@ const Workout = () => {
     }
   };
 
+  //TODO export buttons to a separate component, its not that easy to read
   return (
     <>
       {active && <RestTimer />}
@@ -78,7 +79,7 @@ const Workout = () => {
               <div className="text-xl font-semibold gap-4 grid justify-self-stretch align-items-center grid-cols-3">
                 <button
                   onClick={() => onWeightIncrease(index)}
-                  className="w-1/3 min-w-full bg-green-800 border-black self-center w-max btn"
+                  className="self-center w-1/3 min-w-full bg-green-800 border-black w-max btn"
                 >
                   +
                 </button>
@@ -95,7 +96,7 @@ const Workout = () => {
                   -
                 </button>
 
-                <p className="self-center  w-1/3 min-w-full overflow-visible text-center ">
+                <p className="self-center w-1/3 min-w-full overflow-visible text-center ">
                   {`${item.weight}kg`}
                 </p>
               </div>
