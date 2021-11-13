@@ -40,20 +40,24 @@ const Routing = () => {
           <User />
         </PrivateRoute>
 
-        <PrivateRoute authenticationPath="/login" exact path="/add-workout">
+        <PrivateRoute
+          authenticationPath="/login"
+          exact
+          path="/user/add-workout"
+        >
           <AddWorkoutTemplate />
-        </PrivateRoute>
-
-        <PrivateRoute authenticationPath="/login" exact path="/dashboard">
-          <Dashboard />
         </PrivateRoute>
 
         <PrivateRoute
           authenticationPath="/login"
           exact
-          path="/custom-templates"
+          path="/user/custom-templates"
         >
           <CheckWorkoutTemplates />
+        </PrivateRoute>
+
+        <PrivateRoute authenticationPath="/login" exact path="/dashboard">
+          <Dashboard />
         </PrivateRoute>
 
         <Route path="/*">

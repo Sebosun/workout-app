@@ -6,7 +6,6 @@ import { tickTimer, handleAction } from "../../../store/slices/timer-slice";
 import { changeCooldown } from "../../../store/slices/settings-slice";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
 
-
 // accepts an array within an array with 4 properties: name reps sets weight.
 
 const InitialState = () => {
