@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface workoutArray {
+export interface workoutArray {
   name: string;
   sets: number[];
   completed: boolean[];
@@ -8,13 +8,13 @@ interface workoutArray {
   weight: number;
 }
 
-interface WorkoutState {
+export interface WorkoutState {
   workout: workoutArray[];
   completed: boolean;
   started: boolean;
 }
 
-interface SetComplete {
+export interface SetComplete {
   index: number;
   position: number;
   number?: number;

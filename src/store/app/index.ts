@@ -3,6 +3,7 @@ import settingsReducer from "../slices/settings-slice";
 import timerReducer from "../slices/timer-slice";
 import workoutReducer from "../slices/workout-slice";
 import uiReducer from "../slices/ui-slice";
+import editReducer from "../slices/edit-slice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     timer: timerReducer,
     workout: workoutReducer,
     ui: uiReducer,
+    edit: editReducer,
   },
 });
 

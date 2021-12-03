@@ -11,6 +11,7 @@ import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTempla
 
 import firebase from "firebase/app";
 import "firebase/firestore";
+import { changeEdit } from "../../../store/slices/edit-slice";
 
 export default function Preview(): ReactElement | null {
   const location = useLocation();
@@ -34,6 +35,7 @@ export default function Preview(): ReactElement | null {
     docRef.get().then((doc) => {
       if (doc.exists) {
         setTemplateData(doc.data() || null);
+        dispatch(changeEdit(doc.data()?.workout));
       } else {
         history.push("/");
       }
@@ -59,6 +61,10 @@ export default function Preview(): ReactElement | null {
     }
   };
 
+  const handleEdit = (index: number) => {
+    history.push(`./${workoutName}/edit?index=${index}`);
+  };
+
   return (
     <p>
       {!templateData && <p className="text-center">Loading...</p>}
@@ -66,7 +72,10 @@ export default function Preview(): ReactElement | null {
         <>
           <div className="p-2 mx-auto max-w-md lg:max-w-xl">
             <h1 className="my-4 text-4xl text-center">{templateData.name}</h1>
-            <WorkoutTemplatePreview workout={templateData.workout} />
+            <WorkoutTemplatePreview
+              onEdit={handleEdit}
+              workout={templateData.workout}
+            />
             <button className="btn" onClick={handleSetAsCurrentTemplate}>
               Set as current template
             </button>

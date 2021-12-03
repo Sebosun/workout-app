@@ -50,7 +50,6 @@ const FirebaseTemplateData = () => {
     docRef.onSnapshot((snapShot) => {
       try {
         const data = snapShot.data();
-        console.log(data);
         dispatch(changeCurrentWorkoutTemplate(data!.currentWorkout));
       } catch (err: any) {
         console.error(err);
