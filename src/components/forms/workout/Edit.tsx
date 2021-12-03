@@ -1,12 +1,6 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-interface workoutType {
-  name: string;
-  sets: number;
-  reps: number;
-  weight: number;
-}
+import { workoutType } from "../../pages/User/CheckWorkoutTemplates";
 
 const Edit = ({ name, sets, reps, weight }: workoutType) => {
   return (

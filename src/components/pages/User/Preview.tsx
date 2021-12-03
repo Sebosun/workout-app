@@ -37,8 +37,12 @@ export default function Preview(): ReactElement | null {
       {!templateData && <p>Loading...</p>}
       {templateData && (
         <>
-          <p>Loaded + {workoutName}</p>
-          <WorkoutTemplatePreview workout={templateData.workout} />
+          <div className="p-2 mx-auto max-w-md lg:max-w-xl">
+            <h1 className="my-4 text-4xl text-center">{templateData.name}</h1>
+            <WorkoutTemplatePreview workout={templateData.workout} />
+            <button className="btn">Set as current template</button>
+            <button className="btn">Return</button>
+          </div>
         </>
       )}
     </p>

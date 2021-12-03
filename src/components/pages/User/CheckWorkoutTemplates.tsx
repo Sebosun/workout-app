@@ -3,22 +3,19 @@ import { ReactElement, useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { useAppDispatch, useAppSelector } from "../../../store/app/hooks";
-import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTemplatePreview";
 import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
 import { displayError, displaySuccess } from "../../../store/slices/ui-slice";
 import WorkoutTemplatesList from "../../workout/workoutTemplates/WorkoutTemplatesList";
-import Edit from "../../forms/workout/Edit";
+import { useHistory } from "react-router";
 
-interface previewItem {
-  name: string;
-  date: Date;
-  workout: [];
-}
-interface workoutType {
+export interface workoutType {
   name: string;
   sets: number;
   reps: number;
   weight: number;
+}
+export interface editType extends workoutType {
+  index: number;
 }
 
 /** fetches users workout templates from fireabse and displays them as a grid list */
@@ -27,13 +24,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     firebase.firestore.DocumentData[] | null
   >(null);
 
-  // holds an array of exercises + name +  date to be displayed
-  const [preview, setPreview] = useState<previewItem | null>();
-  // holds an exercise to-be-edited
-  const [edit, setEdit] = useState<workoutType | null>();
-  // will turn to true once at least one item was edited
-  const [edited, setEdited] = useState(false);
-
+  const history = useHistory();
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch();
   const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
@@ -66,11 +57,11 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
 
   //TODO: Figure out the type for this
   const onShowPreview = (item: any) => {
-    setPreview(item);
+    history.push(`/user/custom-templates/${item.name}`);
   };
 
   //TODO confirmation if workout started
-  const handleChangeTemplate = (name: string) => {
+  const handleSetAsCurrentTemplate = (name: string) => {
     const db = firebase.firestore();
     const docRef = db
       .collection("user-data")
@@ -115,47 +106,14 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     }
   };
 
-  const onEdit = (index: number) => {
-    console.log(index);
-    console.log(preview?.workout[index]);
-    setEdit(preview?.workout[index]);
-    console.log(edit);
-  };
-
-  // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
   if (!templateData) {
     return <div>Loading...</div>;
-  } else if (preview && !edit) {
-    return (
-      <div className="p-2 mx-auto max-w-md lg:max-w-xl">
-        <h1 className="my-4 text-4xl text-center">{preview.name}</h1>
-        <WorkoutTemplatePreview workout={preview.workout} onEdit={onEdit} />
-        <button
-          className="btn"
-          onClick={() => handleChangeTemplate(preview.name)}
-        >
-          Set as current template
-        </button>
-        <button onClick={() => setPreview(null)} className="btn">
-          Return
-        </button>
-      </div>
-    );
-  } else if (preview && edit) {
-    return (
-      <Edit
-        name={edit.name}
-        sets={edit.sets}
-        reps={edit.reps}
-        weight={edit.weight}
-      />
-    );
   } else {
     return (
       <WorkoutTemplatesList
         templateData={templateData}
         onShowPreview={onShowPreview}
-        handleChangeTemplate={handleChangeTemplate}
+        handleChangeTemplate={handleSetAsCurrentTemplate}
         deleteItem={deleteItem}
         currentWorkoutTemplate={currentWorkoutTemplate}
       />
