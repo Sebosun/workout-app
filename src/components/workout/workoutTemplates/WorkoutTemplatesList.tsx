@@ -47,7 +47,7 @@ ${
           </div>
           <div className="flex gap-2">
             <button
-              className="btn"
+              className="btn-pos"
               onClick={() => handleChangeTemplate(item.name)}
             >
               Set as current template
@@ -56,7 +56,7 @@ ${
               Show preview
             </button>
           </div>
-          <button onClick={() => deleteItem(item.name)} className="btn">
+          <button onClick={() => deleteItem(item.name)} className="btn-del">
             Delete
           </button>
         </div>

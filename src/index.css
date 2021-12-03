@@ -6,6 +6,15 @@
   .btn {
     @apply w-full p-2 mt-2 font-medium font-semibold tracking-tight tracking-wide text-gray-400 uppercase bg-gray-900 border-2 border-gray-400 border-solid rounded-lg hover:text-gray-900 hover:border-purple-800 hover:bg-purple-800;
   }
+
+  .btn-del {
+    @apply w-full p-2 mt-2 font-medium font-semibold tracking-tight tracking-wide text-gray-400 uppercase bg-gray-900 border-2 border-gray-400 border-solid rounded-lg hover:text-gray-900 hover:border-red-700 hover:bg-red-700;
+  }
+
+  .btn-pos {
+    @apply w-full p-2 mt-2 font-medium font-semibold tracking-tight tracking-wide text-gray-400 uppercase bg-gray-900 border-2 border-gray-400 border-solid rounded-lg hover:text-gray-900 hover:border-green-700 hover:bg-green-700;
+  }
+
   .label {
     @apply block text-xl font-bold text-left text-indigo-400 capitalize;
   }

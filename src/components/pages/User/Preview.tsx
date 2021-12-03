@@ -32,6 +32,10 @@ export default function Preview(): ReactElement | null {
     });
   }, []);
 
+  const handleReturn = () => {
+    history.push("/user/custom-templates");
+  };
+
   return (
     <p>
       {!templateData && <p>Loading...</p>}
@@ -41,7 +45,9 @@ export default function Preview(): ReactElement | null {
             <h1 className="my-4 text-4xl text-center">{templateData.name}</h1>
             <WorkoutTemplatePreview workout={templateData.workout} />
             <button className="btn">Set as current template</button>
-            <button className="btn">Return</button>
+            <button className="btn" onClick={handleReturn}>
+              Return
+            </button>
           </div>
         </>
       )}
