@@ -14,6 +14,12 @@ interface previewItem {
   date: Date;
   workout: [];
 }
+interface workoutType {
+  name: string;
+  sets: number;
+  reps: number;
+  weight: number;
+}
 
 /** fetches users workout templates from fireabse and displays them as a grid list */
 export default function CheckWorkoutTemplates(): ReactElement | null {
@@ -21,8 +27,13 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     firebase.firestore.DocumentData[] | null
   >(null);
 
+  // holds an array of exercises + name +  date to be displayed
   const [preview, setPreview] = useState<previewItem | null>();
-  const [edit, setEdit] = useState<previewItem | null>();
+  // holds an exercise to-be-edited
+  const [edit, setEdit] = useState<workoutType | null>();
+  // will turn to true once at least one item was edited
+  const [edited, setEdited] = useState(false);
+
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch();
   const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
@@ -104,8 +115,11 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     }
   };
 
-  const onEdit = () => {
-    setEdit(preview);
+  const onEdit = (index: number) => {
+    console.log(index);
+    console.log(preview?.workout[index]);
+    setEdit(preview?.workout[index]);
+    console.log(edit);
   };
 
   // preview is displayed based on data in preview state, which is forwarded to it by button OnShowPreview
@@ -115,18 +129,13 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     return (
       <div className="p-2 mx-auto max-w-md lg:max-w-xl">
         <h1 className="my-4 text-4xl text-center">{preview.name}</h1>
-        <WorkoutTemplatePreview workout={preview.workout} />
-        <div className="flex gap-4">
-          <button
-            className="btn"
-            onClick={() => handleChangeTemplate(preview.name)}
-          >
-            Set as current template
-          </button>
-          <button onClick={onEdit} className="btn">
-            Edit
-          </button>
-        </div>
+        <WorkoutTemplatePreview workout={preview.workout} onEdit={onEdit} />
+        <button
+          className="btn"
+          onClick={() => handleChangeTemplate(preview.name)}
+        >
+          Set as current template
+        </button>
         <button onClick={() => setPreview(null)} className="btn">
           Return
         </button>
@@ -134,9 +143,12 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     );
   } else if (preview && edit) {
     return (
-      <h1>
-        <Edit name={edit.name} date={edit.date} workout={edit.workout} />
-      </h1>
+      <Edit
+        name={edit.name}
+        sets={edit.sets}
+        reps={edit.reps}
+        weight={edit.weight}
+      />
     );
   } else {
     return (

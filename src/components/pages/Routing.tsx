@@ -43,17 +43,21 @@ const Routing = () => {
         <PrivateRoute
           authenticationPath="/login"
           exact
-          path="/user/add-workout"
+          path="/user/custom-templates"
         >
-          <AddWorkoutTemplate />
+          <CheckWorkoutTemplates />
         </PrivateRoute>
 
         <PrivateRoute
           authenticationPath="/login"
           exact
-          path="/user/custom-templates"
+          path="/user/add-workout"
         >
-          <CheckWorkoutTemplates />
+          <AddWorkoutTemplate />
+        </PrivateRoute>
+
+        <PrivateRoute authenticationPath="/login" exact path="/dashboard">
+          <Dashboard />
         </PrivateRoute>
 
         <PrivateRoute authenticationPath="/login" exact path="/dashboard">
