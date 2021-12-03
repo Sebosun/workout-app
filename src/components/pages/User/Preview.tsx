@@ -1,12 +1,16 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
+
+import { useAppDispatch } from "../../../store/app/hooks";
+
+import { displayError, displaySuccess } from "../../../store/slices/ui-slice";
+import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
 import { setAsCurrentTemplate } from "./CheckWorkoutTemplates";
+
+import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTemplatePreview";
+
 import firebase from "firebase/app";
 import "firebase/firestore";
-import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTemplatePreview";
-import { useAppDispatch } from "../../../store/app/hooks";
-import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
-import { displayError, displaySuccess } from "../../../store/slices/ui-slice";
 
 export default function Preview(): ReactElement | null {
   const location = useLocation();
@@ -57,7 +61,7 @@ export default function Preview(): ReactElement | null {
 
   return (
     <p>
-      {!templateData && <p>Loading...</p>}
+      {!templateData && <p className="text-center">Loading...</p>}
       {templateData && (
         <>
           <div className="p-2 mx-auto max-w-md lg:max-w-xl">

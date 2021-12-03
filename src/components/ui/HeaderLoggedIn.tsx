@@ -1,14 +1,16 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { IoIosLogOut } from "react-icons/io";
 
 export default function HeaderLoggedIn(): ReactElement | null {
   const { logout }: any = useAuth();
   const history = useHistory();
-  const headerItemClasses =
-    "text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400";
+  const location = useLocation();
+  const headerItemClasses = "";
+
+  const locationSplit = location.pathname.split("/")[1];
 
   const handleLogout = async (): Promise<void> => {
     //TODO confirmation if you really want to logout
@@ -24,19 +26,33 @@ export default function HeaderLoggedIn(): ReactElement | null {
   // that button will be stylized later after i get around implementing tailwind
   return (
     <>
-      <li className={headerItemClasses}>
+      <li
+        className={`header-el ${
+          locationSplit === "dashboard" && "text-green-400"
+        }`}
+      >
         <Link to="/dashboard">Dashboard</Link>
       </li>
-      <li className={headerItemClasses}>
+      <li
+        className={`header-el ${
+          locationSplit === "workout" && "text-green-400"
+        }`}
+      >
         <Link to="/workout">Workout</Link>
       </li>
-      <li className={headerItemClasses}>
+      <li
+        className={`header-el ${
+          locationSplit === "settings" && "text-green-400"
+        }`}
+      >
         <Link to="/settings">Settings</Link>
       </li>
-      <li className={headerItemClasses}>
+      <li
+        className={`header-el ${locationSplit === "user" && "text-green-400"}`}
+      >
         <Link to="/user">User</Link>
       </li>
-      <li className={headerItemClasses + "self-center"}>
+      <li className={"header-el self-center"}>
         <IoIosLogOut
           role="button"
           onClick={handleLogout}

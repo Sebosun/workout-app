@@ -21,4 +21,7 @@
   .input {
     @apply block p-2 my-6 w-full bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50;
   }
+  .header-el {
+    @apply text-xl border-b-2 border-transparent outline-none hover:border-current hover:border-gray-400;
+  }
 }
