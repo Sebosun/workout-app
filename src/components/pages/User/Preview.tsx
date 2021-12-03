@@ -1,14 +1,18 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
+import { setAsCurrentTemplate } from "./CheckWorkoutTemplates";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { WorkoutType } from "../../../helpers/types/workout";
 import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTemplatePreview";
+import { useAppDispatch } from "../../../store/app/hooks";
+import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-slice";
+import { displayError, displaySuccess } from "../../../store/slices/ui-slice";
 
 export default function Preview(): ReactElement | null {
   const location = useLocation();
   const history = useHistory();
   const user = firebase.auth().currentUser;
+  const dispatch = useAppDispatch();
 
   const workoutName = location.pathname.split("/")[3];
   const [templateData, setTemplateData] =
@@ -35,6 +39,21 @@ export default function Preview(): ReactElement | null {
   const handleReturn = () => {
     history.push("/user/custom-templates");
   };
+  const handleSetAsCurrentTemplate = () => {
+    if (user) {
+      const set = setAsCurrentTemplate(firebase.firestore(), user, workoutName);
+      if (set === true) {
+        dispatch(changeCurrentWorkoutTemplate(workoutName));
+        dispatch(
+          displaySuccess(
+            `Workout template succesfully changed to ${workoutName}`
+          )
+        );
+      } else {
+        dispatch(displayError(set));
+      }
+    }
+  };
 
   return (
     <p>
@@ -44,7 +63,9 @@ export default function Preview(): ReactElement | null {
           <div className="p-2 mx-auto max-w-md lg:max-w-xl">
             <h1 className="my-4 text-4xl text-center">{templateData.name}</h1>
             <WorkoutTemplatePreview workout={templateData.workout} />
-            <button className="btn">Set as current template</button>
+            <button className="btn" onClick={handleSetAsCurrentTemplate}>
+              Set as current template
+            </button>
             <button className="btn" onClick={handleReturn}>
               Return
             </button>
