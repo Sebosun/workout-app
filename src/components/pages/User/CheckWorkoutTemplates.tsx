@@ -18,6 +18,27 @@ export interface editType extends workoutType {
   index: number;
 }
 
+export const setAsCurrentTemplate = (
+  db: firebase.firestore.Firestore,
+  user: firebase.User,
+  name: string
+) => {
+  const docRef = db
+    .collection("user-data")
+    .doc(user?.uid)
+    .collection("settings")
+    .doc("workout-settings");
+
+  try {
+    docRef.update({
+      currentWorkout: name,
+    });
+    return true;
+  } catch (err: any) {
+    return err;
+  }
+};
+
 /** fetches users workout templates from fireabse and displays them as a grid list */
 export default function CheckWorkoutTemplates(): ReactElement | null {
   const [templateData, setTemplateData] = useState<
@@ -63,23 +84,16 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
   //TODO confirmation if workout started
   const handleSetAsCurrentTemplate = (name: string) => {
     const db = firebase.firestore();
-    const docRef = db
-      .collection("user-data")
-      .doc(user?.uid)
-      .collection("settings")
-      .doc("workout-settings");
-
-    try {
-      docRef.update({
-        currentWorkout: name,
-      });
-      dispatch(changeCurrentWorkoutTemplate(name));
-      dispatch(
-        displaySuccess(`Workout template succesfully changed to ${name}`)
-      );
-    } catch (err: any) {
-      console.error(err);
-      dispatch(displayError(err));
+    if (user) {
+      const currentTemplate = setAsCurrentTemplate(db, user, name);
+      if (currentTemplate === true) {
+        dispatch(changeCurrentWorkoutTemplate(name));
+        dispatch(
+          displaySuccess(`Workout template succesfully changed to ${name}`)
+        );
+      } else {
+        dispatch(displayError(currentTemplate));
+      }
     }
   };
 
