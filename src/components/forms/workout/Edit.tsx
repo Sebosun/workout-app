@@ -2,7 +2,11 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { workoutType } from "../../pages/User/CheckWorkoutTemplates";
 
-const Edit = ({ name, sets, reps, weight }: workoutType) => {
+interface editTypes extends workoutType {
+  handleSubmit: (values: workoutType) => void;
+}
+
+const Edit = ({ name, sets, reps, weight, handleSubmit }: editTypes) => {
   return (
     <Formik
       initialValues={{ name, sets, reps, weight }}
@@ -12,10 +16,10 @@ const Edit = ({ name, sets, reps, weight }: workoutType) => {
           .required("Required"),
         sets: Yup.number().positive().integer().required("Required"),
         reps: Yup.number().positive().integer().required("Required"),
-        weight: Yup.number().positive().integer().required("Required"),
+        weight: Yup.number().moreThan(-1).integer().required("Required"),
       })}
       onSubmit={(values: workoutType) => {
-        console.log(values);
+        handleSubmit(values);
       }}
     >
       <Form className="p-2 my-20 max-w-full lg:max-w-2xl mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl">

@@ -9,6 +9,7 @@ interface workoutTemplate {
 
 interface initState {
   template: workoutTemplate[];
+  isModified: boolean;
 }
 
 const initialState: initState = {
@@ -20,6 +21,7 @@ const initialState: initState = {
       weight: 0,
     },
   ],
+  isModified: false,
 };
 
 const editSlice = createSlice({
@@ -29,9 +31,15 @@ const editSlice = createSlice({
     changeEdit(state, action) {
       state.template = action.payload;
     },
+    setModified(state) {
+      state.isModified = true;
+    },
+    turnOffModified(state) {
+      state.isModified = false;
+    },
   },
 });
 
-export const { changeEdit } = editSlice.actions;
+export const { changeEdit, setModified, turnOffModified } = editSlice.actions;
 
 export default editSlice.reducer;
