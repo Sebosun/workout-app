@@ -40,7 +40,11 @@ export default function Preview(): ReactElement | null {
         }
       });
     }
-  }, [isModified, workoutName]);
+    //this runs on unmount and will clear the condition for refetching
+    return () => {
+      dispatch(turnOffModified());
+    };
+  }, [isModified]);
 
   const handleReturn = () => {
     history.push("/user/custom-templates");
