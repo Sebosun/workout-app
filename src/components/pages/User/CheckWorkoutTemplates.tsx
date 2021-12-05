@@ -80,9 +80,8 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     }
   }, [dispatch, user]);
 
-  //TODO: Figure out the type for this
-  const onShowPreview = (item: any) => {
-    history.push(`/user/custom-templates/${item.name}`);
+  const onShowPreview = (item: string) => {
+    history.push(`/user/custom-templates/${item}`);
   };
 
   //TODO confirmation if workout started

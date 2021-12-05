@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 
 interface ListTypes {
   templateData: firebase.firestore.DocumentData[] | null;
-  onShowPreview: (item: any) => void;
+  onShowPreview: (item: string) => void;
   handleChangeTemplate: (name: string) => void;
   deleteItem: (name: string) => void;
   currentWorkoutTemplate: string;
@@ -52,7 +52,7 @@ ${
             >
               Set as current template
             </button>
-            <button onClick={() => onShowPreview(item)} className="btn">
+            <button onClick={() => onShowPreview(item.name)} className="btn">
               Show preview
             </button>
           </div>

@@ -100,6 +100,8 @@ export default function Preview(): ReactElement | null {
     }
   };
 
+  //TODO option to add an exercise
+  //TODO option to change name
   if (isModified) {
     return (
       <PreviewEdited handleEdit={handleEdit} updateWorkout={updateWorkout} />
