@@ -43,6 +43,8 @@ export default function Preview(): ReactElement | null {
         if (doc.exists) {
           setTemplateData(doc.data() || null);
           dispatch(changeEdit(doc.data()?.workout));
+        } else {
+          history.push("/not-found");
         }
       });
     }

@@ -82,6 +82,10 @@ const Routing = () => {
           <Dashboard />
         </PrivateRoute>
 
+        <Route exact path="/not-found">
+          <NotFound />
+        </Route>
+
         <Route path="/*">
           <NotFound />
         </Route>
