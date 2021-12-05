@@ -30,7 +30,7 @@ const PortalWrapper = ({ children, location }: PortalWrapperProps) => {
     return ReactDOM.createPortal(
       <div>
         <div onClick={handleDisplay} className={classes.modal} />
-        <Card className={classes.card}>{children}</Card>
+        <div className={`${classes.card} bg-gray-900`}>{children}</div>
       </div>,
       domNode
     );

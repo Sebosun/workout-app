@@ -1,6 +1,7 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { turnOffModified } from "../../store/slices/edit-slice";
+import PortalWrapper from "../ui/PortalWrapper";
 import WorkoutTemplatePreview from "../workout/workoutTemplates/WorkoutTemplatePreview";
 
 interface previewTypes {
@@ -15,6 +16,7 @@ export default function PreviewEdited({
   const dispatch = useAppDispatch();
 
   const { template, isModified } = useAppSelector((state) => state.edit);
+  const [finalConfirmation, setFinalConfirmaton] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -27,16 +29,38 @@ export default function PreviewEdited({
     dispatch(turnOffModified());
   };
 
+  const handleConfirmation = () => {
+    updateWorkout();
+  };
+
+  const handleSubmit = () => {
+    setFinalConfirmaton(true);
+  };
+  const handleCancelSubmit = () => {
+    setFinalConfirmaton(false);
+  };
+
   return (
     <div className="p-2 mx-auto max-w-md lg:max-w-xl">
       <p className="text-center text-2xl">New Workout</p>
       <WorkoutTemplatePreview onEdit={handleEdit} workout={template} />
-      <button onClick={updateWorkout} className="btn-pos">
-        Confirm
+      <button onClick={handleSubmit} className="btn-pos">
+        Submit
       </button>
       <button onClick={handleCancel} className="btn-del">
         Cancel
       </button>
+      {finalConfirmation && (
+        <PortalWrapper>
+          <p>Are you sure?</p>
+          <button onClick={handleConfirmation} className="btn">
+            Yes
+          </button>
+          <button onClick={handleCancelSubmit} className="btn">
+            No
+          </button>
+        </PortalWrapper>
+      )}
     </div>
   );
 }
