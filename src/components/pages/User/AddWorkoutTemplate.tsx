@@ -118,16 +118,14 @@ export default function AddWorkoutTemplate(): ReactElement | null {
                 <h1 className="p-2 text-2xl text-center text-gray-300">
                   Add an exercise
                 </h1>
-                <ExerciseForm collector={handleExerciseSubmit} />
+                <ExerciseForm handleSubmit={handleExerciseSubmit}>
+                  {workout.length !== 0 && (
+                    <button onClick={handleShowMenuPage} className="btn">
+                      Show menu
+                    </button>
+                  )}
+                </ExerciseForm>
               </div>
-              {workout.length !== 0 && (
-                <button
-                  onClick={handleShowMenuPage}
-                  className="mx-auto max-w-xs btn"
-                >
-                  Show menu
-                </button>
-              )}
             </div>
           </div>
         )}
