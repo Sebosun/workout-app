@@ -101,32 +101,29 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
     }
   };
 
-  // TODO This will need additional verifications. Such as:
-  // - prevent from deleting current template
-  // - confirmation if you *really* want to do this
   const deleteItem = async () => {
-    if (currentWorkoutTemplate === confirmation.name) {
+    const db = firebase.firestore();
+    const docRef = db
+      .collection("user-data")
+      .doc(user?.uid)
+      .collection("workout-templates")
+      .doc(confirmation.name);
+
+    await docRef.delete();
+    setConfirmation({ status: false, name: "" });
+    dispatch(displaySuccess("Template succesfully deleted."));
+  };
+
+  const handleConfirmation = (name: string) => {
+    if (currentWorkoutTemplate === name) {
       dispatch(
         displayError(
           "Template already in use. Choose another template as default to delete this one."
         )
       );
     } else {
-      const db = firebase.firestore();
-      const docRef = db
-        .collection("user-data")
-        .doc(user?.uid)
-        .collection("workout-templates")
-        .doc(confirmation.name);
-
-      await docRef.delete();
-      setConfirmation({ status: false, name: "" });
-      dispatch(displaySuccess("Template succesfully deleted."));
+      setConfirmation({ status: true, name: name });
     }
-  };
-
-  const handleConfirmation = (name: string) => {
-    setConfirmation({ status: true, name: name });
   };
   const handleCancelConfirmation = () => {
     setConfirmation({ status: false, name: "" });
