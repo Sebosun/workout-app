@@ -7,6 +7,7 @@ import { changeCurrentWorkoutTemplate } from "../../../store/slices/settings-sli
 import { displayError, displaySuccess } from "../../../store/slices/ui-slice";
 import WorkoutTemplatesList from "../../workout/workoutTemplates/WorkoutTemplatesList";
 import { useHistory } from "react-router";
+import PortalWrapper from "../../ui/PortalWrapper";
 
 export interface workoutType {
   name: string;
@@ -48,7 +49,10 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
   const history = useHistory();
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch();
+
   const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
+
+  const [confirmation, setConfirmation] = useState({ status: false, name: "" });
 
   // TODO getitng unique id for array later
   useEffect(() => {
@@ -100,8 +104,8 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
   // TODO This will need additional verifications. Such as:
   // - prevent from deleting current template
   // - confirmation if you *really* want to do this
-  const deleteItem = async (name: string) => {
-    if (currentWorkoutTemplate === name) {
+  const deleteItem = async () => {
+    if (currentWorkoutTemplate === confirmation.name) {
       dispatch(
         displayError(
           "Template already in use. Choose another template as default to delete this one."
@@ -113,24 +117,45 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
         .collection("user-data")
         .doc(user?.uid)
         .collection("workout-templates")
-        .doc(name);
+        .doc(confirmation.name);
 
       await docRef.delete();
+      setConfirmation({ status: false, name: "" });
       dispatch(displaySuccess("Template succesfully deleted."));
     }
+  };
+
+  const handleConfirmation = (name: string) => {
+    setConfirmation({ status: true, name: name });
+  };
+  const handleCancelConfirmation = () => {
+    setConfirmation({ status: false, name: "" });
   };
 
   if (!templateData) {
     return <div>Loading...</div>;
   } else {
     return (
-      <WorkoutTemplatesList
-        templateData={templateData}
-        onShowPreview={onShowPreview}
-        handleChangeTemplate={handleSetAsCurrentTemplate}
-        deleteItem={deleteItem}
-        currentWorkoutTemplate={currentWorkoutTemplate}
-      />
+      <>
+        <WorkoutTemplatesList
+          templateData={templateData}
+          onShowPreview={onShowPreview}
+          handleChangeTemplate={handleSetAsCurrentTemplate}
+          deleteItem={handleConfirmation}
+          currentWorkoutTemplate={currentWorkoutTemplate}
+        />
+        {confirmation.status && (
+          <PortalWrapper>
+            <p> Are you sure you want to delete the workout?</p>
+            <button onClick={deleteItem} className="btn-del">
+              Yes
+            </button>
+            <button onClick={handleCancelConfirmation} className="btn">
+              No
+            </button>
+          </PortalWrapper>
+        )}
+      </>
     );
   }
 }

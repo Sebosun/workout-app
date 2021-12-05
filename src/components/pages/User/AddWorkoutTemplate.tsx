@@ -10,6 +10,7 @@ import "firebase/firestore";
 import firebase from "firebase/app";
 import { displaySuccess } from "../../../store/slices/ui-slice";
 
+/** handles the logic for adding new workout to the user profile*/
 export default function AddWorkoutTemplate(): ReactElement | null {
   const [workout, setWorkout] = useState<ExerciseTypes[]>([]);
   const [workoutName, setWorkoutName] = useState("");
