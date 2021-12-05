@@ -2,7 +2,7 @@ import WorkoutPage from "./WorkoutPage";
 import Settings from "./Settings";
 import NotFound from "./NotFound";
 import FrontPage from "./FrontPage";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Login from "./Login";
 import PrivateRoute from "../wrappers/PrivateRoute";
 
@@ -11,7 +11,6 @@ import CheckWorkoutTemplates from "./User/CheckWorkoutTemplates";
 import AddWorkoutTemplate from "./User/AddWorkoutTemplate";
 import Dashboard from "./Dashboard";
 import Preview from "./User/Preview";
-import Edit from "../forms/workout/Edit";
 import EditOne from "./User/EditOne";
 
 const Routing = () => {

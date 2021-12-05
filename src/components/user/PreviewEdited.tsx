@@ -23,7 +23,7 @@ export default function PreviewEdited({
       dispatch(turnOffModified());
     };
     //this runs on unmount and will clear the condition for refetching
-  }, [isModified]);
+  }, [isModified, dispatch]);
 
   const handleCancel = () => {
     dispatch(turnOffModified());

@@ -1,5 +1,3 @@
-import classes from "./Excercise.module.css";
-
 // for clarity
 //   sets - how many series (loops) are there
 //   reps - how many repetitions of loops are there

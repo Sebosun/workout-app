@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory, useLocation } from "react-router";
@@ -8,7 +8,6 @@ export default function HeaderLoggedIn(): ReactElement | null {
   const { logout }: any = useAuth();
   const history = useHistory();
   const location = useLocation();
-  const headerItemClasses = "";
 
   const locationSplit = location.pathname.split("/")[1];
 

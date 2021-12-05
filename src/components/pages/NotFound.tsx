@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import Flex from "../ui/Flex";
 
 const NotFound = () => {
   const [redirect, setRedirect] = useState<React.ReactElement>();

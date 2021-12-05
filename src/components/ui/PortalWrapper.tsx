@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { Redirect } from "react-router";
-import Card from "./Card";
 import classes from "./PortalWrapper.module.css";
 
 interface PortalWrapperProps {
