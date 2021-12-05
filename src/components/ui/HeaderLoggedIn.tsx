@@ -1,8 +1,9 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory, useLocation } from "react-router";
 import { IoIosLogOut } from "react-icons/io";
+import PortalWrapper from "./PortalWrapper";
 
 export default function HeaderLoggedIn(): ReactElement | null {
   const { logout }: any = useAuth();
@@ -10,9 +11,9 @@ export default function HeaderLoggedIn(): ReactElement | null {
   const location = useLocation();
 
   const locationSplit = location.pathname.split("/")[1];
+  const [confirmation, setConfirmation] = useState(false);
 
   const handleLogout = async (): Promise<void> => {
-    //TODO confirmation if you really want to logout
     try {
       // TODO: clear workout data at logout maybe
       await logout();
@@ -22,7 +23,14 @@ export default function HeaderLoggedIn(): ReactElement | null {
     }
   };
 
-  // that button will be stylized later after i get around implementing tailwind
+  const handleLogoutConfirmed = () => {
+    handleLogout();
+  };
+
+  const handleConfirmLogout = () => {
+    setConfirmation((prev) => !prev);
+  };
+
   return (
     <>
       <li
@@ -54,10 +62,21 @@ export default function HeaderLoggedIn(): ReactElement | null {
       <li className={"header-el self-center"}>
         <IoIosLogOut
           role="button"
-          onClick={handleLogout}
+          onClick={handleConfirmLogout}
           className="text-3xl cursor-pointer hover:text-purple-500 hover:border-current"
         />
       </li>
+      {confirmation && (
+        <PortalWrapper>
+          <h1>Are you sure you want to log out?</h1>
+          <button onClick={handleLogoutConfirmed} className="btn-del">
+            Yes
+          </button>
+          <button onClick={handleConfirmLogout} className="btn-pos">
+            No
+          </button>
+        </PortalWrapper>
+      )}
     </>
   );
 }
