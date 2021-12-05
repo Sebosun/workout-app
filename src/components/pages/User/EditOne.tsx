@@ -29,6 +29,12 @@ export default function EditOne(): ReactElement | null {
     history.push(editPath.join("/"));
   };
 
+  const handleReturn = () => {
+    const editPath: string[] = location.pathname.split("/");
+    editPath.pop();
+    history.push(editPath.join("/"));
+  };
+
   return (
     <div className="max-w-md mx-auto">
       <Edit
@@ -37,6 +43,7 @@ export default function EditOne(): ReactElement | null {
         reps={curTempl.reps}
         weight={curTempl.weight}
         handleSubmit={handleSubmit}
+        handleReturn={handleReturn}
       />
     </div>
   );
