@@ -48,16 +48,16 @@ export default function HeaderLoggedIn(): ReactElement | null {
         <Link to="/workout">Workout</Link>
       </li>
       <li
+        className={`header-el ${locationSplit === "user" && "text-green-400"}`}
+      >
+        <Link to="/user">User</Link>
+      </li>
+      <li
         className={`header-el ${
           locationSplit === "settings" && "text-green-400"
         }`}
       >
         <Link to="/settings">Settings</Link>
-      </li>
-      <li
-        className={`header-el ${locationSplit === "user" && "text-green-400"}`}
-      >
-        <Link to="/user">User</Link>
       </li>
       <li className={"header-el self-center"}>
         <IoIosLogOut
