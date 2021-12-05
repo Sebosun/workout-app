@@ -41,7 +41,7 @@ const Exercise = (props: Props) => {
 
   const sets = setsRender(props.sets.length);
 
-  return <div className="flex gap-2 justify-center">{sets}</div>;
+  return <div className="flex flex-wrap gap-2 justify-center">{sets}</div>;
 };
 
 export default Exercise;

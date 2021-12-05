@@ -4,11 +4,13 @@ import { ExerciseTypes } from "../../forms/workout/ExerciseForm";
 interface DisplayProps {
   workout: ExerciseTypes[];
   onEdit?: (index: number) => void;
+  onDelete?: (index: number) => void;
 }
 
 export default function WorkoutTemplatePreview({
   workout,
   onEdit,
+  onDelete,
 }: DisplayProps): ReactElement | null {
   return (
     // TODO delete button hehe
@@ -41,9 +43,9 @@ export default function WorkoutTemplatePreview({
                   Edit
                 </button>
               ) : null}
-              {onEdit ? (
+              {onDelete ? (
                 <button
-                  onClick={() => console.error("not yet implemented")}
+                  onClick={() => onDelete(index)}
                   className="btn hover:bg-red-700 hover:border-red-700"
                 >
                   Delete

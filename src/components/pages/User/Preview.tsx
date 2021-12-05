@@ -11,17 +11,23 @@ import WorkoutTemplatePreview from "../../workout/workoutTemplates/WorkoutTempla
 
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { changeEdit, turnOffModified } from "../../../store/slices/edit-slice";
+import {
+  changeEdit,
+  setModified,
+  turnOffModified,
+} from "../../../store/slices/edit-slice";
+import PreviewEdited from "../../user/PreviewEdited";
 
 export default function Preview(): ReactElement | null {
-  const location = useLocation();
-  const history = useHistory();
   const user = firebase.auth().currentUser;
-  const dispatch = useAppDispatch();
-
-  const workoutName = location.pathname.split("/")[3];
   const [templateData, setTemplateData] =
     useState<firebase.firestore.DocumentData | null>(null);
+
+  const location = useLocation();
+  const workoutName = location.pathname.split("/")[3];
+
+  const history = useHistory();
+  const dispatch = useAppDispatch();
   const { template, isModified } = useAppSelector((state) => state.edit);
 
   useEffect(() => {
@@ -41,13 +47,21 @@ export default function Preview(): ReactElement | null {
       });
     }
     //this runs on unmount and will clear the condition for refetching
-    return () => {
-      dispatch(turnOffModified());
-    };
   }, [isModified]);
 
   const handleReturn = () => {
     history.push("/user/custom-templates");
+  };
+
+  const handleEdit = (index: number) => {
+    history.push(`./${workoutName}/edit?index=${index}`);
+  };
+
+  const handleDelete = (index: number) => {
+    const newArr = [...template];
+    newArr.splice(index, 1);
+    dispatch(setModified());
+    dispatch(changeEdit(newArr));
   };
 
   const handleSetAsCurrentTemplate = () => {
@@ -64,10 +78,6 @@ export default function Preview(): ReactElement | null {
         dispatch(displayError(set));
       }
     }
-  };
-
-  const handleEdit = (index: number) => {
-    history.push(`./${workoutName}/edit?index=${index}`);
   };
 
   const updateWorkout = () => {
@@ -90,14 +100,7 @@ export default function Preview(): ReactElement | null {
 
   if (isModified) {
     return (
-      <div className="p-2 mx-auto max-w-md lg:max-w-xl">
-        <p className="text-center text-2xl">New Workout</p>
-        <WorkoutTemplatePreview onEdit={handleEdit} workout={template} />
-        <button onClick={updateWorkout} className="btn-pos">
-          Confirm
-        </button>
-        <button className="btn-del">Cancel</button>
-      </div>
+      <PreviewEdited handleEdit={handleEdit} updateWorkout={updateWorkout} />
     );
   } else {
     return (
@@ -110,6 +113,7 @@ export default function Preview(): ReactElement | null {
               <WorkoutTemplatePreview
                 onEdit={handleEdit}
                 workout={templateData.workout}
+                onDelete={handleDelete}
               />
               <button className="btn" onClick={handleSetAsCurrentTemplate}>
                 Set as current template

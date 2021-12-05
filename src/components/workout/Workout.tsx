@@ -60,7 +60,6 @@ const Workout = () => {
     }
   };
 
-  //TODO export buttons to a separate component, its not that easy to read
   return (
     <>
       {active && <RestTimer />}
