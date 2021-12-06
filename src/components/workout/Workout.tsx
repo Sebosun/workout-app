@@ -68,20 +68,21 @@ const Workout = () => {
         return (
           <section
             key={index + item.name}
-            className="max-w-sm p-4 mx-auto my-6 border-4 border-purple-800 lg:max-w-md"
+            className="max-w-sm p-4 mx-auto my-6 border-4 border-purple-800 lg:max-w-xl"
           >
-            <div className="p-4 grid grid-cols-2">
-              <h1 className="self-center text-xl font-semibold capitalize">
+            <div className="p-4 grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none">
+              <h1 className="self-center text-center text-3xl font-semibold capitalize">
                 {item.name}
               </h1>
 
-              <div className="text-xl font-semibold gap-4 grid justify-self-stretch align-items-center grid-cols-3">
+              <div className="grid grid-cols-4 items-center gap-2 justify-center ">
                 <button
                   onClick={() => onWeightIncrease(index)}
-                  className="self-center w-1/3 min-w-full bg-green-800 border-black w-max btn"
+                  className="self-center bg-green-800 border-black btn"
                 >
                   +
                 </button>
+                <p className="text-2xl text-center col-start-2 col-end-4">{`${item.weight}kg`}</p>
 
                 <button
                   onClick={() => onWeightDecrease(index, item.weight)}
@@ -89,15 +90,11 @@ const Workout = () => {
                     item.weight === 0
                       ? "bg-gray-800 cursor-not-allowed "
                       : "bg-red-800"
-                  } w-1/3 self-center border-black min-w-full btn 
+                  }  self-center border-black  btn 
               `}
                 >
                   -
                 </button>
-
-                <p className="self-center w-1/3 min-w-full overflow-visible text-center ">
-                  {`${item.weight}kg`}
-                </p>
               </div>
             </div>
 
