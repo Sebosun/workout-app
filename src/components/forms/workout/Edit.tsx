@@ -23,7 +23,7 @@ const Edit = ({
           name: Yup.string()
             .max(25, "Must be 25 characters or less")
             .required("Required"),
-          sets: Yup.number().positive().integer().required("Required"),
+          sets: Yup.number().positive().max(15).integer().required("Required"),
           reps: Yup.number().positive().integer().required("Required"),
           weight: Yup.number().moreThan(-1).integer().required("Required"),
         })}

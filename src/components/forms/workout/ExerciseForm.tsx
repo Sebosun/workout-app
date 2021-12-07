@@ -15,14 +15,14 @@ interface ExerciseProps {
 
 const ExerciseForm = ({ handleSubmit, children }: ExerciseProps) => {
   return (
-    <div className="p-2 my-8  max-w-md mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl">
+    <div className="p-4 my-8  max-w-md mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl">
       <Formik
         initialValues={{ name: "", sets: 0, reps: 0, weight: 0 }}
         validationSchema={Yup.object({
           name: Yup.string()
             .max(25, "Must be 25 characters or less")
             .required("Required"),
-          sets: Yup.number().positive().integer().required("Required"),
+          sets: Yup.number().positive().max(15).integer().required("Required"),
           reps: Yup.number().positive().integer().required("Required"),
           weight: Yup.number().moreThan(-1).integer().required("Required"),
         })}

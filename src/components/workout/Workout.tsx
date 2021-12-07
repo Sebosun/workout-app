@@ -14,6 +14,7 @@ import { setTimer, handleAction } from "../../store/slices/timer-slice";
 import { displayError } from "../../store/slices/ui-slice";
 
 // TODO: consider saving current workout to localStorage
+// TODO: if workout is modified mid-workout, its not being updated
 const Workout = () => {
   const dispatch = useAppDispatch();
 
