@@ -5,7 +5,7 @@ import { changeEdit, setModified } from "../../../store/slices/edit-slice";
 import Edit from "../../forms/workout/Edit";
 import { workoutType } from "./CheckWorkoutTemplates";
 
-function useQuery() {
+export function useQuery() {
   const { search } = useLocation();
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }

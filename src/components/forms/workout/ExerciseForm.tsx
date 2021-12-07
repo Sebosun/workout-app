@@ -15,7 +15,7 @@ interface ExerciseProps {
 
 const ExerciseForm = ({ handleSubmit, children }: ExerciseProps) => {
   return (
-    <div className="p-2 my-8 max-w-full lg:max-w-2xl mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl">
+    <div className="p-2 my-8  max-w-md mx-auto border-2 border-blue-900 border-solid shadow-2xl rounded-xl">
       <Formik
         initialValues={{ name: "", sets: 0, reps: 0, weight: 0 }}
         validationSchema={Yup.object({

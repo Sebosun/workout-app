@@ -59,6 +59,10 @@ export default function Preview(): ReactElement | null {
     history.push(`./${workoutName}/edit?index=${index}`);
   };
 
+  const handleAdd = () => {
+    history.push(`./${workoutName}/add`);
+  };
+
   const handleDelete = (index: number) => {
     const newArr = [...template];
     newArr.splice(index, 1);
@@ -119,6 +123,9 @@ export default function Preview(): ReactElement | null {
                 workout={templateData.workout}
                 onDelete={handleDelete}
               />
+              <button className="btn" onClick={handleAdd}>
+                Add an exercise
+              </button>
               <button className="btn" onClick={handleSetAsCurrentTemplate}>
                 Set as current template
               </button>

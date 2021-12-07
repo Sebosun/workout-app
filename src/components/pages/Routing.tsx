@@ -12,6 +12,7 @@ import AddWorkoutTemplate from "./User/AddWorkoutTemplate";
 import Dashboard from "./Dashboard";
 import Preview from "./User/Preview";
 import EditOne from "./User/EditOne";
+import AddExercise from "./User/AddExercise";
 
 const Routing = () => {
   // may split this later into two components - logged in routes and 'normal routes'
@@ -63,6 +64,13 @@ const Routing = () => {
           path="/user/custom-templates/:edit/edit"
         >
           <EditOne />
+        </PrivateRoute>
+
+        <PrivateRoute
+          authenticationPath="/login"
+          path="/user/custom-templates/:edit/add"
+        >
+          <AddExercise />
         </PrivateRoute>
 
         <PrivateRoute
