@@ -13,6 +13,7 @@ import Dashboard from "./Dashboard";
 import Preview from "./User/Preview";
 import EditOne from "./User/EditOne";
 import AddExercise from "./User/AddExercise";
+import UserMenu from "./routing/UserMenu";
 
 const Routing = () => {
   // may split this later into two components - logged in routes and 'normal routes'
@@ -31,58 +32,14 @@ const Routing = () => {
           <Login mode="registration" />
         </Route>
 
+        <UserMenu />
+
         <PrivateRoute authenticationPath="/login" exact path="/workout">
           <WorkoutPage />
         </PrivateRoute>
 
         <PrivateRoute authenticationPath="/login" exact path="/settings">
           <Settings />
-        </PrivateRoute>
-
-        <PrivateRoute authenticationPath="/login" exact path="/user">
-          <User />
-        </PrivateRoute>
-
-        <PrivateRoute
-          authenticationPath="/login"
-          exact
-          path="/user/custom-templates"
-        >
-          <CheckWorkoutTemplates />
-        </PrivateRoute>
-
-        <PrivateRoute
-          authenticationPath="/login"
-          exact
-          path="/user/custom-templates/:edit"
-        >
-          <Preview />
-        </PrivateRoute>
-
-        <PrivateRoute
-          authenticationPath="/login"
-          path="/user/custom-templates/:edit/edit"
-        >
-          <EditOne />
-        </PrivateRoute>
-
-        <PrivateRoute
-          authenticationPath="/login"
-          path="/user/custom-templates/:edit/add"
-        >
-          <AddExercise />
-        </PrivateRoute>
-
-        <PrivateRoute
-          authenticationPath="/login"
-          exact
-          path="/user/add-workout"
-        >
-          <AddWorkoutTemplate />
-        </PrivateRoute>
-
-        <PrivateRoute authenticationPath="/login" exact path="/dashboard">
-          <Dashboard />
         </PrivateRoute>
 
         <PrivateRoute authenticationPath="/login" exact path="/dashboard">
