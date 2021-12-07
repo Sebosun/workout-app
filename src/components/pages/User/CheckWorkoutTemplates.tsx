@@ -40,21 +40,24 @@ export const setAsCurrentTemplate = (
   }
 };
 
+export interface documentTypes {
+  id: string;
+  workouts: firebase.firestore.DocumentData;
+}
+
 /** fetches users workout templates from fireabse and displays them as a grid list */
 export default function CheckWorkoutTemplates(): ReactElement | null {
-  const [templateData, setTemplateData] = useState<
-    firebase.firestore.DocumentData[] | null
-  >(null);
+  const [templateData, setTemplateData] = useState<documentTypes[] | null>(
+    null
+  );
 
   const history = useHistory();
   const user = firebase.auth().currentUser;
   const dispatch = useAppDispatch();
 
   const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
-
   const [confirmation, setConfirmation] = useState({ status: false, name: "" });
 
-  // TODO getitng unique id for array later
   useEffect(() => {
     const getData = async () => {
       const db = firebase.firestore();
@@ -65,9 +68,9 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
 
       docRef.onSnapshot((querySnapshot) => {
         try {
-          let workoutTemplates: firebase.firestore.DocumentData[] = [];
+          let workoutTemplates: documentTypes[] = [];
           querySnapshot.forEach((doc) => {
-            workoutTemplates.push(doc.data());
+            workoutTemplates.push({ id: doc.id, workouts: doc.data() });
           });
           setTemplateData([...workoutTemplates]);
         } catch (err: any) {

@@ -5,6 +5,7 @@ interface workoutTemplate {
   reps: number;
   sets: number;
   weight: number;
+  docName?: string;
 }
 
 interface initState {

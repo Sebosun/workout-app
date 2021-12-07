@@ -63,6 +63,24 @@ export default function Preview(): ReactElement | null {
     history.push(`./${workoutName}/add`);
   };
 
+  const handleChangeName = () => {
+    const db = firebase.firestore();
+    const docRef = db
+      .collection("user-data")
+      .doc(user?.uid)
+      .collection("workout-templates")
+      .doc(workoutName);
+
+    try {
+      docRef.update({
+        name: "Name",
+      });
+      dispatch(turnOffModified());
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleDelete = (index: number) => {
     const newArr = [...template];
     newArr.splice(index, 1);
@@ -104,7 +122,6 @@ export default function Preview(): ReactElement | null {
     }
   };
 
-  //TODO option to add an exercise
   //TODO option to change name
   if (isModified) {
     return (
@@ -112,7 +129,7 @@ export default function Preview(): ReactElement | null {
     );
   } else {
     return (
-      <p>
+      <div>
         {!templateData && <p className="text-center">Loading...</p>}
         {templateData && (
           <>
@@ -123,19 +140,26 @@ export default function Preview(): ReactElement | null {
                 workout={templateData.workout}
                 onDelete={handleDelete}
               />
-              <button className="btn" onClick={handleAdd}>
-                Add an exercise
-              </button>
-              <button className="btn" onClick={handleSetAsCurrentTemplate}>
-                Set as current template
-              </button>
-              <button className="btn" onClick={handleReturn}>
-                Return
-              </button>
+              <div className=" gap-2 flex">
+                <button className="btn" onClick={handleAdd}>
+                  Add an exercise
+                </button>
+                <button className="btn" onClick={handleChangeName}>
+                  Change workout name
+                </button>
+              </div>
+              <div className=" gap-2 flex">
+                <button className="btn" onClick={handleSetAsCurrentTemplate}>
+                  Set as current template
+                </button>
+                <button className="btn" onClick={handleReturn}>
+                  Return
+                </button>
+              </div>
             </div>
           </>
         )}
-      </p>
+      </div>
     );
   }
 }
