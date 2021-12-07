@@ -17,6 +17,7 @@ import {
   turnOffModified,
 } from "../../../store/slices/edit-slice";
 import PreviewEdited from "../../user/PreviewEdited";
+import ChangeName from "../../forms/user/ChangeName";
 
 export default function Preview(): ReactElement | null {
   const user = firebase.auth().currentUser;
@@ -25,6 +26,7 @@ export default function Preview(): ReactElement | null {
 
   const location = useLocation();
   const workoutName = location.pathname.split("/")[3];
+  const [changeName, setChangeName] = useState(false);
 
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -39,16 +41,15 @@ export default function Preview(): ReactElement | null {
         .collection("workout-templates")
         .doc(workoutName);
 
-      docRef.get().then((doc) => {
-        if (doc.exists) {
-          setTemplateData(doc.data() || null);
-          dispatch(changeEdit(doc.data()?.workout));
-        } else {
-          history.push("/not-found");
+      docRef.onSnapshot((snapshot) => {
+        try {
+          setTemplateData(snapshot.data() || null);
+          dispatch(changeEdit(snapshot.data()?.workout));
+        } catch (err: any) {
+          console.error(err.message);
         }
       });
     }
-    //this runs on unmount and will clear the condition for refetching
   }, [isModified]);
 
   const handleReturn = () => {
@@ -63,7 +64,7 @@ export default function Preview(): ReactElement | null {
     history.push(`./${workoutName}/add`);
   };
 
-  const handleChangeName = () => {
+  const handleChangeName = (name: string) => {
     const db = firebase.firestore();
     const docRef = db
       .collection("user-data")
@@ -73,9 +74,9 @@ export default function Preview(): ReactElement | null {
 
     try {
       docRef.update({
-        name: "Name",
+        name: name,
       });
-      dispatch(turnOffModified());
+      setChangeName(false);
     } catch (err) {
       console.error(err);
     }
@@ -140,11 +141,15 @@ export default function Preview(): ReactElement | null {
                 workout={templateData.workout}
                 onDelete={handleDelete}
               />
+              {changeName && <ChangeName handleSubmit={handleChangeName} />}
               <div className=" gap-2 flex">
                 <button className="btn" onClick={handleAdd}>
                   Add an exercise
                 </button>
-                <button className="btn" onClick={handleChangeName}>
+                <button
+                  className="btn"
+                  onClick={() => setChangeName((prev) => !prev)}
+                >
                   Change workout name
                 </button>
               </div>
