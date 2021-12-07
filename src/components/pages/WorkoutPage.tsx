@@ -10,6 +10,7 @@ const WorkoutPage = () => {
   const handleStart = () => {
     dispatch(startWorkout());
   };
+  console.log("workout 2");
 
   if (completed) {
     return (

@@ -94,9 +94,7 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
       const currentTemplate = setAsCurrentTemplate(db, user, name);
       if (currentTemplate === true) {
         dispatch(changeCurrentWorkoutTemplate(name));
-        dispatch(
-          displaySuccess(`Workout template succesfully changed to ${name}`)
-        );
+        dispatch(displaySuccess(`Workout template succesfully changed`));
       } else {
         dispatch(displayError(currentTemplate));
       }

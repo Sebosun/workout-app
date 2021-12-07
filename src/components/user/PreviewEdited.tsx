@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import {
   changeEdit,
@@ -13,21 +13,23 @@ interface previewTypes {
   handleEdit: (index: number) => void;
 }
 
+// appears when the
 export default function PreviewEdited({
   updateWorkout,
   handleEdit,
 }: previewTypes): ReactElement | null {
   const dispatch = useAppDispatch();
 
-  const { template, isModified } = useAppSelector((state) => state.edit);
+  const { template } = useAppSelector((state) => state.edit);
   const [finalConfirmation, setFinalConfirmaton] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      dispatch(turnOffModified());
-    };
-    //this runs on unmount and will clear the condition for refetching
-  }, [isModified, dispatch]);
+  // this might be redundant as im calling to turn off modified basically in every action lol
+  //useEffect(() => {
+  //  return () => {
+  //    dispatch(turnOffModified());
+  //  };
+  //  //this runs on unmount and will clear the condition for refetching
+  //}, [isModified, dispatch]);
 
   const handleCancel = () => {
     dispatch(turnOffModified());

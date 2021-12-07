@@ -5,14 +5,7 @@ import FrontPage from "./FrontPage";
 import { Route, Switch } from "react-router-dom";
 import Login from "./Login";
 import PrivateRoute from "../wrappers/PrivateRoute";
-
-import User from "./User/User";
-import CheckWorkoutTemplates from "./User/CheckWorkoutTemplates";
-import AddWorkoutTemplate from "./User/AddWorkoutTemplate";
 import Dashboard from "./Dashboard";
-import Preview from "./User/Preview";
-import EditOne from "./User/EditOne";
-import AddExercise from "./User/AddExercise";
 import UserMenu from "./routing/UserMenu";
 
 const Routing = () => {
@@ -32,8 +25,6 @@ const Routing = () => {
           <Login mode="registration" />
         </Route>
 
-        <UserMenu />
-
         <PrivateRoute authenticationPath="/login" exact path="/workout">
           <WorkoutPage />
         </PrivateRoute>
@@ -45,6 +36,8 @@ const Routing = () => {
         <PrivateRoute authenticationPath="/login" exact path="/dashboard">
           <Dashboard />
         </PrivateRoute>
+
+        <UserMenu />
 
         <Route exact path="/not-found">
           <NotFound />

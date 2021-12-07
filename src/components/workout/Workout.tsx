@@ -16,6 +16,7 @@ import { displayError } from "../../store/slices/ui-slice";
 // TODO: consider saving current workout to localStorage
 // TODO: if workout is modified mid-workout, its not being updated
 const Workout = () => {
+  console.log("WOrkout");
   const dispatch = useAppDispatch();
 
   const active = useAppSelector((state) => state.timer.active);

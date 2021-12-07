@@ -24,12 +24,12 @@ const WorkoutTemplatesList = ({
       <div
         className={`
 ${
-  currentWorkoutTemplate === item.workouts.name &&
+  currentWorkoutTemplate === item.id &&
   "border-2 border-green-400 rounded-lg p-2"
 }
         `}
       >
-        {currentWorkoutTemplate === item.workouts.name && (
+        {currentWorkoutTemplate === item.id && (
           <p className="text-green-500 ">Active</p>
         )}
         <div>
@@ -48,7 +48,7 @@ ${
           <div className="flex gap-2">
             <button
               className="btn-pos"
-              onClick={() => handleChangeTemplate(item.workouts.name)}
+              onClick={() => handleChangeTemplate(item.id)}
             >
               Set as current template
             </button>
@@ -56,10 +56,7 @@ ${
               Show preview
             </button>
           </div>
-          <button
-            onClick={() => deleteItem(item.workouts.name)}
-            className="btn-del"
-          >
+          <button onClick={() => deleteItem(item.id)} className="btn-del">
             Delete
           </button>
         </div>
