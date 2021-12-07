@@ -1,6 +1,10 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
-import { turnOffModified } from "../../store/slices/edit-slice";
+import {
+  changeEdit,
+  setModified,
+  turnOffModified,
+} from "../../store/slices/edit-slice";
 import PortalWrapper from "../ui/PortalWrapper";
 import WorkoutTemplatePreview from "../workout/workoutTemplates/WorkoutTemplatePreview";
 
@@ -29,6 +33,13 @@ export default function PreviewEdited({
     dispatch(turnOffModified());
   };
 
+  const handleDelete = (index: number) => {
+    const newArr = [...template];
+    newArr.splice(index, 1);
+    dispatch(setModified());
+    dispatch(changeEdit(newArr));
+  };
+
   const handleConfirmation = () => {
     updateWorkout();
   };
@@ -43,7 +54,11 @@ export default function PreviewEdited({
   return (
     <div className="p-2 mx-auto max-w-md lg:max-w-xl">
       <p className="text-center text-2xl">New Workout</p>
-      <WorkoutTemplatePreview onEdit={handleEdit} workout={template} />
+      <WorkoutTemplatePreview
+        onDelete={handleDelete}
+        onEdit={handleEdit}
+        workout={template}
+      />
       <button onClick={handleSubmit} className="btn-pos">
         Submit
       </button>
