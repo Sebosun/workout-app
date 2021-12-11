@@ -50,12 +50,6 @@ export default function AddWorkoutTemplate(): ReactElement | null {
     setPreviewVisible(true);
   };
 
-  // shows the 'menu' page
-  const handleShowMenuPage = () => {
-    setFormVisible(false);
-    setPreviewVisible(false);
-  };
-
   //submits the workout to firebase, then dispatches 'success' message and redirects to the main page
   // if the name of the workout is the same, overwrites the previous entry
   const submitWorkout = async () => {
@@ -63,10 +57,9 @@ export default function AddWorkoutTemplate(): ReactElement | null {
     const docRef = db
       .collection("user-data")
       .doc(currentUser.uid)
-      .collection("workout-templates")
-      .doc(workoutName);
+      .collection("workout-templates");
 
-    await docRef.set({
+    await docRef.add({
       name: workoutName,
       date: firebase.firestore.FieldValue.serverTimestamp(),
       workout,
@@ -90,22 +83,25 @@ export default function AddWorkoutTemplate(): ReactElement | null {
             value={workoutName}
             onValueChange={onNameChange}
           />
-          <button className="btn">Submit</button>
+          <button className="btn-pos">Submit</button>
         </form>
       </div>
     );
   } else {
     return (
-      <div className="p-2 mx-auto max-w-full lg:max-w-2xl">
+      <div className="p-4 md:my-4 mx-auto max-w-full lg:max-w-2xl">
         {/*the added exercises preview*/}
         {previewVisible && (
           <>
+            <div className="text-3xl text-center">
+              New workout: {workoutName}
+            </div>
             <WorkoutTemplatePreview workout={workout} />
             <button onClick={handleShowExercisePage} className="btn">
               Add an exercise
             </button>
-            <button onClick={handleShowMenuPage} className="btn">
-              Show menu
+            <button className="btn" onClick={submitWorkout}>
+              Finish
             </button>
           </>
         )}
@@ -120,28 +116,13 @@ export default function AddWorkoutTemplate(): ReactElement | null {
                 </h1>
                 <ExerciseForm handleSubmit={handleExerciseSubmit}>
                   {workout.length !== 0 && (
-                    <button onClick={handleShowMenuPage} className="btn">
-                      Show menu
+                    <button onClick={handleShowPreviewPage} className="btn">
+                      Go back
                     </button>
                   )}
                 </ExerciseForm>
               </div>
             </div>
-          </div>
-        )}
-
-        {/*show preview of added exercises screen*/}
-        {!previewVisible && !formVisible && (
-          <div className="">
-            <button className="btn" onClick={handleShowExercisePage}>
-              Add another exercise
-            </button>
-            <button className="btn" onClick={handleShowPreviewPage}>
-              Show preview
-            </button>
-            <button className="btn" onClick={submitWorkout}>
-              Finish
-            </button>
           </div>
         )}
       </div>
