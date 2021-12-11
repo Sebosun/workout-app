@@ -22,11 +22,17 @@ const settingsSlice = createSlice({
     changeCurrentWorkoutTemplate(state, action: PayloadAction<string>) {
       state.currentWorkoutTemplate = action.payload;
     },
+    handleResetSettings(state) {
+      state = initialState;
+    },
   },
 });
 
-export const { changeCooldown, changeCurrentWorkoutTemplate } =
-  settingsSlice.actions;
+export const {
+  changeCooldown,
+  changeCurrentWorkoutTemplate,
+  handleResetSettings,
+} = settingsSlice.actions;
 // export const settingsActions = settingsSlice.actions;
 
 export default settingsSlice.reducer;

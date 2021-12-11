@@ -6,7 +6,8 @@ import { IoIosLogOut } from "react-icons/io";
 import PortalWrapper from "./PortalWrapper";
 import { useAppDispatch } from "../../store/app/hooks";
 import { displayError } from "../../store/slices/ui-slice";
-import { handleResetToInitial } from "../../store/slices/workout-slice";
+import { handleResetWorkoutSlice } from "../../store/slices/workout-slice";
+import { handleResetSettings } from "../../store/slices/settings-slice";
 
 export default function HeaderLoggedIn(): ReactElement | null {
   const { logout }: any = useAuth();
@@ -21,7 +22,8 @@ export default function HeaderLoggedIn(): ReactElement | null {
     try {
       await logout();
       history.push("/");
-      dispatch(handleResetToInitial());
+      dispatch(handleResetWorkoutSlice());
+      dispatch(handleResetSettings());
     } catch (err: any) {
       dispatch(displayError(err.message));
     }
