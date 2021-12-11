@@ -4,22 +4,26 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useHistory, useLocation } from "react-router";
 import { IoIosLogOut } from "react-icons/io";
 import PortalWrapper from "./PortalWrapper";
+import { useAppDispatch } from "../../store/app/hooks";
+import { displayError } from "../../store/slices/ui-slice";
+import { handleResetToInitial } from "../../store/slices/workout-slice";
 
 export default function HeaderLoggedIn(): ReactElement | null {
   const { logout }: any = useAuth();
   const history = useHistory();
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   const locationSplit = location.pathname.split("/")[1];
   const [confirmation, setConfirmation] = useState(false);
 
   const handleLogout = async (): Promise<void> => {
     try {
-      // TODO: clear workout data at logout maybe
       await logout();
       history.push("/");
-    } catch {
-      throw new Error("An error has occurred");
+      dispatch(handleResetToInitial());
+    } catch (err: any) {
+      dispatch(displayError(err.message));
     }
   };
 

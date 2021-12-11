@@ -8,7 +8,7 @@ export interface SettingsState {
 
 const initialState = {
   theme: "light",
-  cooldown: 30,
+  cooldown: 20,
   currentWorkoutTemplate: "",
 };
 

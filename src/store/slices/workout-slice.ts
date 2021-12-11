@@ -41,8 +41,14 @@ const workoutSlice = createSlice({
     startWorkout(state) {
       state.started = true;
     },
+    completeWorkout(state) {
+      state.completed = true;
+    },
     addWorkout(state, action) {
       state.workout = action.payload;
+    },
+    handleResetToInitial(state) {
+      state = initialState;
     },
     handleSetComplete(state, action: PayloadAction<SetComplete>) {
       const { workout } = state;
@@ -68,15 +74,13 @@ const workoutSlice = createSlice({
         --workout[index].sets[position];
       }
     },
-    completeWorkout(state) {
-      state.completed = true;
-    },
   },
 });
 
 export const {
   startWorkout,
   addWorkout,
+  handleResetToInitial,
   handleSetComplete,
   handleSets,
   increaseWeight,
