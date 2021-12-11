@@ -2,10 +2,13 @@ import React, { useRef } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../../store/app/hooks";
+import { displayError } from "../../../store/slices/ui-slice";
 
 const LoginForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
   const { login }: any = useAuth();
   const history = useHistory();
@@ -15,8 +18,12 @@ const LoginForm = () => {
     try {
       await login(emailRef.current?.value, passwordRef.current?.value);
       history.push("/");
-    } catch {
-      throw new Error("An error has occured");
+    } catch (err: any) {
+      if (err.code === "auth/user-not-found")
+        dispatch(displayError("User not found"));
+      else {
+        dispatch(displayError(err.message));
+      }
     }
   };
 
@@ -41,10 +48,7 @@ const LoginForm = () => {
             placeholder="Email"
             required
           />
-          <label
-            htmlFor="password"
-            className="block text-xl font-bold"
-          >
+          <label htmlFor="password" className="block text-xl font-bold">
             Password
           </label>
           <input
