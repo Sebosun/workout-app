@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
+import { displayError } from "../../store/slices/ui-slice";
 import { startWorkout } from "../../store/slices/workout-slice";
 
 import { WorkoutWrapper } from "../workout/WorkoutWrapper";
@@ -6,11 +7,15 @@ import { WorkoutWrapper } from "../workout/WorkoutWrapper";
 const WorkoutPage = () => {
   const dispatch = useAppDispatch();
   const { started, completed } = useAppSelector((state) => state.workout);
+  const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
 
   const handleStart = () => {
-    dispatch(startWorkout());
+    if (currentWorkoutTemplate === "") {
+      dispatch(displayError("Please select a workout template."));
+    } else {
+      dispatch(startWorkout());
+    }
   };
-  console.log("workout 2");
 
   if (completed) {
     return (
