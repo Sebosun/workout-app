@@ -1,4 +1,6 @@
-Live version available on https://workout-app-alpha.vercel.app/
+Live version available at 
+
+https://workout-app-alpha.vercel.app/
 
 # Exercise/workout-tracker
 
