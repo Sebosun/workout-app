@@ -1,4 +1,5 @@
-Workout-tracker type of application.
+Live version available on https://workout-app-alpha.vercel.app/
+Exercise/workout-tracker type of application.
 
 So far implemented: 
 - Basic workout layout with a glbal timer
