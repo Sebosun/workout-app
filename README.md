@@ -1,12 +1,15 @@
 Live version available on https://workout-app-alpha.vercel.app/
-Exercise/workout-tracker type of application.
+
+# Exercise/workout-tracker
+
 
 So far implemented: 
-- Basic workout layout with a glbal timer
+- Basic exercise completion layout with a global cooldown timer
 - Adding and editing custom workouts 
 - Saving workouts to database (firebase)
 - Logging in/logging out
-- Custom settings
+- Simple notification display
+- User settings
 
 Technologies used:
 - Typescript
@@ -14,3 +17,23 @@ Technologies used:
 - Redux / Context API
 - TailwindCSS / Headwind
 - Firebase / firebase.auth
+- Formik
+
+# To run locally
+Clone the repository with 
+
+```bash
+git clone
+```
+
+Install required packages
+```bash
+npm install
+```
+
+Start the local server
+```bash
+npm start
+```
+
+
