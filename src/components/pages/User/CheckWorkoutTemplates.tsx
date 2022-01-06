@@ -9,42 +9,6 @@ import WorkoutTemplatesList from "../../workout/workoutTemplates/WorkoutTemplate
 import { useHistory } from "react-router";
 import PortalWrapper from "../../ui/PortalWrapper";
 
-export interface workoutType {
-  name: string;
-  sets: number;
-  reps: number;
-  weight: number;
-}
-export interface editType extends workoutType {
-  index: number;
-}
-
-export const setAsCurrentTemplate = (
-  db: firebase.firestore.Firestore,
-  user: firebase.User,
-  name: string
-) => {
-  const docRef = db
-    .collection("user-data")
-    .doc(user?.uid)
-    .collection("settings")
-    .doc("workout-settings");
-
-  try {
-    docRef.update({
-      currentWorkout: name,
-    });
-    return true;
-  } catch (err: any) {
-    return err;
-  }
-};
-
-export interface documentTypes {
-  id: string;
-  workouts: firebase.firestore.DocumentData;
-}
-
 /** fetches users workout templates from fireabse and displays them as a grid list */
 export default function CheckWorkoutTemplates(): ReactElement | null {
   const [templateData, setTemplateData] = useState<documentTypes[] | null>(
@@ -88,10 +52,10 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
   };
 
   //TODO confirmation if workout started
-  const handleSetAsCurrentTemplate = (name: string) => {
+  const handleSetAsCurrentTemplate = async (name: string) => {
     const db = firebase.firestore();
     if (user) {
-      const currentTemplate = setAsCurrentTemplate(db, user, name);
+      const currentTemplate = await setAsCurrentTemplate(db, user, name);
       if (currentTemplate === true) {
         dispatch(changeCurrentWorkoutTemplate(name));
         dispatch(displaySuccess(`Workout template succesfully changed`));
@@ -155,4 +119,48 @@ export default function CheckWorkoutTemplates(): ReactElement | null {
       </>
     );
   }
+}
+
+export interface workoutType {
+  name: string;
+  sets: number;
+  reps: number;
+  weight: number;
+}
+export interface editType extends workoutType {
+  index: number;
+}
+
+export const setAsCurrentTemplate = async (
+  db: firebase.firestore.Firestore,
+  user: firebase.User,
+  name: string
+): Promise<true | string> => {
+  const docRef = db
+    .collection("user-data")
+    .doc(user?.uid)
+    .collection("settings")
+    .doc("workout-settings");
+
+  try {
+    const doc = await docRef.get();
+    if (doc.exists) {
+      await docRef.update({
+        currentWorkout: name,
+      });
+      return true;
+    } else {
+      await docRef.set({
+        currentWorkout: name,
+      });
+      return true;
+    }
+  } catch (err: any) {
+    return err;
+  }
+};
+
+export interface documentTypes {
+  id: string;
+  workouts: firebase.firestore.DocumentData;
 }

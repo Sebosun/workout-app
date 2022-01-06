@@ -89,9 +89,13 @@ export default function Preview(): ReactElement | null {
     dispatch(changeEdit(newArr));
   };
 
-  const handleSetAsCurrentTemplate = () => {
+  const handleSetAsCurrentTemplate = async () => {
     if (user) {
-      const set = setAsCurrentTemplate(firebase.firestore(), user, workoutName);
+      const set = await setAsCurrentTemplate(
+        firebase.firestore(),
+        user,
+        workoutName
+      );
       if (set === true) {
         dispatch(changeCurrentWorkoutTemplate(workoutName));
         dispatch(
