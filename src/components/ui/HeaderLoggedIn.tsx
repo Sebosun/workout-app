@@ -37,6 +37,7 @@ export default function HeaderLoggedIn(): ReactElement | null {
     setConfirmation((prev) => !prev);
   };
 
+  //header-el is defined in index.css
   return (
     <>
       <li

@@ -5,8 +5,8 @@ import HeaderLoggedOff from "./HeaderLoggedOff";
 const Header = () => {
   const { currentUser: loggedIn }: any = useAuth();
   return (
-    <header className="m-0 bg-purple-900 border-b-2 border-gray-400">
-      <ul className="flex gap-10  overflow-x-scroll md:overflow-x-auto md:justify-around xl:justify-end p-2 mx-4">
+    <header className="m-0 bg-gray-800 opacity-50">
+      <ul className="flex max-w-xl p-2 mx-auto overflow-x-scroll gap-10 md:overflow-x-auto md:justify-around xl:justify-end">
         {loggedIn && <HeaderLoggedIn />}
         {!loggedIn && <HeaderLoggedOff />}
       </ul>
