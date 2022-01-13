@@ -30,11 +30,11 @@ const RegistrationForm = () => {
 
   return (
     <div className="p-2">
-      <div className="flex flex-col items-center mx-auto w-full max-w-lg">
+      <div className="flex flex-col items-center w-full max-w-lg mx-auto">
         <p className="m-4 text-4xl text-center">Registration</p>
         <form
           onSubmit={submitHandler}
-          className="p-6 pb-8 bg-gray-800 rounded rounded-2xl border-2 border-purple-500 border-solid shadow-md"
+          className="p-6 pb-8 bg-gray-800 border-2 border-purple-500 border-solid shadow-md rounded-2xl"
         >
           <label htmlFor="email" className="block text-xl font-bold">
             Email
@@ -42,23 +42,20 @@ const RegistrationForm = () => {
           <input
             type="email"
             name="email"
-            className="my-2 bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50 solid"
+            className="my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             id="email"
             ref={emailRef}
             placeholder="Email"
             required
           />
-          <label
-            htmlFor="password"
-            className="block text-xl font-bold"
-          >
+          <label htmlFor="password" className="block text-xl font-bold">
             Password
           </label>
           <input
             type="password"
             name="password"
             id="password"
-            className="block my-2 bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50 solid"
+            className="block my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             ref={passwordRef}
             placeholder="***********"
             required
@@ -73,14 +70,14 @@ const RegistrationForm = () => {
             type="password"
             name="password-confirmation"
             id="password-confirmation"
-            className="block my-2 bg-gray-900 rounded-md border-2 border-purple-800 focus:border-gray-50 focus:ring-gray-50 solid"
+            className="block my-2 bg-gray-900 border-2 border-purple-800 rounded-md focus:border-gray-50 focus:ring-gray-50 solid"
             ref={passwordConfirmationRef}
             placeholder="***********"
             required
           />
           <button className="btn">Submit</button>
         </form>
-        <Link className="flex justify-center" to="./registration">
+        <Link className="flex my-2 justify-center" to="./registration">
           Already have an account?
           <Link to="./login" className="mx-2 text-blue-400">
             Login here.
