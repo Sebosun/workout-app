@@ -36,30 +36,38 @@ const FirebaseTemplateData = () => {
   const user = firebase.auth().currentUser;
 
   const { started } = useAppSelector((state) => state.workout);
-  const { currentWorkoutTemplate } = useAppSelector((state) => state.settings);
+  const { currentWorkoutTemplate, freshLogin } = useAppSelector(
+    (state) => state.settings
+  );
 
   /** Gets realtime updates on user settings stored on firestore */
   const getUserSettings = async () => {
-    const db = firebase.firestore();
-    const docRef = db
-      .collection("user-data")
-      .doc(user?.uid)
-      .collection("settings")
-      .doc("workout-settings");
+    if (!user) {
+      console.log("dupa usera nie am");
+    }
+    if (user) {
+      console.log("user jest xD");
+      const db = firebase.firestore();
+      const docRef = db
+        .collection("user-data")
+        .doc(user?.uid)
+        .collection("settings")
+        .doc("workout-settings");
 
-    docRef.onSnapshot((snapShot) => {
-      try {
-        const data = snapShot.data();
-        dispatch(changeCurrentWorkoutTemplate(data!.currentWorkout));
-      } catch (err: any) {
-        console.error(err);
-      }
-    });
+      docRef.onSnapshot((snapShot) => {
+        try {
+          const data = snapShot.data();
+          dispatch(changeCurrentWorkoutTemplate(data!.currentWorkout));
+        } catch (err: any) {
+          console.error(err);
+        }
+      });
+    }
   };
 
   useEffect(() => {
     getUserSettings();
-  }, [started]);
+  }, [started, user, freshLogin]);
 
   useEffect(() => {
     const getData = async () => {

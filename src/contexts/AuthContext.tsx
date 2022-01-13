@@ -27,7 +27,6 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: AuthProps) {
-  // autism ill need to rethink this but man this shit's annoying
   const [currentUser, setCurrentUser] = useState<
     firebase.User | null | undefined
   >();

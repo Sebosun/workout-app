@@ -21,6 +21,8 @@ const RegistrationForm = () => {
     } else {
       try {
         await signup(emailRef.current?.value, passwordRef.current?.value);
+        // actually this shouldnt be needed here since  new user shouldnt have a workout template anyway
+        // dispatch(handleFreshLogin());
         history.push("/");
       } catch (err: any) {
         dispatch(displayError(err.message));

@@ -4,6 +4,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../store/app/hooks";
 import { displayError } from "../../../store/slices/ui-slice";
+import { handleFreshLogin } from "../../../store/slices/settings-slice";
 
 const LoginForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -17,6 +18,7 @@ const LoginForm = () => {
     event.preventDefault();
     try {
       await login(emailRef.current?.value, passwordRef.current?.value);
+      dispatch(handleFreshLogin());
       history.push("/");
     } catch (err: any) {
       if (err.code === "auth/user-not-found")
