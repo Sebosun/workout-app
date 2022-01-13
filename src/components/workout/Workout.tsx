@@ -69,14 +69,14 @@ const Workout = () => {
         return (
           <section
             key={index + item.name}
-            className="max-w-sm p-4 mx-auto my-6 border-4 border-purple-800 lg:max-w-xl"
+            className="max-w-sm p-4 mx-auto my-6 border-4 rounded-xl border-purple-800 lg:max-w-xl"
           >
             <div className="p-4 grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none">
-              <h1 className="self-center text-center text-3xl font-semibold capitalize">
+              <h1 className="self-center text-3xl font-semibold text-center capitalize">
                 {item.name}
               </h1>
 
-              <div className="grid grid-cols-4 items-center gap-2 justify-center ">
+              <div className="items-center justify-center grid grid-cols-4 gap-2 ">
                 <button
                   onClick={() => onWeightIncrease(index)}
                   className="self-center bg-green-800 border-black btn"
