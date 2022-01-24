@@ -19,7 +19,7 @@ const LoginForm = () => {
     try {
       await login(emailRef.current?.value, passwordRef.current?.value);
       dispatch(handleFreshLogin());
-      history.push("/");
+      history.push("/dashboard");
     } catch (err: any) {
       if (err.code === "auth/user-not-found")
         dispatch(displayError("User not found"));
