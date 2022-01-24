@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "firebase/firestore";
 import firebase from "firebase/app";
-import { workoutType } from "./User/CheckWorkoutTemplates";
-
+import VolumeChart from "../ui/VolumeChart";
 interface completedTypes {
+  date: Date;
   completed: boolean[];
   name: string;
   reps: number;
@@ -14,7 +14,9 @@ interface completedTypes {
 const Dashboard = () => {
   const [data, setData] = useState<firebase.firestore.DocumentData[]>();
   const [volume, setVolume] = useState<number[]>();
-  const getUserSettings = async () => {
+  const [labels, setLabels] = useState<any>();
+
+  const getUserData = async () => {
     const user = firebase.auth().currentUser;
     const db = firebase.firestore();
     const docRef = db
@@ -38,33 +40,35 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    getUserSettings();
+    getUserData();
   }, []);
 
-  if (data && !volume) {
-    const totalWeight = data.map((item, index) => {
-      return item.workout.reduce((prev: number, cur: completedTypes) => {
-        let total: number = 0;
-        for (let i = 0; i < cur.reps; i++) {
-          if (cur.completed[i]) {
-            total += cur.sets[i] * cur.weight;
-          }
-        }
-        return prev + total;
-      }, 0);
-    });
-    setVolume(totalWeight);
+  if (data && !volume && !labels) {
+    setVolume(data.map(getTotalVolume));
+    console.log(data);
+    setLabels(
+      data.map((item) => new Date(item.date.seconds * 1000).toLocaleString())
+    );
   }
 
   return (
     <div className="my-12 max-w-md text-2xl mx-auto">
-      <h1>Your Last 3 workouts:</h1>
-      {volume &&
-        volume.map((item) => {
-          return <h1 className="text-2xl">Volume: {item} kg</h1>;
-        })}
+      <h1 className="text-center">Your Last 3 Workouts</h1>
+      {volume && labels && <VolumeChart volume={volume} labels={labels} />}
     </div>
   );
 };
 
 export default Dashboard;
+
+function getTotalVolume(item: firebase.firestore.DocumentData) {
+  return item.workout.reduce((prev: number, cur: completedTypes) => {
+    let total: number = 0;
+    for (let i = 0; i < cur.reps; i++) {
+      if (cur.completed[i]) {
+        total += cur.sets[i] * cur.weight;
+      }
+    }
+    return prev + total;
+  }, 0);
+}
