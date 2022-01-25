@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +9,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import faker from "@faker-js/faker";
 
 ChartJS.register(
   CategoryScale,
@@ -24,7 +22,6 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-
   scales: {
     yAxes: {
       grid: {
@@ -60,7 +57,7 @@ export const options = {
 
 interface props {
   volume: number[];
-  labels: [];
+  labels: string[];
 }
 
 export function LineChart({ volume, labels }: props) {
@@ -75,5 +72,6 @@ export function LineChart({ volume, labels }: props) {
       },
     ],
   };
+
   return <Line options={options} data={data} />;
 }

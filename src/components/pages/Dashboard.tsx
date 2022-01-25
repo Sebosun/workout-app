@@ -5,6 +5,7 @@ import BarChart from "../ui/BarChart";
 import { LineChart } from "../ui/LineChart";
 import { workoutType } from "./User/CheckWorkoutTemplates";
 import { workoutArray } from "../../store/slices/workout-slice";
+import { argv0 } from "process";
 interface completedTypes {
   date: Date;
   completed: boolean[];
@@ -17,7 +18,7 @@ interface completedTypes {
 interface transformedInterface {
   dates: string[];
   volume: number[];
-  // completed: number[];
+  completed: number[];
   totalReps: number[];
 }
 
@@ -25,8 +26,7 @@ const Dashboard = () => {
   const [data, setData] = useState<firebase.firestore.DocumentData[]>();
   //volume as in amount not sound
   const [dataTransformed, setDataTransformed] =
-    useState<transformedInterface>();
-  const [labels, setLabels] = useState<any>();
+    useState<transformedInterface | null>(null);
 
   const getUserData = async () => {
     const user = firebase.auth().currentUser;
@@ -55,29 +55,25 @@ const Dashboard = () => {
     getUserData();
   }, []);
 
-  if (data && !dataTransformed && !labels) {
+  if (data && !dataTransformed) {
     setDataTransformed(getChartStats(data));
     console.log(data);
-    // will return [day]/[month]/[year] date format
-    setLabels(
-      data.map(
-        (item) =>
-          new Date(item.date.seconds * 1000).toLocaleString().split(",")[0]
-      )
-    );
   }
 
   return (
     <div className="max-w-md text-red-500 gap-8 mx-auto my-12 text-2xl">
-      {dataTransformed && labels && (
+      {dataTransformed && (
         <>
           <h1 className="text-center my-4">Your Last 5 Workouts</h1>
           <h1 className="text-center my-4">Total Volume</h1>
-          <LineChart volume={dataTransformed.volume} labels={labels} />
+          <LineChart
+            volume={dataTransformed.volume}
+            labels={dataTransformed.dates}
+          />
           <h1 className="text-center my-4">Total reps</h1>
           <BarChart
             volume={dataTransformed.totalReps}
-            labels={labels}
+            labels={dataTransformed.dates}
             hover="Total Reps"
           />
         </>
@@ -100,22 +96,37 @@ function getChartStats(data: firebase.firestore.DocumentData[]) {
     return totalVolume;
   });
 
+  // will return [day]/[month]/[year] date format
   const dates = data.map(
     (item) => new Date(item.date.seconds * 1000).toLocaleString().split(",")[0]
   );
 
-  const totalReps = data.map(getTotalSets);
-  const totalCompleted = data.map(getCompletedSets);
+  const totalReps: number[] = data.map(getTotalSets);
+  const totalCompleted: number[] = data.map(getCompletedSets);
 
   console.log(totalReps);
-  return { volume: totalVolArr, dates: dates, totalReps: totalReps };
+  return {
+    volume: totalVolArr,
+    dates: dates,
+    totalReps: totalReps,
+    completed: totalCompleted,
+  };
 }
 
-function getCompletedSets(item: firebase.firestore.DocumentData) {
-  return item.workout.reducej;
+//no of sets that were attempted at at least once
+function getCompletedSets(item: firebase.firestore.DocumentData): number {
+  return item.workout.reduce((prev: number, cur: completedTypes) => {
+    var total: number = 0;
+    for (let i = 0; i < cur.reps; i++) {
+      if (cur.completed[i]) {
+        total++;
+      }
+    }
+    return prev + total;
+  });
 }
 
-function getTotalSets(item: firebase.firestore.DocumentData) {
+function getTotalSets(item: firebase.firestore.DocumentData): number {
   return item.workout.reduce((prev: number, cur: completedTypes) => {
     var total: number = 0;
     for (let i = 0; i < cur.reps; i++) {
