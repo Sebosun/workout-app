@@ -13,7 +13,6 @@ interface previewTypes {
   handleEdit: (index: number) => void;
 }
 
-// appears when the
 export default function PreviewEdited({
   updateWorkout,
   handleEdit,
@@ -22,14 +21,6 @@ export default function PreviewEdited({
 
   const { template } = useAppSelector((state) => state.edit);
   const [finalConfirmation, setFinalConfirmaton] = useState(false);
-
-  // this might be redundant as im calling to turn off modified basically in every action lol
-  //useEffect(() => {
-  //  return () => {
-  //    dispatch(turnOffModified());
-  //  };
-  //  //this runs on unmount and will clear the condition for refetching
-  //}, [isModified, dispatch]);
 
   const handleCancel = () => {
     dispatch(turnOffModified());
