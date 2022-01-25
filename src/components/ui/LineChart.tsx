@@ -24,9 +24,30 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+
   scales: {
-    y: {
-      beginAtZero: true,
+    yAxes: {
+      grid: {
+        display: false,
+        drawBorder: true,
+        color: "#FFFFFF",
+      },
+      ticks: {
+        beginAtZero: true,
+        color: "white",
+        fontSize: 12,
+      },
+    },
+    xAxes: {
+      grid: {
+        display: false,
+        color: "#FFFFFF",
+      },
+      ticks: {
+        beginAtZero: true,
+        color: "white",
+        fontSize: 12,
+      },
     },
   },
   plugins: {
